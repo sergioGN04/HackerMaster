@@ -17,23 +17,19 @@ const Intenta = sequelize.define('Intenta', {
         type: DataTypes.BIGINT,
         allowNull: false
     },
-    horaInicio: {
-        type: DataTypes.TIME,
-        allowNull: false
-    },
-    horaFin: {
-        type: DataTypes.TIME,
-        allowNull: true
-    },
-    fecha: {
+    fechaInicio: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW
     },
+    fechaFin: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
     estado: {
-        type: DataTypes.ENUM('completado', 'en progreso'),
+        type: DataTypes.ENUM('Completado', 'En Progreso'),
         allowNull: false,
-        defaultValue: 'en progreso'
+        defaultValue: 'En Progreso'
     }
 }, {
     timestamps: false,
