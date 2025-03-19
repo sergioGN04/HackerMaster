@@ -4,7 +4,7 @@ services:
       container_name: db
       environment:
         MYSQL_ROOT_PASSWORD: R00t_123@
-        MYSQL_DATABASE: Academia
+        MYSQL_DATABASE: HackerMaster
         MYSQL_USER: hackermaster
         MYSQL_PASSWORD: Hm_123@
       volumes:
@@ -25,7 +25,7 @@ services:
           ipv4_address: 192.168.1.2
         red_frontend:
           ipv4_address: 192.168.2.2
-      command: ["/bin/bash", "-c", "curl -o /usr/local/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /usr/local/bin/wait-for-it.sh && /usr/local/bin/wait-for-it.sh 192.168.1.3:3306 --timeout=60 -- node /app/app.js"]
+      command: ["/bin/bash", "-c", "curl -o /usr/local/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /usr/local/bin/wait-for-it.sh && /usr/local/bin/wait-for-it.sh 192.168.1.3:3306 --timeout=60 -- node --watch /app/app.js"]
     
     frontend:
       image: sergiogn04/angular
