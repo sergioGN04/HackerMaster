@@ -17,6 +17,11 @@ const Estadistica = sequelize.define('Estadistica', {
         allowNull: false,
         defaultValue: 0
     },
+    rango: {
+        type: DataTypes.ENUM('Noob', 'Intermedio', 'Avanzado', 'Experto'),
+        allowNull: false,
+        defaultValue: 'Noob'
+    },
     maquinasCompletadas: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -26,6 +31,11 @@ const Estadistica = sequelize.define('Estadistica', {
         type: DataTypes.FLOAT,
         allowNull: false,
         defaultValue: 0.0
+    },
+    tiempoTotal: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
     fechaActualizacion: {
         type: DataTypes.DATE,

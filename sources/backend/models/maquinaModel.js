@@ -6,7 +6,7 @@ const Maquina = sequelize.define('Maquina', {
     idMaquina: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
     },
     nombre: {
         type: DataTypes.STRING(100),
@@ -24,6 +24,11 @@ const Maquina = sequelize.define('Maquina', {
     dificultad: {
         type: DataTypes.STRING(100),
         allowNull: false
+    },
+    puntuacion: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
     fechaCreacion: {
         type: DataTypes.DATE,
@@ -45,6 +50,11 @@ const Maquina = sequelize.define('Maquina', {
     flagRoot: {
         type: DataTypes.STRING(100),
         allowNull: false
+    },
+    estado: {
+        type: DataTypes.ENUM('Aceptada', 'En Espera'),
+        allowNull: false,
+        defaultValue: 'En Espera'
     }
 }, {
     timestamps: false,
