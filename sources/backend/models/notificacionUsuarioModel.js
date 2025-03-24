@@ -17,11 +17,6 @@ const NotificacionUsuario = sequelize.define('NotificacionUsuario', {
         type: DataTypes.BIGINT,
         allowNull: false
     },
-    estado: {
-        type: DataTypes.ENUM('Visto', 'Pendiente'),
-        allowNull: false,
-        defaultValue: 'Pendiente'
-    }
 }, {
     timestamps: false,
     tableName: 'NotificacionUsuario',

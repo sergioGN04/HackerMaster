@@ -30,6 +30,18 @@ const Usuario = sequelize.define('Usuario', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    pais: {
+        type: DataTypes.STRING(100),
+        allowNull: true
+    },
+    fechaNacimiento: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    telefono: {
+        type: DataTypes.STRING(15),
+        allowNull: true
+    },
     fechaRegistro: {
         type: DataTypes.DATE,
         allowNull: false,
