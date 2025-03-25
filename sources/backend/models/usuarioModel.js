@@ -28,7 +28,8 @@ const Usuario = sequelize.define('Usuario', {
     },
     fotoPerfil: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'fotoPerfil.png'
     },
     pais: {
         type: DataTypes.STRING(100),
