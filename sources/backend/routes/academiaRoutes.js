@@ -6,7 +6,7 @@ const notificacionController = require('../controllers/notificacionController');
 const logroController = require('../controllers/logroController');
 const estadisticaController = require('../controllers/estadisticaController');
 
-// Rutas Academia
+// Rutas HackerMaster
 // Usuarios
 router.get('/usuarios', usuarioController.obtenerUsuarios);
 
