@@ -17,11 +17,17 @@ const Notificacion = sequelize.define('Notificacion', {
     },
     fotoNotificacion: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'fotoNotificacion.png'
     },
     fechaLimite: {
         type: DataTypes.DATE,
         allowNull: false
+    },
+    destinatario: {
+        type: DataTypes.ENUM('Administrador', 'Usuario'),
+        allowNull: false,
+        defaultValue: 'Usuario'
     }
 }, {
     timestamps: false,

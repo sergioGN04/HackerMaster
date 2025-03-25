@@ -19,7 +19,8 @@ const Maquina = sequelize.define('Maquina', {
     },
     fotoMaquina: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'fotoMaquina.png'
     },
     dificultad: {
         type: DataTypes.STRING(100),
