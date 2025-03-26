@@ -1,0 +1,152 @@
+/* Estilos generales para el cuerpo */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Contenedor principal para la página */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.footer {
+    background-color: #0A1A2A;
+    color: #FFFFFF;
+    padding: 40px 0;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+/* Títulos de las columnas */
+.footer h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #6FFF00;
+}
+
+/* Párrafos dentro del footer */
+.footer p {
+    margin: 5px 0;
+}
+
+/* Estilo de listas */
+.footer ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+}
+
+.footer ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer ul li a:hover {
+    color: #6FFF00;
+}
+
+/* Estilos para los enlaces de redes sociales */
+.social-links {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.social-links li {
+    margin-bottom: 15px;
+}
+
+.social-links i {
+    font-size: 24px;
+    color: #FFFFFF;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover i {
+    color: #6FFF00;
+}
+
+/* Estilo para el pie de página con los derechos reservados */
+.footer-bottom {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Distribución de las tres columnas */
+.footer .container .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Estilos para las columnas */
+.footer .col-md-4 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: left;
+}
+
+.footer-col-center {
+    text-align: center;
+}
+
+.footer-col-right {
+    text-align: left;
+}
+
+.footer-col-left {
+    text-align: left;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 15px;
+    }
+
+    .footer .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .footer .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer .col-md-4 {
+        margin-bottom: 20px;
+        text-align: center;
+        flex: none;
+    }
+
+    .footer-col-right, .footer-col-left, .footer-col-center {
+        text-align: center;
+    }
+
+    .social-links {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-links li {
+        margin-bottom: 10px;
+    }
+}

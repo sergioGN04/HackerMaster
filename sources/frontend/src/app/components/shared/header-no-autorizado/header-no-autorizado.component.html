@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <!-- Logo a la izquierda -->
+        <a class="navbar-brand" routerLink="/inicio">
+            <img src="assets/images/hackermasterlogo.png" alt="Logo">
+        </a>
+
+        <!-- Botón del menú hamburguesa -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú de navegación -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a routerLink="/inicio" routerLinkActive="active" class="nav-link text-white">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">¿Qué es?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Estadísticas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Sobre Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/contacto" routerLinkActive="active" class="nav-link text-white">Contacto</a>
+                </li>
+                <!-- Botones dentro del menú hamburguesa en pantallas pequeñas -->
+                <li class="nav-item d-lg-none">
+                    <button class="btn btn1 w-100 mt-2">Login</button>
+                </li>
+                <li class="nav-item d-lg-none">
+                    <button class="btn w-100 mt-2">Register</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Botones de Login y Register en pantallas grandes -->
+        <div class="d-none d-lg-flex">
+            <button class="btn btn1">Login</button>
+            <button class="btn">Register</button>
+        </div>
+    </div>
+</nav>
