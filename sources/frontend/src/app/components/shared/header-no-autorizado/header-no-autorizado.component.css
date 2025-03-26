@@ -1,0 +1,128 @@
+.navbar {
+    background-color: #0B121F !important;
+    padding: 10px 30px;
+}
+
+/* Espaciado del logo */
+.navbar .navbar-brand {
+    margin-left: 20px;
+}
+
+.navbar .navbar-brand img {
+    width: 160px;
+    height: auto;
+}
+
+/* Menú de navegación */
+.navbar-nav {
+    flex-wrap: nowrap;
+}
+
+.navbar .nav-link {
+    
+    font-size: 16px;
+    margin-right: 25px;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.navbar-nav .nav-link.active {
+    color: #6FFF00 !important;
+    font-weight: bold;
+    border-bottom: 1px solid #6FFF00;
+}
+
+/* Hover en los enlaces */
+.navbar .nav-link:hover {
+    color: #6FFF00 !important;
+}
+
+/* Botón menú hamburguesa */
+.navbar-toggler {
+    margin-right: 20px;
+    border: none;
+}
+
+/* Contenedor de los botones Login y Register */
+.navbar .botones-auth {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+/* ESTILOS PARA BOTONES */
+.btn {
+    background-color: #6FFF00;
+    color: #000000;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.2s, transform 0.1s, color 0.2s;
+    margin-right: 20px;
+}
+
+.btn1 {
+    margin-right: 15px;
+}
+
+.btn:hover {
+    background-color: #57cc00;
+    color: #FFFFFF;
+}
+
+.btn:active {
+    background-color: #4DB300;
+    color: #FFFFFF;
+}
+
+.btn:focus {
+    background-color: #368000;
+    color: #FFFFFF;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .navbar-nav {
+        margin-right: 20px;
+    }
+
+    .navbar .nav-link {
+        margin-right: 15px;
+    }
+
+    .navbar .botones-auth {
+        margin-left: 10px;
+    }
+}
+
+/* En pantallas pequeñas, pasamos los botones al menú hamburguesa */
+@media (max-width: 1100px) {
+    .navbar-toggler {
+        margin-right: 20px;
+    }
+
+    .collapse.navbar-collapse {
+        width: 100%;
+    }
+    
+    .botones-auth {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .botones-auth .btn {
+        width: 90%;
+        margin: 5px auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar .btn {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}

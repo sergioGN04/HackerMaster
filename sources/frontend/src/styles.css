@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tipografía por defecto a todo el documento */
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+/* Tipografía para los encabezados */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Estilos globales */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Estilos Globales Botones */
+.btn {
+    background-color: #6FFF00;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+    background-color: #57cc00;
+    color: #FFFFFF;
+}
+
+.btn:active {
+    background-color: #4DB300;
+    color: #FFFFFF;
+    transform: scale(0.98);
+}
+
+.btn:focus {
+    background-color: #368000;
+    color: #FFFFFF;
+    outline: none;
+}
+
+/* Estilos Globales Enlaces */
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #57cc00;
+    text-decoration: none;
+}
