@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid">
         <!-- Logo a la izquierda -->
-        <a class="navbar-brand" routerLink="/inicio">
+        <a class="navbar-brand" href="/inicio">
             <img src="assets/images/hackermasterlogo.png" alt="Logo">
         </a>
 
@@ -15,16 +15,16 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a routerLink="/inicio" routerLinkActive="active" class="nav-link text-white">Inicio</a>
+                    <a href="/inicio#inicio" [class.active]="seccionActiva === 'inicio'" class="nav-link text-white">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">¿Qué es?</a>
+                    <a class="nav-link text-white" href="/inicio#que-es" [class.active]="seccionActiva === 'que-es'">¿Qué es?</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Estadísticas</a>
+                    <a class="nav-link text-white" href="/inicio#estadisticas" [class.active]="seccionActiva === 'estadisticas'">Estadísticas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Sobre Nosotros</a>
+                    <a class="nav-link text-white" href="/inicio#quienes-somos" [class.active]="seccionActiva === 'quienes-somos'">Sobre Nosotros</a>
                 </li>
                 <li class="nav-item">
                     <a routerLink="/contacto" routerLinkActive="active" class="nav-link text-white">Contacto</a>

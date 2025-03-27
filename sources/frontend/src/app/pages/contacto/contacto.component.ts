@@ -4,6 +4,7 @@ import { FooterComponent } from '../../components/shared/footer/footer.component
 
 @Component({
   selector: 'app-contacto',
+  standalone: true,
   imports: [HeaderNoAutorizadoComponent,FooterComponent],
   templateUrl: './contacto.component.html',
   styleUrl: './contacto.component.css'

@@ -4,6 +4,7 @@ import { FooterComponent } from '../../components/shared/footer/footer.component
 
 @Component({
   selector: 'app-inicio',
+  standalone: true,
   imports: [HeaderNoAutorizadoComponent,FooterComponent],
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']

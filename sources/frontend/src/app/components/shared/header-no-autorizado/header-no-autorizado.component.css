@@ -1,6 +1,12 @@
 .navbar {
     background-color: #0B121F !important;
     padding: 10px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1000;
 }
 
 /* Espaciado del logo */
@@ -26,10 +32,11 @@
     transition: color 0.2s;
 }
 
+/* Resaltar el menú activo */
 .navbar-nav .nav-link.active {
     color: #6FFF00 !important;
     font-weight: bold;
-    border-bottom: 1px solid #6FFF00;
+    border-bottom: 2px solid #6FFF00;
 }
 
 /* Hover en los enlaces */
@@ -50,7 +57,7 @@
     gap: 10px;
 }
 
-/* ESTILOS PARA BOTONES */
+/* Estilos para Botones */
 .btn {
     background-color: #6FFF00;
     color: #000000;

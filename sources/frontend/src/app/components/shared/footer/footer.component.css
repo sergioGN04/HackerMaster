@@ -1,20 +1,7 @@
-/* Estilos generales para el cuerpo */
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-/* Contenedor principal para la página */
-.app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
 .footer {
     background-color: #0A1A2A;
     color: #FFFFFF;
-    padding: 40px 0;
+    padding: 50px 0;
     font-size: 14px;
     margin-top: auto;
 }
@@ -79,7 +66,7 @@ html, body {
 /* Estilo para el pie de página con los derechos reservados */
 .footer-bottom {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 110px;
     font-size: 12px;
     color: #FFFFFF;
 }
@@ -118,7 +105,7 @@ html, body {
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
     .footer {
-        padding: 30px 15px;
+        padding: 45px 15px;
     }
 
     .footer .container {
@@ -148,5 +135,9 @@ html, body {
 
     .social-links li {
         margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+        margin-top: 50px;
     }
 }
