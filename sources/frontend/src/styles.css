@@ -1,6 +1,7 @@
 /* Tipografía por defecto a todo el documento */
 body {
     font-family: 'Lato', sans-serif;
+    padding-top: 70px;
 }
 
 /* Tipografía para los encabezados */
@@ -12,6 +13,14 @@ h1, h2, h3, h4, h5, h6 {
 html, body {
     height: 100%;
     margin: 0;
+}
+
+.primarySections {
+    background-color: #0A1A2A;
+}
+
+.secondarySections {
+    background-color: #1A324A;
 }
 
 /* Estilos Globales Botones */
