@@ -5,10 +5,10 @@ module.exports = {
     obtenerNotificaciones: async (req, res) => {
         try {
             const notificaciones = await Notificacion.findAll();
-            res.status(200).json({ notificaciones });
+            res.status(200).json({ success: true, notificaciones });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ mensaje: "Error - No se ha podido obtener las notificaciones" });
+            res.status(500).json({ success: false, mensaje: "Error - No se ha podido obtener las notificaciones" });
         }
     }
 }

@@ -5,10 +5,10 @@ module.exports = {
     obtenerEstadisticas: async (req, res) => {
         try {
             const estadisticas = await Estadistica.findAll();
-            res.status(200).json({ estadisticas });
+            res.status(200).json({ success: true, estadisticas });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: "No se han podido obtener las estadisticas" });
+            res.status(500).json({ success: false, error: "Error - No se han podido obtener las estadisticas" });
         }
     }
 }

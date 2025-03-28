@@ -23,25 +23,21 @@
 
         <!-- Características en fila -->
         <div class="row">
-            <!-- Máquinas con Distintos Niveles de Dificultad -->
             <div class="feature-item">
                 <i class="fas fa-laptop-code"></i>
                 <p>Máquinas con Distintos Niveles</p>
             </div>
 
-            <!-- Sistema de Ranking -->
             <div class="feature-item">
                 <i class="fas fa-trophy"></i>
                 <p>Sistema de Ranking</p>
             </div>
 
-            <!-- Sistema de Logros -->
             <div class="feature-item">
                 <i class="fas fa-medal"></i>
                 <p>Sistema de Logros</p>
             </div>
 
-            <!-- Aprendizaje mediante Desafíos Reales -->
             <div class="feature-item">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <p>Aprendizaje mediante Desafíos Reales</p>
@@ -51,10 +47,39 @@
 </section>
 
 <!-- Estadísticas Actuales -->
-<section id="estadisticas" class="estadisticas py-5 bg-light">
+<section id="estadisticas" class="estadisticas secondarySections">
     <div class="container">
-        <h2 class="display-4">Estadísticas Actuales</h2>
-        <p>Aquí podemos mostrar cifras como usuarios registrados, retos completados, etc.</p>
+        <h2>Estadísticas Actuales</h2>
+        <p class="descripcion-estadisticas">
+            Descubre las estadísticas en tiempo real y cómo nuestra comunidad está creciendo día a día en HackerMaster.
+        </p>
+
+        <!-- Estadísticas en fila -->
+        <div class="row">
+                <div class="feature-item">
+                    <i class="fas fa-users fa-3x"></i>
+                    <p>Usuarios</p>
+                    <p class="stat-number">{{estadisticas.get("Usuarios")}}</p>
+                </div>
+
+                <div class="feature-item">
+                    <i class="fas fa-cogs fa-3x"></i>
+                    <p>Máquinas</p>
+                    <p class="stat-number">{{estadisticas.get("Máquinas")}}</p>
+                </div>
+
+                <div class="feature-item">
+                    <i class="fas fa-medal fa-3x"></i>
+                    <p>Logros</p>
+                    <p class="stat-number">{{estadisticas.get("Logros")}}</p>
+                </div>
+
+                <div class="feature-item">
+                    <i class="fas fa-chalkboard-teacher fa-3x"></i>
+                    <p>Intentos</p>
+                    <p class="stat-number">{{estadisticas.get("Intentos")}}</p>
+                </div>
+        </div>
     </div>
 </section>
 

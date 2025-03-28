@@ -5,8 +5,12 @@ const maquinaController = require('../controllers/maquinaController');
 const notificacionController = require('../controllers/notificacionController');
 const logroController = require('../controllers/logroController');
 const estadisticaController = require('../controllers/estadisticaController');
+const informacionSitioController = require('../controllers/informacionSitioController');
 
 // Rutas HackerMaster
+// Informacion del sitio
+router.get('/estadisticas-actuales', informacionSitioController.obtenerEstadisticasActuales);
+
 // Usuarios
 router.get('/usuarios', usuarioController.obtenerUsuarios);
 
