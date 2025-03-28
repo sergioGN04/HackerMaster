@@ -9,4 +9,16 @@ import { FooterComponent } from '../../components/shared/footer/footer.component
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent { }
+export class InicioComponent {
+  estadisticas: Map<string, number> = new Map();
+
+  ngOnInit() {
+    
+
+    this.estadisticas.set('Usuarios', 68);
+    this.estadisticas.set('Máquinas', 50);
+    this.estadisticas.set('Logros', 40);
+    this.estadisticas.set('Intentos', 100);
+  };
+
+}

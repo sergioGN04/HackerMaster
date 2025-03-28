@@ -21,7 +21,7 @@ sequelize.authenticate()
     .then(() => { console.log("Se ha conectado a la base de datos correctamente");})
     .catch((error) => { console.error("Error - No se ha podido conectar a la base de datos",error);});
 
-sequelize.sync({ force: true })
+sequelize.sync({ alter: true })
     .then(() => console.log('Se han creado las tablas correctamente'))
     .catch(() => console.error('Error - No se ha podido crear las tablas correctamente'));
 

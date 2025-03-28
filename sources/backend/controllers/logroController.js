@@ -5,10 +5,10 @@ module.exports = {
     obtenerLogros: async (req, res) => {
         try {
             const logros = await Logro.findAll();
-            res.json(logros);
+            res.status(200).json({ success: true, logros });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: "No se han podido obtener los logros" });
+            res.status(500).json({ success: false, error: "Error - No se han podido obtener los logros" });
         }
     }
 }
