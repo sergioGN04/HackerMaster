@@ -32,14 +32,12 @@
     transition: color 0.2s;
 }
 
-/* Resaltar el menú activo */
 .navbar-nav .nav-link.active {
     color: #6FFF00 !important;
     font-weight: bold;
     border-bottom: 2px solid #6FFF00;
 }
 
-/* Hover en los enlaces */
 .navbar .nav-link:hover {
     color: #6FFF00 !important;
 }
