@@ -46,9 +46,10 @@
 }
 
 /* Estilos Secciones */
-.que-es,
-.estadisticas {
-    padding: 110px 20px;
+#que-es,
+#estadisticas,
+#preguntas-frecuentes {
+    padding: 40px 20px 100px 20px;
     text-align: center;
 }
 
@@ -58,6 +59,7 @@
     color: #6FFF00;
     font-size: 35px;
     font-weight: bold;
+    margin-top: 60px;
     margin-bottom: 30px;
 }
 
@@ -162,6 +164,58 @@
     border-radius: 10px;
 }
 
+#preguntas-frecuentes {
+    padding: 80px 20px;
+}
+
+.preguntas-frecuentes-titulo {
+    margin-top: 0;
+    padding-bottom: 70px;
+}
+
+#preguntas-frecuentes h2 {
+    color: #6FFF00;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 60px;
+}
+
+/* Estilos de acordeón */
+.accordion-item {
+    border: none;
+    margin-top: -50px;
+}
+
+.accordion-button {
+    background-color: #0A1A2A;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: none;
+    font-size: 18px;
+    padding: 20px;
+}
+
+.accordion-button::after {
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    float: right;
+    font-size: 20px;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.accordion-button.collapsed::after {
+    transform: rotate(-180deg);
+}
+
+.accordion-body {
+    background-color: #0A1A2A;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 15px 20px;
+}
+
 /* Responsive */
 @media (max-width: 991px) {
     .banner {
@@ -222,7 +276,7 @@
 
 @media (max-width: 936px) {
     .banner {
-        height: 80vh;
+        height: 70vh;
     }
 
     .banner-content h1 {
