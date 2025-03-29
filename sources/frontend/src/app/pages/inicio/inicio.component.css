@@ -45,9 +45,10 @@
     line-height: 1.4;
 }
 
-/* Sección ¿Qué es HackerMaster? */
-.que-es {
-    padding: 100px 20px;
+/* Estilos Secciones */
+.que-es,
+.estadisticas {
+    padding: 110px 20px;
     text-align: center;
 }
 
@@ -60,7 +61,7 @@
     margin-bottom: 30px;
 }
 
-/* Párrafo descricpción */
+/* Párrafo descripción */
 .descripcion-que-es,
 .descripcion-estadisticas {
     margin-bottom: 130px;
@@ -75,7 +76,6 @@
     margin-right: auto;
 }
 
-/* Contenedor de características, estadisticas */
 .que-es .row,
 .estadisticas .row {
     display: flex;
@@ -125,10 +125,47 @@
     color: #6FFF00;
 }
 
+/* Sección ¿Quiénes somos? */
+.quienes-somos {
+    padding: 110px 20px;
+    text-align: center;
+}
+
+.quienes-somos h2 {
+    color: #6FFF00;
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 70px;
+}
+
+/* Texto a la izquierda */
+.descripcion-quienes {
+    font-size: 18px;
+    color: #FFFFFF;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Carrusel de imágenes */
+#carouselEmpleados {
+    max-width: 100%;
+    margin: auto;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 /* Responsive */
 @media (max-width: 991px) {
     .banner {
-        height: 60vh;
+        height: 80vh;
     }
 
     .banner-content h1 {
@@ -166,11 +203,26 @@
     .estadisticas .stat-number {
         font-size: 2rem;
     }
+
+    .descripcion-quienes {
+        font-size: 15px;
+        margin-right: 40px;
+        margin-left: -80px;
+    }
+
+    .carousel-item img {
+        aspect-ratio: 5 / 4;
+    }
+
+    #carouselEmpleados {
+        max-width: 100%;
+        margin: 0 auto;
+    }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 936px) {
     .banner {
-        height: 50vh;
+        height: 80vh;
     }
 
     .banner-content h1 {
@@ -208,15 +260,23 @@
     .estadisticas .stat-number {
         font-size: 1.8rem;
     }
-    .descripcion-que-es,
-    .descripcion-estadisticas {
-        margin-bottom: 90px;
+
+    .descripcion-quienes {
+        margin-bottom: 40px;
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 60px;
+    }
+
+    #carouselEmpleados {
+        max-width: 100%;
+        margin: 0 auto;
     }
 }
 
 @media (max-width: 576px) {
     .banner {
-        height: 45vh;
+        height: 70vh;
     }
 
     .banner-content h1 {
@@ -266,5 +326,13 @@
     .descripcion-que-es,
     .descripcion-estadisticas {
         margin-bottom: 80px;
+    }
+
+    .descripcion-quienes {
+        font-size: 14px;
+    }
+
+    .carousel-item img {
+        aspect-ratio: 4 / 3;
     }
 }
