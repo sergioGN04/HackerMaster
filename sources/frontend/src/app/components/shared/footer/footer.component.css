@@ -102,7 +102,7 @@
     text-align: left;
 }
 
-/* Responsividad para pantallas pequeñas */
+/* Responsive */
 @media (max-width: 768px) {
     .footer {
         padding: 45px 15px;

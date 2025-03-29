@@ -60,10 +60,10 @@
     margin-bottom: 30px;
 }
 
-/* Párrafo descriptivo */
+/* Párrafo descricpción */
 .descripcion-que-es,
 .descripcion-estadisticas {
-    margin-bottom: 150px;
+    margin-bottom: 130px;
 }
 
 .que-es p,
@@ -75,7 +75,7 @@
     margin-right: auto;
 }
 
-/* Contenedor de características */
+/* Contenedor de características, estadisticas */
 .que-es .row,
 .estadisticas .row {
     display: flex;

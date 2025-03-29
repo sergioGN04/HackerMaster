@@ -9,21 +9,21 @@ const informacionSitioController = require('../controllers/informacionSitioContr
 
 // Rutas HackerMaster
 // Informacion del sitio
-router.get('/estadisticas-actuales', informacionSitioController.obtenerEstadisticasActuales);
+router.get('/api/estadisticas-actuales', informacionSitioController.obtenerEstadisticasActuales);
 
 // Usuarios
-router.get('/usuarios', usuarioController.obtenerUsuarios);
+router.get('/api/usuarios', usuarioController.obtenerUsuarios);
 
 // Maquinas
-router.get('/maquinas', maquinaController.obtenerMaquinas);
+router.get('/api/maquinas', maquinaController.obtenerMaquinas);
 
 // Notificaciones
-router.get('/notificaciones', notificacionController.obtenerNotificaciones);
+router.get('/api/notificaciones', notificacionController.obtenerNotificaciones);
 
 // Logros
-router.get('/logros', logroController.obtenerLogros);
+router.get('/api/logros', logroController.obtenerLogros);
 
 // Estadisticas
-router.get('/estadisticas', estadisticaController.obtenerEstadisticas);
+router.get('/api/estadisticas', estadisticaController.obtenerEstadisticas);
 
 module.exports = router;

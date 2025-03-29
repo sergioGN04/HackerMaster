@@ -11,7 +11,7 @@ module.exports = {
             const totalMaquinas = await Maquina.count();
             const totalLogros = await Logro.count();
             const totalIntentos = await Intento.count();
-            res.status(200).json({ success: true,totalUsuarios,totalMaquinas,totalLogros,totalIntentos });
+            res.status(200).json({ success: true, totalUsuarios,totalMaquinas,totalLogros,totalIntentos });
         } catch (error) {
             console.error(error);
             res.status(500).json({ success: false, error: "Error - No se han podido obtener las estadisticas actuales" });
