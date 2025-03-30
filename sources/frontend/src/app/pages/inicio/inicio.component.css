@@ -45,7 +45,7 @@
     line-height: 1.4;
 }
 
-/* Estilos Secciones */
+/* Secciones */
 #que-es,
 #estadisticas,
 #preguntas-frecuentes {
@@ -53,7 +53,7 @@
     text-align: center;
 }
 
-/* Título de las secciones */
+/* Títulos de secciones */
 .que-es h2,
 .estadisticas h2 {
     color: #6FFF00;
@@ -78,6 +78,7 @@
     margin-right: auto;
 }
 
+/* Características */
 .que-es .row,
 .estadisticas .row {
     display: flex;
@@ -86,21 +87,18 @@
     gap: 40px;
 }
 
-/* Cada característica */
 .feature-item {
     flex: 1 1 250px;
     text-align: center;
     max-width: 250px;
 }
 
-/* Iconos */
 .feature-item i {
     font-size: 60px;
     color: #FFFFFF;
     margin-bottom: 15px;
 }
 
-/* Texto debajo del icono */
 .feature-item p {
     font-size: 18px;
     color: #6FFF00;
@@ -140,7 +138,7 @@
     margin-bottom: 70px;
 }
 
-/* Texto a la izquierda */
+/* Descripción */
 .descripcion-quienes {
     font-size: 18px;
     color: #FFFFFF;
@@ -164,8 +162,9 @@
     border-radius: 10px;
 }
 
+/* Sección de Preguntas Frecuentes */
 #preguntas-frecuentes {
-    padding: 80px 20px;
+    padding: 110px 20px;
 }
 
 .preguntas-frecuentes-titulo {
@@ -177,16 +176,19 @@
     color: #6FFF00;
     font-size: 35px;
     font-weight: bold;
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
-/* Estilos de acordeón */
+/* Estilos del Acordeón */
 .accordion-item {
     border: none;
-    margin-top: -50px;
+    margin-top: 10px;
 }
 
 .accordion-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #0A1A2A;
     color: #FFFFFF;
     font-weight: bold;
@@ -196,17 +198,17 @@
 }
 
 .accordion-button::after {
-    content: "\f107";
     font-family: "Font Awesome 5 Free";
+    content: "\f107";
     font-weight: 900;
-    float: right;
     font-size: 20px;
     color: #fff;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-in-out;
+    margin-left: auto;
 }
 
-.accordion-button.collapsed::after {
-    transform: rotate(-180deg);
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg);
 }
 
 .accordion-body {
@@ -219,7 +221,7 @@
 /* Responsive */
 @media (max-width: 991px) {
     .banner {
-        height: 80vh;
+        height: 60vh;
     }
 
     .banner-content h1 {
@@ -234,47 +236,34 @@
         padding: 80px 20px;
     }
 
-    .que-es h2 {
-        font-size: 30px;
-    }
-
-    .que-es p {
-        font-size: 18px;
-    }
-
-    .feature-item i {
-        font-size: 65px;
-    }
-
-    .feature-item p {
-        font-size: 16px;
-    }
-
     .estadisticas {
         padding: 60px 20px;
     }
 
-    .estadisticas .stat-number {
-        font-size: 2rem;
-    }
-
     .descripcion-quienes {
         font-size: 15px;
-        margin-right: 40px;
-        margin-left: -80px;
     }
 
     .carousel-item img {
         aspect-ratio: 5 / 4;
     }
 
-    #carouselEmpleados {
-        max-width: 100%;
-        margin: 0 auto;
+    .accordion-button {
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    .accordion-button::after {
+        font-size: 18px;
+    }
+
+    .accordion-body {
+        font-size: 14px;
+        padding: 10px 15px;
     }
 }
 
-@media (max-width: 936px) {
+@media (max-width: 768px) {
     .banner {
         height: 70vh;
     }
@@ -291,40 +280,26 @@
         padding: 60px 20px;
     }
 
-    .que-es h2 {
-        font-size: 26px;
-    }
-
-    .que-es p {
-        font-size: 16px;
-    }
-
-    .feature-item i {
-        font-size: 55px;
-    }
-
-    .feature-item p {
-        font-size: 14px;
-    }
-
     .estadisticas {
         padding: 50px 15px;
     }
 
-    .estadisticas .stat-number {
-        font-size: 1.8rem;
-    }
-
     .descripcion-quienes {
-        margin-bottom: 40px;
-        margin-right: 0;
-        margin-left: 0;
-        margin-bottom: 60px;
+        margin-bottom: 50px;
     }
 
-    #carouselEmpleados {
-        max-width: 100%;
-        margin: 0 auto;
+    .accordion-button {
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    .accordion-button::after {
+        font-size: 18px;
+    }
+
+    .accordion-body {
+        font-size: 14px;
+        padding: 10px 15px;
     }
 }
 
@@ -345,48 +320,30 @@
         padding: 80px 15px;
     }
 
-    .que-es h2 {
-        font-size: 28px;
-    }
-
-    .que-es p {
-        font-size: 14px;
-    }
-
-    .feature-item i {
-        font-size: 60px;
-    }
-
-    .feature-item p {
-        font-size: 16px;
-    }
-
     .estadisticas {
         padding: 80px 10px;
     }
 
-    .estadisticas p {
-        font-size: 16px;
-    }
-
-    .feature-item {
-        margin-top: 50px;
-    }
-
-    .estadisticas .stat-number {
-        font-size: 1.6rem;
-    }
-
-    .descripcion-que-es,
-    .descripcion-estadisticas {
-        margin-bottom: 80px;
-    }
-
     .descripcion-quienes {
         font-size: 14px;
+        margin-bottom: 50px;
     }
 
     .carousel-item img {
         aspect-ratio: 4 / 3;
+    }
+
+    .accordion-button {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .accordion-button::after {
+        font-size: 16px;
+    }
+
+    .accordion-body {
+        font-size: 13px;
+        padding: 10px;
     }
 }
