@@ -4,6 +4,7 @@ import { FooterComponent } from '../../components/shared/footer/footer.component
 
 @Component({
   selector: 'app-register',
+  standalone: true,
   imports: [HeaderNoAutorizadoComponent,FooterComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
