@@ -9,4 +9,12 @@ import { FooterComponent } from '../../components/shared/footer/footer.component
   templateUrl: './contacto.component.html',
   styleUrl: './contacto.component.css'
 })
-export class ContactoComponent { }
+export class ContactoComponent {
+
+  ngOnInit() {
+    setTimeout(() => {
+      window.scrollTo(0,0);
+    }, 40)
+  }
+  
+}

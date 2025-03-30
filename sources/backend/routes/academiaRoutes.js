@@ -4,7 +4,6 @@ const usuarioController = require('../controllers/usuarioController');
 const maquinaController = require('../controllers/maquinaController');
 const notificacionController = require('../controllers/notificacionController');
 const logroController = require('../controllers/logroController');
-const estadisticaController = require('../controllers/estadisticaController');
 const informacionSitioController = require('../controllers/informacionSitioController');
 
 // Rutas HackerMaster
@@ -22,8 +21,5 @@ router.get('/api/notificaciones', notificacionController.obtenerNotificaciones);
 
 // Logros
 router.get('/api/logros', logroController.obtenerLogros);
-
-// Estadisticas
-router.get('/api/estadisticas', estadisticaController.obtenerEstadisticas);
 
 module.exports = router;

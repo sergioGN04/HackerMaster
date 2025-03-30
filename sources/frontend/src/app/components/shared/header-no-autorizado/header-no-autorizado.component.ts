@@ -12,6 +12,8 @@ export class HeaderNoAutorizadoComponent implements OnInit {
   rutaActual: string = '';
   seccionActiva: string = '';
 
+  scrollHabilitado: boolean = true;
+
   secciones = ['inicio', 'que-es', 'estadisticas', 'quienes-somos'];
   seccionVisible: string = '';
 
@@ -43,22 +45,24 @@ export class HeaderNoAutorizadoComponent implements OnInit {
   // Método para manejar el desplazamiento de la ventana
   @HostListener('window:scroll', [])
   onScroll(): void {
-    for (let seccion of this.secciones) {
-      const elemento = document.getElementById(seccion);
-      if (elemento) {
-        const rect = elemento.getBoundingClientRect();
-
-        if (rect.top <= window.innerHeight / 6 && rect.bottom > window.innerHeight / 6) {
-          this.seccionVisible = seccion;
+    if (this.scrollHabilitado) {
+      for (let seccion of this.secciones) {
+        const elemento = document.getElementById(seccion);
+        if (elemento) {
+          const rect = elemento.getBoundingClientRect();
+  
+          if (rect.top <= window.innerHeight / 6 && rect.bottom > window.innerHeight / 6) {
+            this.seccionVisible = seccion;
+          }
+  
         }
-
       }
-    }
-
-    if (this.seccionActiva !== this.seccionVisible) {
-      this.seccionActiva = this.seccionVisible;
-
-      history.pushState(null, '', `/inicio#${this.seccionActiva}`);
+  
+      if (this.seccionActiva !== this.seccionVisible) {
+        this.seccionActiva = this.seccionVisible;
+  
+        history.pushState(null, '', `/inicio#${this.seccionActiva}`);
+      }
     }
   }
 
@@ -67,6 +71,7 @@ export class HeaderNoAutorizadoComponent implements OnInit {
   onLinkClick(event: Event) {
     const target = event.target as HTMLAnchorElement;
     const currentRoute = this.router.url;
+    this.scrollHabilitado = false;
 
     if (target && target.tagName === 'A') {
       if (target.hash && currentRoute.includes('/inicio')) {
@@ -89,6 +94,10 @@ export class HeaderNoAutorizadoComponent implements OnInit {
     if (navbarCollapse?.classList.contains('show')) {
       navbarCollapse.classList.remove('show');
     }
+
+    setTimeout(() => {
+      this.scrollHabilitado = true;
+    }, 400);
 
   }
 
