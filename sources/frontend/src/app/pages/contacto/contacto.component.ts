@@ -12,6 +12,10 @@ import { FooterComponent } from '../../components/shared/footer/footer.component
 export class ContactoComponent {
 
   ngOnInit() {
+    this.posicionarArriba();
+  }
+
+  posicionarArriba() {
     setTimeout(() => {
       window.scrollTo(0,0);
     }, 40)
