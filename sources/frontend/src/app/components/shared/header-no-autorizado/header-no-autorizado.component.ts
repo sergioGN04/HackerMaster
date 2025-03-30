@@ -16,7 +16,7 @@ export class HeaderNoAutorizadoComponent implements OnInit {
   seccionVisible: string = '';
 
   constructor(private router: Router) { }
-  
+
   // Método que se encarga de obtener la ruta actual y la sección activa al iniciar el componente
   ngOnInit() {
     this.rutaActual = this.router.url;
@@ -84,6 +84,12 @@ export class HeaderNoAutorizadoComponent implements OnInit {
         }
       }
     }
+
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarCollapse?.classList.contains('show')) {
+      navbarCollapse.classList.remove('show');
+    }
+
   }
 
 }
