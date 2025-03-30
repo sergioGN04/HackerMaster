@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 90px 20px;
+    padding: 100px 20px;
 }
 
 /* Contenido de cada sección */
@@ -27,7 +27,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Línea decorativa */
+/* Línea */
 .linea {
     width: 90%;
     height: 3px;
@@ -75,14 +75,14 @@ form div {
     outline: none;
 }
 
-/* Placeholder en blanco */
+/* Placeholder */
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: white;
     opacity: 0.8;
 }
 
-/* Ajuste del textarea */
+/* Textarea */
 textarea {
     resize: vertical;
     min-height: 120px;
@@ -109,31 +109,60 @@ textarea::-webkit-resizer {
     background: #57cc00;
 }
 
-/* Otros Métodos*/
-.metodos-links {
+/* Otros Métodos */
+.metodos-contenedor {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 60px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    margin: 70px 20px;
 }
 
-.metodos-links a {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
+/* Estilos de cada método */
+.metodo {
+    background: #1A324A;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    width: 300px;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 40px;
+}
+
+/* Iconos */
+.metodo i {
+    font-size: 90px;
+    margin-bottom: 20px;
+}
+
+/* Títulos */
+.metodo h3 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Descripción */
+.metodo p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin: 0;
+    max-width: 220px;
 }
 
 .discord {
     background: #7289DA;
-    color: white;
+    border-color: #5a6ea5;
 }
 
 .telegram {
     background: #0088CC;
-    color: white;
+    border-color: #0077b5;
 }
 
 .discord:hover {
