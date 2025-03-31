@@ -3,12 +3,12 @@ import { HeaderNoAutorizadoComponent } from '../../components/shared/header-no-a
 import { FooterComponent } from '../../components/shared/footer/footer.component';
 import { InformacionSitioService } from '../../core/services/informacion-sitio.service';
 import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [HeaderNoAutorizadoComponent, FooterComponent],
+  imports: [HeaderNoAutorizadoComponent, FooterComponent, RouterModule],
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
