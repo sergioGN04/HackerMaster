@@ -97,7 +97,7 @@ export class HeaderNoAutorizadoComponent implements OnInit {
 
     setTimeout(() => {
       this.scrollHabilitado = true;
-    }, 400);
+    }, 500);
 
   }
 
