@@ -109,6 +109,29 @@ textarea::-webkit-resizer {
     background: #57cc00;
 }
 
+/* Mensaje de respuesta del formulario */
+.mensaje-respuesta {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Éxito (mensaje enviado correctamente) */
+.mensaje-exito {
+    color: #6FFF00;
+}
+
+/* Error (fallo al enviar) */
+.mensaje-error {
+    color: #FF4C4C;
+}
+
 /* Otros Métodos */
 .metodos-contenedor {
     display: flex;
