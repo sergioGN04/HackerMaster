@@ -17,10 +17,12 @@ module.exports = {
             },
         });
 
+        const date = new Date();
+
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: process.env.EMAIL_USER,
-            subject: `Mensaje de ${nombreUsuario} - ${asunto}`,
+            subject: `${nombreUsuario} - ${asunto} (${date.toLocaleDateString('es-ES')})`,
             text: `Username: ${nombreUsuario}\n\nMensaje:\n${descripcion}`,
         };
 
