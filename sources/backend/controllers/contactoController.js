@@ -6,7 +6,7 @@ module.exports = {
         const { nombreUsuario, asunto, descripcion } = req.body;
 
         if (!nombreUsuario || !asunto || !descripcion ) {
-            return res.status(400).json({ message: "Error - Todos los campos son obligatorios"});
+            return res.status(400).json({ message: "Error - Todos los campos son obligatorios."});
         }
 
         const transporter = nodemailer.createTransport({
@@ -30,7 +30,7 @@ module.exports = {
             await transporter.sendMail(mailOptions);
             res.status(200).json({ message: "Se ha enviado el email correctamente"});
         } catch (error) {
-            res.status(500).json({ message: "Error - No se ha podido enviar el email"});
+            res.status(500).json({ message: "Error - No se ha podido enviar el email."});
         }
 
     }

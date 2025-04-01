@@ -1,0 +1,124 @@
+/* Contenido Página */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 87vh;
+    padding: 20px;
+}
+
+/* Caja del formulario */
+.login-box {
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    text-align: center;
+}
+
+/* Título */
+.login-title {
+    color: white;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+/* Estilos del formulario */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-align: left;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #B0B0B0;
+    background-color: #1A324A;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.form input:focus {
+    border: 1px solid #6FFF00;
+}
+
+.linea {
+    border: 2px solid white;
+    width: 100%;
+    margin: 30px 0;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    background-color: #6FFF00;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #57cc00;
+    color: white;
+}
+
+/* Enlace Registro */
+p {
+    color: white;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.register-link {
+    color: #00ff00;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+    color: #57cc00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-box {
+        width: 100%;
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .login-title {
+        font-size: 1.1rem;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    .form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

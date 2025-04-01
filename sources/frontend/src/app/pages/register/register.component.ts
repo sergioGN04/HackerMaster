@@ -11,4 +11,14 @@ import { FooterComponent } from '../../components/shared/footer/footer.component
 })
 export class RegisterComponent {
 
+  ngOnInit() {
+    this.posicionarArriba();
+  }
+
+  posicionarArriba() {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 40);
+  }
+  
 }

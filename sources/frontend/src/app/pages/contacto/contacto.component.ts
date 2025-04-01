@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [HeaderNoAutorizadoComponent, FooterComponent, FormsModule,CommonModule],
+  imports: [HeaderNoAutorizadoComponent, FooterComponent, FormsModule, CommonModule],
   templateUrl: './contacto.component.html',
   styleUrl: './contacto.component.css'
 })
@@ -40,15 +40,24 @@ export class ContactoComponent {
 
     this.contactoService.enviarFormulario(nombreUsuario, asunto, descripcion).subscribe({
       next: (response: any) => {
-        this.mensajeRespuesta = "¡Mensaje enviado correctamente!";
+        this.mensajeRespuesta = response.message;
         this.mensajeEsError = false;
         form.reset();
       },
       error: (error: any) => {
-        this.mensajeRespuesta = "Error al enviar el mensaje. Inténtalo de nuevo.";
+        if (error.error && error.error.message) {
+          this.mensajeRespuesta = error.error.message;
+        } else {
+          this.mensajeRespuesta = 'Ocurrió un error inesperado. Intenta nuevamente.';
+        }
         this.mensajeEsError = true;
       }
     });
-  }
 
+    setTimeout(() => {
+      this.mensajeRespuesta = '';
+    }, 5000)
+
+  }
+  
 }
