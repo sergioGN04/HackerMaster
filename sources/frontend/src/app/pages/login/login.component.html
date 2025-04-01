@@ -1,5 +1,21 @@
 <app-header-no-autorizado></app-header-no-autorizado>
 
-<h2>Login</h2>
+<div class="login-container secondarySections">
+    <div class="login-box primarySections">
+        <h2 class="login-title">Iniciar Sesión en HackerMaster</h2>
+        <form class="form">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" required />
+
+            <hr class="linea">
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p>¿Eres nuevo en HackerMaster? <a href="/register" class="register-link">Regístrate</a></p>
+    </div>
+</div>
 
 <app-footer></app-footer>

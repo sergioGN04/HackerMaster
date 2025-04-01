@@ -1,0 +1,160 @@
+/* Contenido Página */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Caja del formulario */
+.register-box {
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    text-align: center;
+}
+
+/* Título */
+.register-title {
+    color: white;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+/* Estilos del formulario */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo de los labels */
+label {
+    text-align: left;
+    color: white;
+    margin-top: 35px;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+/* Estilo de los inputs */
+.form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #B0B0B0;
+    background-color: #1A324A;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.form input:focus {
+    border: 1px solid #6FFF00;
+}
+
+/* Línea separadora */
+.linea {
+    border: 2px solid white;
+    width: 100%;
+    margin: 30px 0;
+}
+
+/* Botón de registro */
+button {
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    background-color: #6FFF00;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #57cc00;
+    color: white;
+}
+
+/* Estilo del enlace Login */
+p {
+    color: white;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.login-link {
+    color: #00ff00;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+    color: #57cc00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .register-box {
+        width: 100%;
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .register-title {
+        font-size: 1.3rem;
+        text-align: left;
+    }
+
+    label {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-box {
+        width: 100%;
+        max-width: 95%;
+    }
+
+    .register-title {
+        font-size: 1.2rem;
+    }
+
+    .form input {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+}
