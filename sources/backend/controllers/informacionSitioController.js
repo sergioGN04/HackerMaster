@@ -14,7 +14,7 @@ module.exports = {
             res.status(200).json({ success: true, totalUsuarios,totalMaquinas,totalLogros,totalIntentos });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ success: false, error: "Error - No se han podido obtener las estadisticas actuales" });
+            res.status(500).json({ success: false, error: "No se han podido obtener las estadisticas actuales" });
         }
     }
 }

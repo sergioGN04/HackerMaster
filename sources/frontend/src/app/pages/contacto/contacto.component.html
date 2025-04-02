@@ -8,7 +8,7 @@
         <hr class="linea">
 
         <!-- Formulario -->
-        <form #contactoForm id="contactoForm" (ngSubmit)="enviar($event, contactoForm)">
+        <form #contactoForm="ngForm" id="contactoForm" (ngSubmit)="enviar($event, contactoForm)">
             <div class="form-group">
                 <input type="text" id="nombreUsuario" [(ngModel)]="nombreUsuario" name="nombreUsuario" required
                     placeholder="Nombre de Usuario">
