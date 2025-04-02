@@ -30,7 +30,7 @@ export class InicioComponent {
         this.estadisticas = response;
       },
       error: (error: any) => {
-        console.error('Error al obtener las estadísticas:', error);
+        console.error('Error - No se ha podido obtener las estadísticas');
       }
     });
   }

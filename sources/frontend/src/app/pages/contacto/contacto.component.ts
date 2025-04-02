@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderNoAutorizadoComponent } from '../../components/shared/header-no-autorizado/header-no-autorizado.component';
 import { FooterComponent } from '../../components/shared/footer/footer.component';
 import { ContactoService } from '../../core/services/contacto.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -31,18 +31,16 @@ export class ContactoComponent {
     }, 40)
   }
 
-  enviar(event: Event, form: HTMLFormElement) {
+  enviar(event: Event, contactoForm: NgForm) {
     event.preventDefault();
 
-    const nombreUsuario = (document.getElementById('nombreUsuario') as HTMLInputElement).value;
-    const asunto = (document.getElementById('asunto') as HTMLSelectElement).value;
-    const descripcion = (document.getElementById('descripcion') as HTMLTextAreaElement).value;
+    const { nombreUsuario, asunto, descripcion } = contactoForm.form.value;
 
     this.contactoService.enviarFormulario(nombreUsuario, asunto, descripcion).subscribe({
       next: (response: any) => {
         this.mensajeRespuesta = response.message;
         this.mensajeEsError = false;
-        form.reset();
+        contactoForm.reset();
       },
       error: (error: any) => {
         if (error.error && error.error.message) {

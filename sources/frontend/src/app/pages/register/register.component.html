@@ -3,23 +3,27 @@
 <div class="register-container secondarySections">
     <div class="register-box primarySections">
         <h2 class="register-title">Registrarse en HackerMaster</h2>
-        <form class="form">
-            <label for="nombreUsuario">Nombre Usuario</label>
-            <input type="text" id="nombreUsuario" required />
+        <form #registerForm="ngForm" class="form" id="contactoForm" (ngSubmit)="registrar($event, registerForm)">
+            <label>Nombre Usuario</label>
+            <input type="text" [(ngModel)]="nombreUsuario" name="nombreUsuario" required />
 
-            <label for="email">Email</label>
-            <input type="email" id="email" required />
+            <label>Email</label>
+            <input type="email" [(ngModel)]="emailUsuario" name="emailUsuario" required />
 
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" required />
+            <label>Contraseña</label>
+            <input type="password" [(ngModel)]="passwordUsuario" name="passwordUsuario" required />
 
-            <label for="confirmarPassword">Confirmar Contraseña</label>
-            <input type="password" id="confirmarPassword" required />
+            <label>Confirmar Contraseña</label>
+            <input type="password" [(ngModel)]="confirmarPassword" name="confirmarPassword" required />
 
             <hr class="linea">
-
             <button type="submit">Registrarse</button>
         </form>
+
+        <p *ngIf="mensajeRespuesta"
+            [ngClass]="mensajeEsError ? 'mensaje-respuesta mensaje-error' : 'mensaje-respuesta mensaje-exito'">
+            {{ mensajeRespuesta }}
+        </p>
         <p>¿Ya tienes una cuenta? <a href="/login" class="login-link">Iniciar Sesión</a></p>
     </div>
 </div>
