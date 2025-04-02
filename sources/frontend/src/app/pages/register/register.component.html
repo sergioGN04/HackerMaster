@@ -3,7 +3,7 @@
 <div class="register-container secondarySections">
     <div class="register-box primarySections">
         <h2 class="register-title">Registrarse en HackerMaster</h2>
-        <form #registerForm="ngForm" class="form" id="contactoForm" (ngSubmit)="registrar($event, registerForm)">
+        <form #registerForm="ngForm" class="form" id="registerForm" (ngSubmit)="registrar($event, registerForm)">
             <label>Nombre Usuario</label>
             <input type="text" [(ngModel)]="nombreUsuario" name="nombreUsuario" required />
 

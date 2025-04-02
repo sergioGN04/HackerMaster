@@ -77,6 +77,27 @@ button:hover {
     color: white;
 }
 
+/* Mensaje de respuesta del formulario */
+.mensaje-respuesta {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mensaje-exito {
+    color: #6FFF00;
+}
+
+.mensaje-error {
+    color: #FF4C4C;
+}
+
 /* Enlace Registro */
 p {
     color: white;
