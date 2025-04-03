@@ -48,7 +48,7 @@ export class LoginComponent {
 
         // Redireccionamos a la pagina Dashboard Usuario
         setTimeout(() => {
-          window.location.href = "/inicio";
+          window.location.href = "/dashboard-usuario";
         }, 1500)
 
       },
