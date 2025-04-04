@@ -34,11 +34,11 @@
     color: white;
     text-decoration: none;
     padding: 15px 0 15px 65px;
-    background-color: #0A1A2A;
+    background-color: #0B121F;
 }
 
 .nav-list a:hover {
-    background-color: #1A324A;
+    background-color: #0A1A2A;
     color: #6FFF00;
 }
 
