@@ -36,7 +36,7 @@ export class LoginComponent {
 
     const { emailUsuario, password } = registerForm.form.value;
 
-    this.authService.iniciarSesion(emailUsuario, password).subscribe({
+    this.authService.login(emailUsuario, password).subscribe({
       next: (response: any) => {
 
         this.mensajeRespuesta = response.message;
@@ -46,10 +46,10 @@ export class LoginComponent {
         // Guardamos el token en el localStorage
         localStorage.setItem('authToken', response.token);
 
-        // Redireccionamos a la pagina Dashboard Usuario
+        // Redireccionamos a la pagina Dashboard-Usuario
         setTimeout(() => {
           window.location.href = "/dashboard-usuario";
-        }, 1500)
+        }, 500)
 
       },
       error: (error: any) => {
