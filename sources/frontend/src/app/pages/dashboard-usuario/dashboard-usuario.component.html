@@ -1,1 +1,10 @@
-<app-header-autorizado></app-header-autorizado>
+<app-header-autorizado (toggleSidebar)="toggleSidebar()"></app-header-autorizado>
+
+<div class="dashboard-container">
+    <app-sidebar-autorizado [expandido]="sidebarExpandido"></app-sidebar-autorizado>
+
+    <div class="contenido-dashboard" [class.expandido]="sidebarExpandido">
+        <!-- Contenido del Dashboard-Usuario -->
+
+    </div>
+</div>

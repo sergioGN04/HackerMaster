@@ -14,8 +14,12 @@ export class AuthService {
     return this.http.post(`${this.url}/register`, { nombreUsuario, emailUsuario, passwordUsuario, confirmarPassword });
   }
 
-  iniciarSesion(emailUsuario: string, password: string) {
+  login(emailUsuario: string, password: string) {
     return this.http.post(`${this.url}/login`, { emailUsuario, password });
+  }
+
+  logout() {
+    localStorage.removeItem('authToken');
   }
 
 }
