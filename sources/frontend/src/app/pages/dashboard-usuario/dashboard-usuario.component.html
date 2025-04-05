@@ -5,6 +5,14 @@
 
     <div class="contenido-dashboard" [class.expandido]="sidebarExpandido">
         <!-- Contenido del Dashboard-Usuario -->
-
+        <div class="resumen-perfil primarySections" *ngIf="resumen">
+            <p>Foto Perfil: {{ resumen.fotoPerfil }}</p>
+            <p>Username: {{ resumen.nombreUsuario }}</p>
+            <p>Rango: {{ resumen.rango }}</p>
+            <p>Puntuación: {{ resumen.puntuacion }}</p>
+            <p>Progreso: {{ resumen.progreso }}%</p>
+            <p>Máquinas completadas: {{ resumen.maquinasCompletadas }}</p>
+            <p>Logros completados: {{ resumen.logrosCompletados }}</p>
+        </div>
     </div>
 </div>

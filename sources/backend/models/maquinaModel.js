@@ -23,13 +23,12 @@ const Maquina = sequelize.define('Maquina', {
         defaultValue: 'fotoMaquina.png'
     },
     dificultad: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.ENUM('Facil', 'Medio', 'Dificil'),
         allowNull: false
     },
     puntuacion: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
+        allowNull: false
     },
     fechaCreacion: {
         type: DataTypes.DATE,
@@ -42,7 +41,7 @@ const Maquina = sequelize.define('Maquina', {
     },
     writeUp: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     flagUsuario: {
         type: DataTypes.STRING(100),

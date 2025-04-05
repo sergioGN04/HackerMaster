@@ -57,7 +57,7 @@ module.exports = {
 
             // Crear token JWT
             const token = jwt.sign(
-                { userId: usuario.idUsuario, username: usuario.username, rol: usuario.rol },
+                { idUsuario: usuario.idUsuario, username: usuario.username, rol: usuario.rol },
                 process.env.SECRET_KEY,
                 { expiresIn: "12h" }
             );
