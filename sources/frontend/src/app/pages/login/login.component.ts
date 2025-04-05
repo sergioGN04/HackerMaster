@@ -69,7 +69,7 @@ export class LoginComponent {
         if (error.error && error.error.message) {
           this.mensajeRespuesta = error.error.message;
         } else {
-          this.mensajeRespuesta = 'Ocurrió un error inesperado. Intenta nuevamente.';
+          this.mensajeRespuesta = 'Ocurrió un error inesperado. Intentelo más tarde.';
         }
         this.mensajeEsError = true;
 

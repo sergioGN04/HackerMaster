@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class DashboardUsuarioComponent {
   sidebarExpandido = true;
   resumen: any;
+  username: string = '';
 
   constructor(private usuarioService: UsuarioService, private authService: AuthService, private router: Router) { }
 
@@ -39,7 +40,7 @@ export class DashboardUsuarioComponent {
     this.usuarioService.obtenerResumenUsuario().subscribe({
       next: (response: any) => {
         this.resumen = response;
-        
+        this.username = this.resumen?.nombreUsuario;
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
