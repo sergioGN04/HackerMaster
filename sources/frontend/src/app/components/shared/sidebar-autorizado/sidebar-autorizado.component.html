@@ -1,4 +1,12 @@
 <aside class="sidebar" [ngClass]="{ 'colapsado': !expandido }">
+    <!-- Logo dentro del Sidebar -->
+    <div class="logo-sidebar" (click)="onLogoClick()">
+        <a class="navbar-brand logo">
+            <img [src]="logoUrl" alt="Logo">
+        </a>
+    </div>
+
+    <!-- Lista de navegación -->
     <ul class="nav-list">
         <li>
             <a routerLink="/dashboard-usuario" routerLinkActive="activo">

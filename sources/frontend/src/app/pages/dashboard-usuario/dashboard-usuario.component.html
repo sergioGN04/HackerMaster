@@ -1,18 +1,3 @@
-<app-header-autorizado (toggleSidebar)="toggleSidebar()" [username]="username"></app-header-autorizado>
+<app-header-autorizado [username]="username"></app-header-autorizado>
 
-<div class="dashboard-container">
-    <app-sidebar-autorizado [expandido]="sidebarExpandido"></app-sidebar-autorizado>
-
-    <div class="contenido-dashboard" [class.expandido]="sidebarExpandido">
-        <!-- Contenido del Dashboard-Usuario -->
-        <div class="resumen-perfil primarySections" *ngIf="resumen">
-            <p>Foto Perfil: {{ resumen.fotoPerfil }}</p>
-            <p>Username: {{ resumen.nombreUsuario }}</p>
-            <p>Rango: {{ resumen.rango }}</p>
-            <p>Puntuación: {{ resumen.puntuacion }}</p>
-            <p>Progreso: {{ resumen.progreso }}%</p>
-            <p>Máquinas completadas: {{ resumen.maquinasCompletadas }}</p>
-            <p>Logros completados: {{ resumen.logrosCompletados }}</p>
-        </div>
-    </div>
-</div>
+<app-sidebar-autorizado></app-sidebar-autorizado>

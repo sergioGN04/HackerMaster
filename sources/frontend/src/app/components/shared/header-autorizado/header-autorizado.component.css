@@ -1,7 +1,7 @@
 /* Navbar */
 .navbar {
     background-color: #0B121F !important;
-    padding: 10px 50px;
+    padding: 17px 50px;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,35 +11,95 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px black solid;
 }
 
-/* Logo */
-.logo img {
-    width: 160px;
-    height: auto;
-    cursor: pointer;
-}
-
+/* Contenedor Notificaciones y Menú Perfil */
 .acciones-derecha {
     display: flex;
     align-items: center;
-    gap: 5px;
+    margin-left: auto;
+    gap: 15px;
 }
 
 /* Notificaciones */
 .notificaciones {
     font-size: 24px;
     cursor: pointer;
-    margin-right: 40px;
     color: white;
+    transition: color 0.3s;
 }
 
 .notificaciones:hover {
     color: #6FFF00;
 }
 
-/* Menú Perfil */
+/* Menú de Notificaciones */
+.menu-notificaciones {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background: #0B121F;
+    padding: 12px;
+    border-radius: 5px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 2000;
+}
+
+.menu-notificaciones.abierto {
+    display: flex;
+}
+
+.notificaciones-card {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #1A324A;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.notificacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.notificacion:hover {
+    background-color: #1A324A;
+    color: #6FFF00;
+}
+
+.notificacion-imagen {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.notificacion-titulo {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
+
+.notificacion-descripcion {
+    font-size: 14px;
+    color: #b0b0b0;
+    margin-top: 5px;
+}
+
+/* Perfil */
 .perfil {
     position: relative;
     font-size: 18px;
@@ -56,9 +116,8 @@
     align-items: center;
     gap: 10px;
     background-color: #1A324A;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 .logo-pequeno {
@@ -73,13 +132,13 @@
 
 .flecha {
     font-size: 18px;
-    transition: transform 0.3s ease-in-out;
 }
 
 .flecha.abierta {
     transform: rotate(180deg);
 }
 
+/* Menú del perfil */
 .menu-perfil {
     position: absolute;
     top: 40px;
@@ -91,9 +150,9 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     display: none;
     flex-direction: column;
+    z-index: 2000;
 }
 
-/* Cuando el menú está abierto, lo mostramos */
 .menu-perfil.abierto {
     display: flex;
 }
@@ -104,7 +163,6 @@
     padding: 8px 12px;
     color: white;
     text-decoration: none;
-    transition: background 0.3s;
     font-size: 14px;
 }
 
@@ -119,12 +177,85 @@
 }
 
 /* Responsive */
-@media (max-width: 767px) {
-    .perfil-info {
-        font-size: 16px;
+@media (max-width: 768px) {
+    .navbar {
+        padding: 9px 20px;
+    }
+
+    .menu-notificaciones {
+        width: 260px;
+        right: 15px;
+        top: 70px;
+    }
+
+    .menu-perfil {
+        width: 150px;
+        right: 15px;
+        top: 38px;
+    }
+
+    .perfil-info .nombre-usuario {
+        display: none;
+    }
+
+    .notificacion-imagen {
+        width: 50px;
+        height: 50px;
+    }
+
+    .notificacion-titulo {
+        font-size: 14px;
+    }
+
+    .notificacion-descripcion {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .acciones-derecha {
+        gap: 10px;
+    }
+
+    .notificaciones {
+        font-size: 22px;
+    }
+
+    .menu-notificaciones {
+        width: 220px;
+        top: 60px;
+        right: 10px;
     }
 
     .menu-perfil {
         width: 140px;
+        top: 35px;
+        right: 10px;
+    }
+
+    .perfil-info {
+        padding: 6px 10px;
+    }
+
+    .logo-pequeno {
+        width: 28px;
+    }
+
+    .flecha {
+        font-size: 16px;
+    }
+
+    .menu-perfil a {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .menu-perfil i {
+        font-size: 16px;
+        margin-right: 6px;
     }
 }

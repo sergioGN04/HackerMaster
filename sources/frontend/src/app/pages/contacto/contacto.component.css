@@ -217,4 +217,29 @@ textarea::-webkit-resizer {
     form {
         max-width: 100%;
     }
+
+    .metodos-contenedor {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .metodo {
+        width: 90%;
+        max-width: 300px;
+        padding: 40px;
+    }
+
+    .metodo i {
+        font-size: 70px;
+    }
+
+    .metodo h3 {
+        font-size: 20px;
+    }
+
+    .metodo p {
+        font-size: 12px;
+        max-width: 280px;
+    }
 }

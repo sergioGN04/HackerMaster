@@ -56,9 +56,4 @@ export class DashboardUsuarioComponent {
     });
   }
 
-  // Método para expandir o colapsar el sidebar
-  toggleSidebar() {
-    this.sidebarExpandido = !this.sidebarExpandido;
-  }
-
 }
