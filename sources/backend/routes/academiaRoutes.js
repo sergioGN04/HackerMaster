@@ -7,6 +7,7 @@ const usuarioController = require('../controllers/usuarioController');
 const maquinaController = require('../controllers/maquinaController');
 const notificacionController = require('../controllers/notificacionController');
 const logroController = require('../controllers/logroController');
+const verifyToken = require('../middlewares/verifyToken');
 
 // ------ Rutas HackerMaster ------
 // Informacion del sitio
@@ -20,7 +21,7 @@ router.post('/api/login', authenticationController.iniciarSesion);
 router.post('/api/register', authenticationController.registrarUsuario);
 
 // Usuarios
-router.get('/api/usuarios', usuarioController.obtenerUsuarios);
+router.get('/api/dashboard-usuario', verifyToken, usuarioController.obtenerResumenUsuario);
 
 // Maquinas
 router.get('/api/maquinas', maquinaController.obtenerMaquinas);

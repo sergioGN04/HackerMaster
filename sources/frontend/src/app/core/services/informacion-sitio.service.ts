@@ -6,12 +6,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InformacionSitioService {
 
-  private url = 'http://192.168.2.2:3000/api/';
+  private url = 'http://192.168.2.2:3000/api';
 
   constructor(private http: HttpClient) { }
 
+  // Método para obtener las estadísticas actuales del sitio
   getInformacionSitio() {
-    return this.http.get(this.url + 'estadisticas-actuales');
+    return this.http.get(this.url + '/estadisticas-actuales');
   }
 
 }

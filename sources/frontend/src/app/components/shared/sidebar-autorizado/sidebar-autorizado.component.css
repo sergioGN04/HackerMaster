@@ -1,3 +1,4 @@
+/* Estilos para el Sidebar */
 .sidebar {
     position: fixed;
     top: 85px;
@@ -8,7 +9,6 @@
     color: white;
     padding-top: 20px;
     z-index: 999;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
     overflow-x: hidden;
 }
 
@@ -38,7 +38,16 @@
 }
 
 .nav-list a:hover {
+    background-color: #1A324A;
+    color: #6FFF00;
+}
+
+.nav-list a.activo {
     background-color: #0A1A2A;
+    color: #6FFF00;
+}
+
+.nav-list a.activo i {
     color: #6FFF00;
 }
 
@@ -55,6 +64,7 @@
     white-space: nowrap;
 }
 
+/* Estilos para el sidebar colapsado */
 .sidebar.colapsado .nav-list a {
     justify-content: center;
     padding-left: 0;

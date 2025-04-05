@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+// Middleware para verificar el token JWT
 const verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.split(' ')[1];
 
-    if (!token) return res.status(401).json({ message: 'Acceso no autorizado. No se proporcionó un token.' });
+    if (!token) return res.status(401).json({ message: 'Error - No se proporcionó un token.' });
 
-    jwt.verify(token, process.env.SECRET_KEY, (err, datos) => {
-        if (err) return res.status(403).json({ message: 'Token inválido o expirado' });
+    jwt.verify(token, process.env.SECRET_KEY, (error, datos) => {
+        if (error) return res.status(403).json({ message: 'Error - Token inválido o expirado' });
 
         req.user = datos;
         next();

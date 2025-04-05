@@ -23,14 +23,26 @@ export class LoginComponent {
 
   ngOnInit() {
     this.posicionarArriba();
+    this.redirigirDashboard();
   }
 
+  // Método para posicionar la página arriba
   posicionarArriba() {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 40);
   }
 
+  // Método para redirigir al dashboard si el usuario ya está logueado
+  redirigirDashboard() {
+    if (this.authService.estaLogueado()) {
+      setTimeout(() => {
+        window.location.href = "/dashboard-usuario";
+      }, 500)
+    }
+  }
+
+  // Método para iniciar sesión
   iniciarSesion(event: Event, registerForm: NgForm) {
     event.preventDefault();
 
@@ -44,7 +56,7 @@ export class LoginComponent {
         registerForm.reset();
 
         // Guardamos el token en el localStorage
-        localStorage.setItem('authToken', response.token);
+        this.authService.almacenarToken(response.token);
 
         // Redireccionamos a la pagina Dashboard-Usuario
         setTimeout(() => {
@@ -66,7 +78,7 @@ export class LoginComponent {
 
     setTimeout(() => {
       this.mensajeRespuesta = '';
-    }, 3000);
+    }, 2500);
 
   }
   

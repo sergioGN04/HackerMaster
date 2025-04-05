@@ -19,20 +19,24 @@ export class HeaderAutorizadoComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  // Método para expandir o colapsar el sidebar
   onLogoClick() {
     this.toggleSidebar.emit();
   }
 
+  // Método para abrir el menú de perfil
   toggleMenuPerfil(event: Event) {
     event.stopPropagation();
     this.menuPerfilAbierto = !this.menuPerfilAbierto;
   }
 
+  // Método para cerrar sesión
   cerrarSesion() {
-    this.authService.logout();
+    this.authService.eliminarToken();
     this.router.navigate(['/login']);
   }
 
+  // Método para cerrar el menú de perfil al hacer clic fuera de él
   @HostListener('document:click', ['$event'])
   cerrarSiClickFuera(event: Event) {
     const target = event.target as HTMLElement;
