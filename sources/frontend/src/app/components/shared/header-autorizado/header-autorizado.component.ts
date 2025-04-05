@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderAutorizadoComponent {
   @Output() toggleSidebar = new EventEmitter<void>();
+  @Input() username!: string;
 
-  nombreUsuario = 'usuario';
   menuPerfilAbierto = false;
 
   constructor(private authService: AuthService, private router: Router) { }
