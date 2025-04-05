@@ -1,15 +1,38 @@
 /* Estilos para el Sidebar */
 .sidebar {
     position: fixed;
-    top: 85px;
+    top: 0;
     left: 0;
     width: 280px;
-    height: calc(100vh - 85px);
+    height: 100vh;
     background-color: #0B121F;
     color: white;
-    padding-top: 20px;
-    z-index: 999;
+    z-index: 1000;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Logo Sidebar */
+.logo-sidebar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 2px solid #0A1A2A;
+}
+
+/* Logo por defecto */
+.logo-sidebar .logo img {
+    width: 160px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Logo cuando el sidebar está colapsado */
+.sidebar.colapsado .logo-sidebar img {
+    width: 60px;
+    height: auto;
 }
 
 /* Sidebar colapsado */
@@ -22,19 +45,23 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    flex-grow: 1;
 }
 
+/* Estilos para los items de la lista */
 .nav-list li {
     margin: 10px 0;
 }
 
+/* Estilo para los enlaces */
 .nav-list a {
     display: flex;
     align-items: center;
     color: white;
     text-decoration: none;
-    padding: 15px 0 15px 80px;
+    padding: 15px 0 15px 30px;
     background-color: #0B121F;
+    padding-left: 75px;
 }
 
 .nav-list a:hover {
@@ -51,14 +78,15 @@
     color: #6FFF00;
 }
 
+/* Estilo de los iconos */
 .nav-list i {
     font-size: 24px;
     min-width: 24px;
     text-align: center;
-    transition: color 0.3s ease;
     margin-right: 10px;
 }
 
+/* Texto de los enlaces */
 .texto-link {
     display: inline-block;
     white-space: nowrap;
@@ -76,4 +104,65 @@
 
 .sidebar.colapsado .nav-list i {
     margin-right: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 220px;
+    }
+
+    .sidebar.colapsado {
+        width: 65px;
+    }
+
+    .logo-sidebar .logo img {
+        width: 120px;
+    }
+
+    .sidebar.colapsado .logo-sidebar img {
+        width: 43px;
+    }
+
+    .nav-list i {
+        font-size: 20px;
+        min-width: 20px;
+    }
+
+    .nav-list a {
+        padding-left: 50px;
+        font-size: 15px;
+    }
+
+    .sidebar.colapsado .nav-list a {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 180px;
+    }
+
+    .sidebar.colapsado {
+        width: 60px;
+    }
+
+    .logo-sidebar .logo img {
+        width: 108px;
+    }
+
+    .sidebar.colapsado .logo-sidebar img {
+        width: 40px;
+    }
+
+    .nav-list i {
+        font-size: 18px;
+        min-width: 18px;
+    }
+
+    .nav-list a {
+        padding-left: 40px;
+        font-size: 14px;
+    }
 }

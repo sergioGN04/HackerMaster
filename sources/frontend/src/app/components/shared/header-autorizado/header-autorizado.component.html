@@ -1,24 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid">
-        <!-- Logo que abre el Sidebar -->
-        <a class="navbar-brand logo" (click)="onLogoClick()">
-            <img src="/assets/images/hackermasterlogo.png" alt="Logo">
-        </a>
-
         <div class="acciones-derecha">
-            <!-- Icono de Notificaciones -->
-            <div class="notificaciones">
+            <!-- Icono Notificaciones -->
+            <div class="notificaciones" (click)="toggleMenuNotificaciones($event)">
                 <i class="bi bi-bell"></i>
             </div>
 
-            <!-- Menú de perfil -->
+            <!-- Notificaciones -->
+            <div class="menu-notificaciones" [ngClass]="{'abierto': menuNotificacionesAbierto}">
+                <!-- Ejemplos de notificacines -->
+                <div class="notificaciones-card" *ngFor="let i of [1,2,3]">
+                    <div class="notificacion">
+                        <img src="/assets/notificaciones/notificacion1.png" alt="Notificación" class="notificacion-imagen">
+                        <span class="notificacion-titulo">Ejemplo Titulo {{ i }}</span>
+                        <p class="notificacion-descripcion">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. At eos, repellat non veritatis a
+                            quibusdam voluptate sit ex maxime aperiam, in nobis porro numquam ullam! Adipisci,
+                            aspernatur exercitationem. Officiis, vitae!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perfil -->
             <div class="perfil" (click)="toggleMenuPerfil($event)">
                 <div class="perfil-info">
                     <img src="/assets/images/logo.png" alt="Logo pequeño" class="logo-pequeno">
                     <span class="nombre-usuario">{{ username }}</span>
                     <i class="bi bi-chevron-down flecha" [ngClass]="{'abierta': menuPerfilAbierto}"></i>
                 </div>
-                <!-- Dropdown del perfil -->
+
+                <!-- Opciones perfil -->
                 <div class="menu-perfil" [ngClass]="{'abierto': menuPerfilAbierto}">
                     <a routerLink="/configurar-perfil"><i class="bi bi-gear"></i> Configurar Perfil</a>
                     <a (click)="cerrarSesion()"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a>

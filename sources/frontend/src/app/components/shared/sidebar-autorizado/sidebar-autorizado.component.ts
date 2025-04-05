@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -10,5 +10,18 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./sidebar-autorizado.component.css']
 })
 export class SidebarAutorizadoComponent {
-  @Input() expandido = true;
+  expandido = true;
+  logoUrl: string = '/assets/images/hackermasterlogo.png';
+
+  onLogoClick(): void {
+    this.expandido = !this.expandido;
+
+    if (this.expandido) {
+      this.logoUrl = '/assets/images/hackermasterlogo.png';
+    } else {
+      this.logoUrl = '/assets/images/logo.png';
+    }
+    
+  }
+  
 }
