@@ -1,306 +1,323 @@
 <app-header-no-autorizado></app-header-no-autorizado>
 
 <!-- Banner -->
-<section id="inicio" class="banner">
-    <div class="banner-overlay"></div>
-    <div class="banner-content container">
-        <h1 class="display-3">HackerMaster</h1>
-        <p class="lead">Desafía tus habilidades en ciberseguridad con retos reales</p>
-        <button routerLink="/register" routerLinkActive="active" class="btn btn-success btn-lg">Únete ahora</button>
-    </div>
-</section>
+<div class="main-container">
+    <section id="inicio" class="banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-content container">
+            <h1 class="display-3">HackerMaster</h1>
+            <p class="lead">Desafía tus habilidades en ciberseguridad con retos reales</p>
+            <button routerLink="/register" routerLinkActive="active" class="btn btn-success btn-lg">Únete ahora</button>
+        </div>
+    </section>
 
-<!-- ¿Qué es HackerMaster? -->
-<section id="que-es" class="que-es primarySections">
-    <div class="container">
-        <h2>¿Qué es HackerMaster?</h2>
-        <p class="descripcion-que-es">
-            HackerMaster es el lugar perfecto para cualquiera que quiera mejorar sus habilidades en ciberseguridad. Aquí
-            puedes enfrentarte a retos reales, jugar con máquinas virtuales para practicar sin riesgos, subir en el
-            ranking y aprender junto a una comunidad de hackers y entusiastas de la seguridad. No importa si estás
-            empezando o ya tienes experiencia, siempre hay algo nuevo por descubrir. ¿Listo para el desafío?
-        </p>
+    <!-- ¿Qué es HackerMaster? -->
+    <section id="que-es" class="que-es primarySections">
+        <div class="container">
+            <h2>¿Qué es HackerMaster?</h2>
+            <p class="descripcion-que-es">
+                HackerMaster es el lugar perfecto para cualquiera que quiera mejorar sus habilidades en ciberseguridad.
+                Aquí
+                puedes enfrentarte a retos reales, jugar con máquinas virtuales para practicar sin riesgos, subir en el
+                ranking y aprender junto a una comunidad de hackers y entusiastas de la seguridad. No importa si estás
+                empezando o ya tienes experiencia, siempre hay algo nuevo por descubrir. ¿Listo para el desafío?
+            </p>
 
-        <!-- Características en fila -->
-        <div class="row">
-            <div class="feature-item">
-                <i class="fas fa-laptop-code"></i>
-                <p>Máquinas con Distintos Niveles</p>
-            </div>
+            <!-- Características en fila -->
+            <div class="row">
+                <div class="feature-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <p>Máquinas con Distintos Niveles</p>
+                </div>
 
-            <div class="feature-item">
-                <i class="fas fa-trophy"></i>
-                <p>Sistema de Ranking</p>
-            </div>
+                <div class="feature-item">
+                    <i class="fas fa-trophy"></i>
+                    <p>Sistema de Ranking</p>
+                </div>
 
-            <div class="feature-item">
-                <i class="fas fa-medal"></i>
-                <p>Sistema de Logros</p>
-            </div>
+                <div class="feature-item">
+                    <i class="fas fa-medal"></i>
+                    <p>Sistema de Logros</p>
+                </div>
 
-            <div class="feature-item">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <p>Aprendizaje mediante Desafíos Reales</p>
+                <div class="feature-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <p>Aprendizaje mediante Desafíos Reales</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Estadísticas Actuales -->
-<section id="estadisticas" class="estadisticas secondarySections">
-    <div class="container">
-        <h2>Estadísticas Actuales</h2>
-        <p class="descripcion-estadisticas">Aquí puedes consultar las estadísticas más recientes de nuestra plataforma.
-            Estos números muestran el crecimiento y la actividad de nuestra comunidad. ¡Únete y sé parte de esta
-            emocionante aventura! Recuerda, cada logro y cada intento cuenta.</p>
+    <!-- Estadísticas Actuales -->
+    <section id="estadisticas" class="estadisticas secondarySections">
+        <div class="container">
+            <h2>Estadísticas Actuales</h2>
+            <p class="descripcion-estadisticas">Aquí puedes consultar las estadísticas más recientes de nuestra
+                plataforma.
+                Estos números muestran el crecimiento y la actividad de nuestra comunidad. ¡Únete y sé parte de esta
+                emocionante aventura! Recuerda, cada logro y cada intento cuenta.</p>
 
-        <!-- Estadísticas en fila -->
-        <div class="row">
-            <div class="feature-item">
-                <i class="fas fa-users fa-3x"></i>
-                <p>Usuarios</p>
-                <p class="stat-number">{{estadisticas.totalUsuarios}}</p>
-            </div>
+            <!-- Estadísticas en fila -->
+            <div class="row">
+                <div class="feature-item">
+                    <i class="fas fa-users fa-3x"></i>
+                    <p>Usuarios</p>
+                    <p class="stat-number">{{estadisticas.totalUsuarios}}</p>
+                </div>
 
-            <div class="feature-item">
-                <i class="fas fa-cogs fa-3x"></i>
-                <p>Máquinas</p>
-                <p class="stat-number">{{estadisticas.totalMaquinas}}</p>
-            </div>
+                <div class="feature-item">
+                    <i class="fas fa-cogs fa-3x"></i>
+                    <p>Máquinas</p>
+                    <p class="stat-number">{{estadisticas.totalMaquinas}}</p>
+                </div>
 
-            <div class="feature-item">
-                <i class="fas fa-medal fa-3x"></i>
-                <p>Logros</p>
-                <p class="stat-number">{{estadisticas.totalLogros}}</p>
-            </div>
+                <div class="feature-item">
+                    <i class="fas fa-medal fa-3x"></i>
+                    <p>Logros</p>
+                    <p class="stat-number">{{estadisticas.totalLogros}}</p>
+                </div>
 
-            <div class="feature-item">
-                <i class="fas fa-chalkboard-teacher fa-3x"></i>
-                <p>Intentos</p>
-                <p class="stat-number">{{estadisticas.totalIntentos}}</p>
+                <div class="feature-item">
+                    <i class="fas fa-chalkboard-teacher fa-3x"></i>
+                    <p>Intentos</p>
+                    <p class="stat-number">{{estadisticas.totalIntentos}}</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ¿Quiénes somos? -->
-<section id="quienes-somos" class="quienes-somos primarySections">
-    <div class="container">
-        <h2 class="display-4 text-center">¿Quiénes Somos?</h2>
-        <div class="row align-items-center">
-            <!-- Descripción -->
-            <div class="col-md-6 text-center text-md-start">
-                <p class="descripcion-quienes">En HackerMaster, somos un equipo apasionado por la ciberseguridad y el
-                    aprendizaje práctico. Creemos en la enseñanza a través de retos reales y en la importancia de una
-                    comunidad que impulse el crecimiento. Nuestro objetivo es proporcionar herramientas y desafíos que
-                    ayuden a cada persona a mejorar sus habilidades, sin importar su nivel de experiencia.
-                </p>
-            </div>
+    <!-- ¿Quiénes somos? -->
+    <section id="quienes-somos" class="quienes-somos primarySections">
+        <div class="container">
+            <h2 class="display-4 text-center">¿Quiénes Somos?</h2>
+            <div class="row align-items-center">
+                <!-- Descripción -->
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="descripcion-quienes">En HackerMaster, somos un equipo apasionado por la ciberseguridad y
+                        el
+                        aprendizaje práctico. Creemos en la enseñanza a través de retos reales y en la importancia de
+                        una
+                        comunidad que impulse el crecimiento. Nuestro objetivo es proporcionar herramientas y desafíos
+                        que
+                        ayuden a cada persona a mejorar sus habilidades, sin importar su nivel de experiencia.
+                    </p>
+                </div>
 
-            <!-- Carrusel de imágenes -->
-            <div class="col-md-6">
-                <div id="carouselEmpleados" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="http://192.168.2.3:4200/assets/images/empleado1.png" class="d-block w-100"
-                                alt="Empleado 1">
+                <!-- Carrusel de imágenes -->
+                <div class="col-md-6">
+                    <div id="carouselEmpleados" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="http://192.168.2.3:4200/assets/images/empleado1.png" class="d-block w-100"
+                                    alt="Empleado 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="http://192.168.2.3:4200/assets/images/empleado2.png" class="d-block w-100"
+                                    alt="Empleado 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="http://192.168.2.3:4200/assets/images/empleado3.png" class="d-block w-100"
+                                    alt="Empleado 3">
+                            </div>
                         </div>
-                        <div class="carousel-item">
-                            <img src="http://192.168.2.3:4200/assets/images/empleado2.png" class="d-block w-100"
-                                alt="Empleado 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="http://192.168.2.3:4200/assets/images/empleado3.png" class="d-block w-100"
-                                alt="Empleado 3">
-                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselEmpleados"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselEmpleados"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselEmpleados"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselEmpleados"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Preguntas Frecuentes -->
-<section id="preguntas-frecuentes" class="preguntas-frecuentes secondarySections">
-    <div class="container">
-        <h2 class="preguntas-frecuentes-titulo">Preguntas Frecuentes</h2>
+    <!-- Preguntas Frecuentes -->
+    <section id="preguntas-frecuentes" class="preguntas-frecuentes secondarySections">
+        <div class="container">
+            <h2 class="preguntas-frecuentes-titulo">Preguntas Frecuentes</h2>
 
-        <!-- Acordeón de Preguntas Frecuentes -->
-        <div class="accordion" id="accordionExample">
+            <!-- Acordeón de Preguntas Frecuentes -->
+            <div class="accordion" id="accordionExample">
 
-            <!-- Pregunta 1: Registro -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        ¿Cómo me registro y empiezo a hackear?
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        En la parte superior de la página encontrarás un botón de "Register". Tras completar tus datos,
-                        podrás acceder a la plataforma y empezar a hackear las máquinas disponibles en la sección
-                        "Máquinas".
+                <!-- Pregunta 1: Registro -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            ¿Cómo me registro y empiezo a hackear?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            En la parte superior de la página encontrarás un botón de "Register". Tras completar tus
+                            datos,
+                            podrás acceder a la plataforma y empezar a hackear las máquinas disponibles en la sección
+                            "Máquinas".
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 2: Experiencia previa -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        ¿Es necesario tener experiencia previa en ciberseguridad para empezar?
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        No es necesario. La plataforma cuenta con máquinas de diferentes niveles de dificultad, por lo
-                        que puedes comenzar desde lo más básico e ir avanzando a tu ritmo.
+                <!-- Pregunta 2: Experiencia previa -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            ¿Es necesario tener experiencia previa en ciberseguridad para empezar?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            No es necesario. La plataforma cuenta con máquinas de diferentes niveles de dificultad, por
+                            lo
+                            que puedes comenzar desde lo más básico e ir avanzando a tu ritmo.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 3: Funcionamiento de las máquinas -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        ¿Qué son las máquinas de hackeo y cómo funcionan?
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        Las máquinas son entornos virtuales diseñados para simular vulnerabilidades de seguridad. Cada
-                        una tiene diferentes niveles de dificultad y tu objetivo es explotarlas utilizando técnicas de
-                        hacking ético.
+                <!-- Pregunta 3: Funcionamiento de las máquinas -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            ¿Qué son las máquinas de hackeo y cómo funcionan?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Las máquinas son entornos virtuales diseñados para simular vulnerabilidades de seguridad.
+                            Cada
+                            una tiene diferentes niveles de dificultad y tu objetivo es explotarlas utilizando técnicas
+                            de
+                            hacking ético.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 4: Coste -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        ¿Es gratis o tiene algún costo?
-                    </button>
-                </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        La plataforma es completamente gratuita. Puedes registrarte, interactuar con las máquinas y
-                        subir las tuyas propias sin ningún tipo de coste.
+                <!-- Pregunta 4: Coste -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            ¿Es gratis o tiene algún costo?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            La plataforma es completamente gratuita. Puedes registrarte, interactuar con las máquinas y
+                            subir las tuyas propias sin ningún tipo de coste.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 5: Subir nuevas máquinas -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        ¿Cómo se suben nuevas máquinas?
-                    </button>
-                </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        Puedes subir nuevas máquinas desde la sección "Máquinas", donde encontrarás un formulario para
-                        completar los detalles y adjuntar el archivo .tar de Docker. Un administrador revisará tu envío
-                        antes de aceptarlo o rechazarlo.
+                <!-- Pregunta 5: Subir nuevas máquinas -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            ¿Cómo se suben nuevas máquinas?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Puedes subir nuevas máquinas desde la sección "Máquinas", donde encontrarás un formulario
+                            para
+                            completar los detalles y adjuntar el archivo .tar de Docker. Un administrador revisará tu
+                            envío
+                            antes de aceptarlo o rechazarlo.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 6: Ayuda en las máquinas -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingSix">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        ¿Puedo recibir ayuda si me quedo atascado en una máquina?
-                    </button>
-                </h2>
-                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        Si te quedas atascado, puedes consultar los "Writeups" disponibles, donde encontrarás guías
-                        detalladas con imágenes para ayudarte a avanzar. También puedes unirte a nuestra comunidad en
-                        Discord y Telegram para compartir dudas y recibir consejos de otros usuarios.
+                <!-- Pregunta 6: Ayuda en las máquinas -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingSix">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            ¿Puedo recibir ayuda si me quedo atascado en una máquina?
+                        </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Si te quedas atascado, puedes consultar los "Writeups" disponibles, donde encontrarás guías
+                            detalladas con imágenes para ayudarte a avanzar. También puedes unirte a nuestra comunidad
+                            en
+                            Discord y Telegram para compartir dudas y recibir consejos de otros usuarios.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 7: Medición del progreso -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingSeven">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                        ¿Hay alguna forma de medir mi progreso?
-                    </button>
-                </h2>
-                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        En tu perfil podrás ver estadísticas clave que te permiten seguir tu progreso, como el
-                        porcentaje de avance general, tu puntuación, el número de máquinas completadas, los logros que
-                        has desbloqueado, el tiempo total jugado y el total de intentos. También encontrarás una lista
-                        detallada de los logros que has alcanzado. Además, podrás comparar tu rendimiento con otros
-                        usuarios a través de los rankings.
+                <!-- Pregunta 7: Medición del progreso -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingSeven">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            ¿Hay alguna forma de medir mi progreso?
+                        </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            En tu perfil podrás ver estadísticas clave que te permiten seguir tu progreso, como el
+                            porcentaje de avance general, tu puntuación, el número de máquinas completadas, los logros
+                            que
+                            has desbloqueado, el tiempo total jugado y el total de intentos. También encontrarás una
+                            lista
+                            detallada de los logros que has alcanzado. Además, podrás comparar tu rendimiento con otros
+                            usuarios a través de los rankings.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 8: Actualización de las máquinas -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingEight">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                        ¿Las máquinas se actualizan o cambian con el tiempo?
-                    </button>
-                </h2>
-                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        Sí, continuamente se añaden nuevas máquinas y algunas existentes pueden actualizarse para
-                        mantener los retos interesantes y alineados con las tendencias actuales en ciberseguridad.
+                <!-- Pregunta 8: Actualización de las máquinas -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingEight">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            ¿Las máquinas se actualizan o cambian con el tiempo?
+                        </button>
+                    </h2>
+                    <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Sí, continuamente se añaden nuevas máquinas y algunas existentes pueden actualizarse para
+                            mantener los retos interesantes y alineados con las tendencias actuales en ciberseguridad.
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pregunta 9: Compatibilidad de la plataforma -->
-            <div class="accordion-item secondarySections">
-                <h2 class="accordion-header" id="headingNine">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                        ¿Puedo acceder desde cualquier dispositivo o plataforma?
-                    </button>
-                </h2>
-                <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        La plataforma es accesible desde cualquier dispositivo con un navegador web, aunque se
-                        recomienda el uso de un ordenador para una mejor experiencia, especialmente en la interacción
-                        con las máquinas.
+                <!-- Pregunta 9: Compatibilidad de la plataforma -->
+                <div class="accordion-item secondarySections">
+                    <h2 class="accordion-header" id="headingNine">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                            ¿Puedo acceder desde cualquier dispositivo o plataforma?
+                        </button>
+                    </h2>
+                    <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            La plataforma es accesible desde cualquier dispositivo con un navegador web, aunque se
+                            recomienda el uso de un ordenador para una mejor experiencia, especialmente en la
+                            interacción
+                            con las máquinas.
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<app-footer></app-footer>
+    <app-footer></app-footer>
+</div>

@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     width: 280px;
-    height: 100vh;
+    height: 200vh;
     background-color: #0B121F;
     color: white;
     z-index: 1000;
@@ -19,7 +19,6 @@
     justify-content: center;
     margin-bottom: 20px;
     padding: 10px;
-    border-bottom: 2px solid #0A1A2A;
 }
 
 /* Logo por defecto */
@@ -48,12 +47,10 @@
     flex-grow: 1;
 }
 
-/* Estilos para los items de la lista */
 .nav-list li {
     margin: 10px 0;
 }
 
-/* Estilo para los enlaces */
 .nav-list a {
     display: flex;
     align-items: center;
@@ -78,7 +75,6 @@
     color: #6FFF00;
 }
 
-/* Estilo de los iconos */
 .nav-list i {
     font-size: 24px;
     min-width: 24px;

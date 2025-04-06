@@ -1,3 +1,69 @@
 <app-header-autorizado [username]="username"></app-header-autorizado>
+<app-sidebar-autorizado (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-autorizado>
 
-<app-sidebar-autorizado></app-sidebar-autorizado>
+<!-- Primer Apartado: Perfil -->
+<div class="dashboard-container primarySections resumen-usuario" [class.colapsado]="!sidebarExpandido" *ngIf="resumen">
+    <div class="resumen-perfil">
+        <div class="perfil-header">
+            <img class="foto-perfil" [src]="'http://192.168.2.2:3000/usuarios/' + resumen.fotoPerfil"
+                alt="Foto de perfil">
+            <div>
+                <h1>{{ resumen.nombreUsuario }}</h1>
+                <p class="rango">Rango: {{ resumen.rango }}</p>
+            </div>
+        </div>
+
+        <hr class="separator">
+
+        <!-- Barra de Progreso -->
+        <div class="barra-progreso">
+            <label>Progreso:</label>
+            <div class="progreso-fondo">
+                <div class="progreso-valor" [style.width.%]="resumen.progreso"></div>
+            </div>
+            <span>{{ resumen.progreso }}%</span>
+        </div>
+
+        <div class="resumen-tarjetas">
+            <div class="tarjeta">
+                <div class="icono-tarjeta">
+                    <i class="bi bi-award"></i>
+                </div>
+                <h3>Puntuación</h3>
+                <p>{{ resumen.puntuacion }}</p>
+            </div>
+            <div class="tarjeta">
+                <div class="icono-tarjeta">
+                    <i class="bi bi-cpu"></i>
+                </div>
+                <h3>Máquinas Completadas</h3>
+                <p>{{ resumen.maquinasCompletadas }}</p>
+            </div>
+            <div class="tarjeta">
+                <div class="icono-tarjeta">
+                    <i class="bi bi-trophy-fill"></i>
+                </div>
+                <h3>Logros Desbloqueados</h3>
+                <p>{{ resumen.logrosCompletados }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Segundo Apartado: Máquinas Recomendadas y En Progreso -->
+<div class="dashboard-container secondarySections seccion-maquinas" [class.colapsado]="!sidebarExpandido"
+    *ngIf="resumen">
+    <div class="maquinas-recomendadas">
+        <h2>Recomendadas</h2>
+        <hr class="separator">
+        <div class="maquinas-lista">
+            <div *ngFor="let i of [1,2,3,4,5]" class="maquina-card">
+                <a href="{{ i }}">
+                    <img [src]="'http://192.168.2.2:3000/usuarios/' + resumen.fotoPerfil" alt="Foto de la máquina" class="foto-maquina">
+                    <h3>Asucar</h3>
+                    <p>Fácil</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

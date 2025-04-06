@@ -25,12 +25,14 @@ export class ContactoComponent {
     this.posicionarArriba();
   }
 
+  // Función para posicionar la vista en la parte superior de la página
   posicionarArriba() {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 40)
   }
 
+  // Función para validar y enviar el formulario
   enviar(event: Event, contactoForm: NgForm) {
     event.preventDefault();
 
@@ -41,6 +43,7 @@ export class ContactoComponent {
         this.mensajeRespuesta = response.message;
         this.mensajeEsError = false;
         contactoForm.reset();
+        this.asunto = '';
       },
       error: (error: any) => {
         if (error.error && error.error.message) {

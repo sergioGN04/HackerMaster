@@ -15,8 +15,9 @@ import { Router } from '@angular/router';
 })
 export class DashboardUsuarioComponent {
   sidebarExpandido = true;
-  resumen: any;
+  resumen: any = null;
   username: string = '';
+  maquinasEnProgreso: any[] = [];
 
   constructor(private usuarioService: UsuarioService, private authService: AuthService, private router: Router) { }
 
@@ -35,7 +36,7 @@ export class DashboardUsuarioComponent {
     }
   }
 
-  // Método para obtener el resumen del usuario
+  // Método para obtener el resumen del usuario y validar el token
   getResumenUsuario(): void {
     this.usuarioService.obtenerResumenUsuario().subscribe({
       next: (response: any) => {
@@ -54,6 +55,11 @@ export class DashboardUsuarioComponent {
         }
       }
     });
+  }
+
+  // Método para obtener las máquinas en progreso del usuario
+  getMaquinasEnProgreso(): void {
+    
   }
 
 }

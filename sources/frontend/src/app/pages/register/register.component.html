@@ -1,31 +1,36 @@
 <app-header-no-autorizado></app-header-no-autorizado>
 
-<div class="register-container secondarySections">
-    <div class="register-box primarySections">
-        <h2 class="register-title">Registrarse en HackerMaster</h2>
-        <form #registerForm="ngForm" class="form" id="registerForm" (ngSubmit)="registrar($event, registerForm)">
-            <label>Nombre Usuario</label>
-            <input type="text" [(ngModel)]="nombreUsuario" name="nombreUsuario" required />
+<div class="main-container">
+    <div class="register-container secondarySections">
+        <div class="register-box primarySections">
+            <h2 class="register-title">Registrarse en HackerMaster</h2>
 
-            <label>Email</label>
-            <input type="email" [(ngModel)]="emailUsuario" name="emailUsuario" required />
+            <!-- Formulario de registro -->
+            <form #registerForm="ngForm" class="form" id="registerForm" (ngSubmit)="registrar($event, registerForm)">
+                <label>Nombre Usuario</label>
+                <input type="text" [(ngModel)]="nombreUsuario" name="nombreUsuario" required />
+    
+                <label>Email</label>
+                <input type="email" [(ngModel)]="emailUsuario" name="emailUsuario" required />
+    
+                <label>Contraseña</label>
+                <input type="password" [(ngModel)]="passwordUsuario" name="passwordUsuario" required />
+    
+                <label>Confirmar Contraseña</label>
+                <input type="password" [(ngModel)]="confirmarPassword" name="confirmarPassword" required />
+    
+                <hr class="linea">
+                <button type="submit">Registrarse</button>
+            </form>
 
-            <label>Contraseña</label>
-            <input type="password" [(ngModel)]="passwordUsuario" name="passwordUsuario" required />
-
-            <label>Confirmar Contraseña</label>
-            <input type="password" [(ngModel)]="confirmarPassword" name="confirmarPassword" required />
-
-            <hr class="linea">
-            <button type="submit">Registrarse</button>
-        </form>
-
-        <p *ngIf="mensajeRespuesta"
-            [ngClass]="mensajeEsError ? 'mensaje-respuesta mensaje-error' : 'mensaje-respuesta mensaje-exito'">
-            {{ mensajeRespuesta }}
-        </p>
-        <p>¿Ya tienes una cuenta? <a href="/login" class="login-link">Iniciar Sesión</a></p>
+            <!-- Mensaje de error o éxito -->
+            <p *ngIf="mensajeRespuesta"
+                [ngClass]="mensajeEsError ? 'mensaje-respuesta mensaje-error' : 'mensaje-respuesta mensaje-exito'">
+                {{ mensajeRespuesta }}
+            </p>
+            <p>¿Ya tienes una cuenta? <a href="/login" class="login-link">Iniciar Sesión</a></p>
+        </div>
     </div>
+    
+    <app-footer></app-footer>
 </div>
-
-<app-footer></app-footer>

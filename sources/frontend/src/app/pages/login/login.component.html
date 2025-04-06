@@ -1,25 +1,32 @@
 <app-header-no-autorizado></app-header-no-autorizado>
 
-<div class="login-container secondarySections">
-    <div class="login-box primarySections">
-        <h2 class="login-title">Iniciar Sesión en HackerMaster</h2>
-        <form #loginForm="ngForm" class="form" id="loginForm" (ngSubmit)="iniciarSesion($event, loginForm)">
-            <label for="emailUsuario">Email</label>
-            <input type="email" [(ngModel)]="emailUsuario" name="emailUsuario" required />
+<div class="main-container">
+    <div class="login-container secondarySections">
+        <div class="login-box primarySections">
+            <h2 class="login-title">Iniciar Sesión en HackerMaster</h2>
 
-            <label for="password">Contraseña</label>
-            <input type="password" [(ngModel)]="password" name="password" required />
+            <!-- Formulario de inicio de sesión -->
+            <form #loginForm="ngForm" class="form" id="loginForm" (ngSubmit)="iniciarSesion($event, loginForm)">
+                <label for="emailUsuario">Email</label>
+                <input type="email" [(ngModel)]="emailUsuario" name="emailUsuario" required />
 
-            <hr class="linea">
+                <label for="password">Contraseña</label>
+                <input type="password" [(ngModel)]="password" name="password" required />
 
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <p *ngIf="mensajeRespuesta"
-            [ngClass]="mensajeEsError ? 'mensaje-respuesta mensaje-error' : 'mensaje-respuesta mensaje-exito'">
-            {{ mensajeRespuesta }}
-        </p>
-        <p>¿Eres nuevo en HackerMaster? <a href="/register" class="register-link">Regístrate</a></p>
+                <hr class="linea">
+
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+
+            <!-- Mensaje de error o éxito -->
+            <p *ngIf="mensajeRespuesta"
+                [ngClass]="mensajeEsError ? 'mensaje-respuesta mensaje-error' : 'mensaje-respuesta mensaje-exito'">
+                {{ mensajeRespuesta }}
+            </p>
+            
+            <p>¿Eres nuevo en HackerMaster? <a href="/register" class="register-link">Regístrate</a></p>
+        </div>
     </div>
-</div>
 
-<app-footer></app-footer>
+    <app-footer></app-footer>
+</div>
