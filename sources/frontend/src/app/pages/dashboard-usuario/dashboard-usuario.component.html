@@ -63,8 +63,7 @@
 
         <hr class="separator">
 
-        <div class="maquinas-lista"
-            [ngClass]="{'pegar-izquierda': (activeTab === 'recomendadas' ? maquinasRecomendadas.length : maquinasEnProgreso.length) <= 3}">
+        <div class="maquinas-lista">
             <!-- Mostrar las máquinas según la pestaña activa -->
             <div *ngFor="let maquina of (activeTab === 'recomendadas' ? maquinasRecomendadas : maquinasEnProgreso)"
                 class="maquina-card">
