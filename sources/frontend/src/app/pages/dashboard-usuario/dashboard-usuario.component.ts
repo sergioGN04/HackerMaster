@@ -5,6 +5,7 @@ import { UsuarioService } from '../../core/services/usuario.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MaquinaService } from '../../core/services/maquina.service';
 
 @Component({
   selector: 'app-dashboard-usuario',
@@ -17,9 +18,9 @@ export class DashboardUsuarioComponent {
   sidebarExpandido = true;
   resumen: any = null;
   username: string = '';
-  maquinasEnProgreso: any[] = [];
+  maquinasRecomendadas: any[] = [];
 
-  constructor(private usuarioService: UsuarioService, private authService: AuthService, private router: Router) { }
+  constructor(private usuarioService: UsuarioService, private maquinaService: MaquinaService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.comprobarToken();
@@ -33,7 +34,9 @@ export class DashboardUsuarioComponent {
       this.router.navigate(['/login']);
     } else {
       this.getResumenUsuario();
+      this.getMaquinasRecomendadas();
     }
+    
   }
 
   // Método para obtener el resumen del usuario y validar el token
@@ -57,9 +60,16 @@ export class DashboardUsuarioComponent {
     });
   }
 
-  // Método para obtener las máquinas en progreso del usuario
-  getMaquinasEnProgreso(): void {
-    
+  // Método para obtener las máquinas recomendadas del usuario
+  getMaquinasRecomendadas(): void {
+    this.maquinaService.obtenerMaquinasRecomendadas().subscribe({
+      next: (response: any) => {
+        this.maquinasRecomendadas = response;
+      },
+      error: (error: any) => {
+        console.error('Error - No se ha podido obtener las máquinas en progreso del usuario');
+      }
+    });
   }
 
 }

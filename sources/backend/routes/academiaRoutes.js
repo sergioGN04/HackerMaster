@@ -24,7 +24,7 @@ router.post('/api/register', authenticationController.registrarUsuario);
 router.get('/api/dashboard-usuario', verifyToken, usuarioController.obtenerResumenUsuario);
 
 // Maquinas
-router.get('/api/maquinas', maquinaController.obtenerMaquinas);
+router.get('/api/maquinas-recomendadas', verifyToken, maquinaController.obtenerMaquinasRecomendadas);
 
 // Notificaciones
 router.get('/api/notificaciones', notificacionController.obtenerNotificaciones);

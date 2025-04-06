@@ -57,11 +57,11 @@
         <h2>Recomendadas</h2>
         <hr class="separator">
         <div class="maquinas-lista">
-            <div *ngFor="let i of [1,2,3,4,5]" class="maquina-card">
-                <a href="{{ i }}">
-                    <img [src]="'http://192.168.2.2:3000/usuarios/' + resumen.fotoPerfil" alt="Foto de la máquina" class="foto-maquina">
-                    <h3>Asucar</h3>
-                    <p>Fácil</p>
+            <div *ngFor="let maquina of maquinasRecomendadas" class="maquina-card">
+                <a href="{{ maquina.idMaquina }}">
+                    <img [src]="'http://192.168.2.2:3000/maquinas/' + maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
+                    <h3>{{ maquina.nombre }}</h3>
+                    <p>{{ maquina.dificultad }}</p>
                 </a>
             </div>
         </div>
