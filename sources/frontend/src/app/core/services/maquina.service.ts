@@ -12,11 +12,19 @@ export class MaquinaService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   // Método para obtener las máquinas recomendadas del usuario
-  obtenerMaquinasRecomendadas(): Observable<any> {
+  obtenerMaquinasRecomendadas(rango: string): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.get(`${this.apiUrl}/maquinas-recomendadas`, { headers });
+    return this.http.post(`${this.apiUrl}/maquinas-recomendadas`, { rango }, { headers });
+  }
+
+  // Método para obtener las máquinas en progreso del usuario
+  obtenerMaquinasEnProgreso(): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.get(`${this.apiUrl}/maquinas-en-progreso`, { headers });
   }
 
 }
