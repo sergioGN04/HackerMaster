@@ -115,7 +115,7 @@
     margin: 40px 0;
 }
 
-/* Apartado de Máquinas Recomendadas */
+/* Apartado de Máquinas Recomendadas y En Progreso */
 .seccion-maquinas {
     margin-top: 0;
 }
@@ -126,6 +126,34 @@
     margin-bottom: 20px;
 }
 
+/* Pestañas */
+.tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    color: #6FFF00;
+}
+
+button.active {
+    border-bottom: 2px solid #6FFF00;
+    font-weight: bold;
+    color: #6FFF00;
+}
+
+/* Lista de Máquinas */
 .maquinas-lista {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -133,6 +161,12 @@
     justify-items: center;
     margin: 0 auto;
     max-width: 100%;
+}
+
+/* Estilo para poner las máquinas a la izquierda cuando son pocas máquinas */
+.pegar-izquierda {
+    justify-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .maquina-card {
@@ -209,6 +243,17 @@
     .maquinas-lista {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
+
+    .tabs {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tabs button {
+        font-size: 16px;
+        padding: 8px;
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -223,5 +268,11 @@
 
     .maquinas-lista {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .tabs button {
+        font-size: 14px;
+        padding: 6px;
+        width: 100%;
     }
 }

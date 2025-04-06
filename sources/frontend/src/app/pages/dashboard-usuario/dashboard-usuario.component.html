@@ -54,12 +54,23 @@
 <div class="dashboard-container secondarySections seccion-maquinas" [class.colapsado]="!sidebarExpandido"
     *ngIf="resumen">
     <div class="maquinas-recomendadas">
-        <h2>Recomendadas</h2>
+        <!-- Pestañas para cambiar entre Recomendadas y En Progreso -->
+        <div class="tabs">
+            <button [class.active]="activeTab === 'recomendadas'"
+                (click)="cambiarPestania('recomendadas')">Recomendadas</button>
+            <button [class.active]="activeTab === 'progreso'" (click)="cambiarPestania('progreso')">En Progreso</button>
+        </div>
+
         <hr class="separator">
-        <div class="maquinas-lista">
-            <div *ngFor="let maquina of maquinasRecomendadas" class="maquina-card">
+
+        <div class="maquinas-lista"
+            [ngClass]="{'pegar-izquierda': (activeTab === 'recomendadas' ? maquinasRecomendadas.length : maquinasEnProgreso.length) <= 3}">
+            <!-- Mostrar las máquinas según la pestaña activa -->
+            <div *ngFor="let maquina of (activeTab === 'recomendadas' ? maquinasRecomendadas : maquinasEnProgreso)"
+                class="maquina-card">
                 <a href="{{ maquina.idMaquina }}">
-                    <img [src]="'http://192.168.2.2:3000/maquinas/' + maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
+                    <img [src]="'http://192.168.2.2:3000/maquinas/' + maquina.fotoMaquina" alt="Foto de la máquina"
+                        class="foto-maquina">
                     <h3>{{ maquina.nombre }}</h3>
                     <p>{{ maquina.dificultad }}</p>
                 </a>

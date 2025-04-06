@@ -19,6 +19,8 @@ export class DashboardUsuarioComponent {
   resumen: any = null;
   username: string = '';
   maquinasRecomendadas: any[] = [];
+  maquinasEnProgreso: any[] = [];
+  activeTab: string = 'recomendadas';
 
   constructor(private usuarioService: UsuarioService, private maquinaService: MaquinaService, private authService: AuthService, private router: Router) { }
 
@@ -34,25 +36,24 @@ export class DashboardUsuarioComponent {
       this.router.navigate(['/login']);
     } else {
       this.getResumenUsuario();
-      this.getMaquinasRecomendadas();
     }
-    
   }
 
-  // Método para obtener el resumen del usuario y validar el token
   getResumenUsuario(): void {
     this.usuarioService.obtenerResumenUsuario().subscribe({
       next: (response: any) => {
         this.resumen = response;
         this.username = this.resumen?.nombreUsuario;
+
+        // Obtenemos las máquinas recomendadas del usuario
+        this.getMaquinasRecomendadas();
+
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
           console.error(error.error.message);
-
           this.authService.eliminarToken();
           this.router.navigate(['/login']);
-
         } else {
           console.error('Error - No se ha podido obtener el resumen del usuario');
         }
@@ -62,9 +63,32 @@ export class DashboardUsuarioComponent {
 
   // Método para obtener las máquinas recomendadas del usuario
   getMaquinasRecomendadas(): void {
-    this.maquinaService.obtenerMaquinasRecomendadas().subscribe({
+    this.maquinaService.obtenerMaquinasRecomendadas(this.resumen.rango).subscribe({
       next: (response: any) => {
         this.maquinasRecomendadas = response;
+      },
+      error: (error: any) => {
+        console.error('Error - No se ha podido obtener las máquinas recomendadas del usuario');
+      }
+    });
+  }
+
+  // Método para cambiar entre las pestañas de máquinas recomendadas y en progreso
+  cambiarPestania(tab: string): void {
+    this.activeTab = tab;
+    if (tab === 'recomendadas') {
+      this.getMaquinasRecomendadas();
+    } else if (tab === 'progreso') {
+      this.getMaquinasEnProgreso();
+    }
+  }
+
+
+  // Método para obtener las máquinas en progreso del usuario
+  getMaquinasEnProgreso(): void {
+    this.maquinaService.obtenerMaquinasEnProgreso().subscribe({
+      next: (response: any) => {
+        this.maquinasEnProgreso = response;
       },
       error: (error: any) => {
         console.error('Error - No se ha podido obtener las máquinas en progreso del usuario');
