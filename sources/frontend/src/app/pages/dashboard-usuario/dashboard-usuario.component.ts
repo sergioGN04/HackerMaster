@@ -48,6 +48,9 @@ export class DashboardUsuarioComponent {
         // Obtenemos las máquinas recomendadas del usuario
         this.getMaquinasRecomendadas();
 
+        // Obtenemos las máquinas en progreso del usuario
+        this.getMaquinasEnProgreso();
+
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
@@ -76,11 +79,6 @@ export class DashboardUsuarioComponent {
   // Método para cambiar entre las pestañas de máquinas recomendadas y en progreso
   cambiarPestania(tab: string): void {
     this.activeTab = tab;
-    if (tab === 'recomendadas') {
-      this.getMaquinasRecomendadas();
-    } else if (tab === 'progreso') {
-      this.getMaquinasEnProgreso();
-    }
   }
 
 
