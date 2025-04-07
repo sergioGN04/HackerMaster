@@ -1,4 +1,4 @@
-const sequelize = require('../config/database');
+const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
 const Maquina = require('../models/maquinaModel');
 const Intenta = require('../models/IntentaModel');
@@ -31,7 +31,12 @@ module.exports = {
 
             // Obtenemos las máquinas recomendadas según la dificultad y excluyendo las ya intentadas
             const maquinasRecomendadas = await Maquina.findAll({
-                attributes: ['idMaquina', 'nombre', 'fotoMaquina', 'dificultad'],
+                attributes: [
+                    'idMaquina',
+                    'nombre',
+                    [ Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/maquinas/', Sequelize.col('fotoMaquina')),'fotoMaquina' ],
+                    'dificultad'
+                ],
                 where: {
                     dificultad,
                     estado: 'Aceptada',
@@ -56,7 +61,7 @@ module.exports = {
     },
     obtenerMaquinasEnProgreso: async (req, res) => {
         const idUsuario = req.user.idUsuario;
-    
+
         try {
             // Obtenemos los IDs de las máquinas que están en progreso
             const intentosEnProgreso = await Intenta.findAll({
@@ -66,13 +71,13 @@ module.exports = {
                 },
                 attributes: ['idMaquina']
             });
-    
+
             const idsMaquinasEnProgreso = intentosEnProgreso.map(i => i.idMaquina);
-    
+
             if (idsMaquinasEnProgreso.length === 0) {
                 return res.status(404).json({ message: 'No hay máquinas en progreso.' });
             }
-    
+
             // Obtenemos las máquinas que tienen el estado "Completado" con los mismos IDs
             const intentosCompletados = await Intenta.findAll({
                 where: {
@@ -84,33 +89,41 @@ module.exports = {
                 },
                 attributes: ['idMaquina']
             });
-    
+
             // Obtenemos los IDs de las máquinas completadas
             const idsMaquinasCompletadas = intentosCompletados.map(i => i.idMaquina);
-    
+
             // Filtramos las máquinas en progreso para eliminar las que están completadas
             const maquinasEnProgreso = idsMaquinasEnProgreso.filter(id => !idsMaquinasCompletadas.includes(id));
-    
+
             if (maquinasEnProgreso.length === 0) {
                 return res.status(404).json({ message: 'No hay máquinas en progreso sin completar.' });
             }
-    
+
             // Obtenemos las máquinas que están en progreso y no están completadas
             const maquinas = await Maquina.findAll({
+                attributes: [
+                    'idMaquina',
+                    'nombre',
+                    [
+                        Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/maquinas/', Sequelize.col('fotoMaquina')),
+                        'fotoMaquina'
+                    ],
+                    'dificultad'
+                ],
                 where: {
                     idMaquina: {
                         [Op.in]: maquinasEnProgreso
                     }
-                },
-                attributes: ['idMaquina', 'nombre', 'fotoMaquina', 'dificultad']
+                }
             });
-    
+
             return res.status(200).json(maquinas);
-    
+
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: 'Error - No se ha podido obtener las máquinas en progreso' });
         }
-    }    
+    }
 
 }

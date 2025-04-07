@@ -89,7 +89,7 @@ export class DashboardUsuarioComponent {
         this.maquinasEnProgreso = response;
       },
       error: (error: any) => {
-        console.error('Error - No se ha podido obtener las máquinas en progreso del usuario');
+        console.error(error.error.message);
       }
     });
   }
