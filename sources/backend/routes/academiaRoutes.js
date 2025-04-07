@@ -28,7 +28,7 @@ router.get('/api/maquinas-recomendadas', verifyToken, maquinaController.obtenerM
 router.get('/api/maquinas-en-progreso', verifyToken, maquinaController.obtenerMaquinasEnProgreso);
 
 // Notificaciones
-router.get('/api/notificaciones', notificacionController.obtenerNotificaciones);
+router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNotificaciones);
 
 // Logros
 router.get('/api/logros', logroController.obtenerLogros);

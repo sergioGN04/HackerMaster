@@ -13,11 +13,11 @@ const Notificacion = sequelize.define('Notificacion', {
     },
     descripcion: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: false
     },
     fotoNotificacion: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         defaultValue: 'fotoNotificacion.png'
     },
     fechaLimite: {

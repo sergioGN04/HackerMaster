@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
 import { Router } from '@angular/router';
+import { NotificacionService } from '../../../core/services/notificacion.service';
 
 @Component({
   selector: 'app-header-autorizado',
@@ -17,7 +18,24 @@ export class HeaderAutorizadoComponent {
   menuPerfilAbierto = false;
   menuNotificacionesAbierto = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  notificaciones: any[] = [];
+
+  constructor(private authService: AuthService, private notificacionService: NotificacionService, private router: Router) { }
+
+  ngOnInit() {
+    this.obtenerNotificaciones();
+  }
+
+  obtenerNotificaciones() {
+    this.notificacionService.obtenerNotificacionesUsuario().subscribe({
+      next: (response: any) => {
+        this.notificaciones = response;
+      },
+      error: (error: any) => {
+        console.error(error.error.message);
+      }
+    });
+  }
 
   toggleMenuPerfil(event: Event) {
     event.stopPropagation();
@@ -42,5 +60,5 @@ export class HeaderAutorizadoComponent {
       this.menuNotificacionesAbierto = false;
     }
   }
-  
+
 }
