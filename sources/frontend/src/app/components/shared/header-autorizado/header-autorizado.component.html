@@ -8,18 +8,15 @@
 
             <!-- Notificaciones -->
             <div class="menu-notificaciones" [ngClass]="{'abierto': menuNotificacionesAbierto}">
-                <!-- Ejemplos de notificacines -->
-                <div class="notificaciones-card" *ngFor="let i of [1,2,3]">
+                <!-- Lista de Notificacines -->
+                <div class="notificaciones-card" *ngFor="let notificacion of notificaciones">
                     <div class="notificacion">
-                        <img src="/assets/notificaciones/notificacion1.png" alt="Notificación" class="notificacion-imagen">
-                        <span class="notificacion-titulo">Ejemplo Titulo {{ i }}</span>
-                        <p class="notificacion-descripcion">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. At eos, repellat non veritatis a
-                            quibusdam voluptate sit ex maxime aperiam, in nobis porro numquam ullam! Adipisci,
-                            aspernatur exercitationem. Officiis, vitae!
-                        </p>
+                        <img [src]="notificacion.fotoNotificacion" alt="Notificación" class="notificacion-imagen">
+                        <span class="notificacion-titulo">{{ notificacion.titulo }}</span>
+                        <p class="notificacion-descripcion">{{ notificacion.descripcion }}</p>
+                        <p class="notificacion-fecha">{{ notificacion.fechaLimite | date:'dd/MM/yyyy' }}</p>
                     </div>
-                </div>
+                </div>                
             </div>
 
             <!-- Perfil -->
