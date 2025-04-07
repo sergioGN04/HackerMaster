@@ -19,8 +19,7 @@ module.exports = {
                 attributes: ['fotoPerfil']
             });
 
-            const fotoPerfil = foto.fotoPerfil;
-            
+            const fotoPerfil = `http://192.168.2.2:3000/uploads/usuarios/${foto.fotoPerfil}`;
 
             // Máquinas completadas
             const intentosCompletados = await Intenta.findAll({

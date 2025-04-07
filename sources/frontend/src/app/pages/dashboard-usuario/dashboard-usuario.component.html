@@ -5,8 +5,7 @@
 <div class="dashboard-container primarySections resumen-usuario" [class.colapsado]="!sidebarExpandido" *ngIf="resumen">
     <div class="resumen-perfil">
         <div class="perfil-header">
-            <img class="foto-perfil" [src]="'http://192.168.2.2:3000/usuarios/' + resumen.fotoPerfil"
-                alt="Foto de perfil">
+            <img class="foto-perfil" [src]="resumen.fotoPerfil" alt="Foto de perfil">
             <div>
                 <h1>{{ resumen.nombreUsuario }}</h1>
                 <p class="rango">Rango: {{ resumen.rango }}</p>
@@ -51,8 +50,7 @@
 </div>
 
 <!-- Segundo Apartado: Máquinas Recomendadas y En Progreso -->
-<div class="dashboard-container secondarySections seccion-maquinas" [class.colapsado]="!sidebarExpandido"
-    *ngIf="resumen">
+<div class="dashboard-container secondarySections seccion-maquinas" [class.colapsado]="!sidebarExpandido" *ngIf="resumen">
     <div class="maquinas-recomendadas">
         <!-- Pestañas para cambiar entre Recomendadas y En Progreso -->
         <div class="tabs">
@@ -68,8 +66,7 @@
             <div *ngFor="let maquina of (activeTab === 'recomendadas' ? maquinasRecomendadas : maquinasEnProgreso)"
                 class="maquina-card">
                 <a href="{{ maquina.idMaquina }}">
-                    <img [src]="'http://192.168.2.2:3000/maquinas/' + maquina.fotoMaquina" alt="Foto de la máquina"
-                        class="foto-maquina">
+                    <img [src]="maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
                     <h3>{{ maquina.nombre }}</h3>
                     <p>{{ maquina.dificultad }}</p>
                 </a>
