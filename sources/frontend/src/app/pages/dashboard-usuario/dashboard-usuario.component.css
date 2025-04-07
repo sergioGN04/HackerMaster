@@ -265,6 +265,11 @@ button.active {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
+    .maquina-card img {
+        width: 100%;
+        height: auto;
+    }
+
     .tabs button {
         font-size: 15px;
         padding: 6px;
