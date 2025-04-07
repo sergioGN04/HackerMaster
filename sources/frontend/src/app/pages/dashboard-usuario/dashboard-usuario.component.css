@@ -253,7 +253,7 @@ button.active {
 
 @media (max-width: 480px) {
     .dashboard-container {
-        padding: 50px 60px 40px 30px;
+        padding: 50px 40px 50px 40px;
         margin-left: 60px;
     }
 
