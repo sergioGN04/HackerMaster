@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -15,8 +15,9 @@ export class MaquinaService {
   obtenerMaquinasRecomendadas(rango: string): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const params = new HttpParams().set('rango', rango);
 
-    return this.http.post(`${this.apiUrl}/maquinas-recomendadas`, { rango }, { headers });
+    return this.http.get(`${this.apiUrl}/maquinas-recomendadas`, { headers, params });
   }
 
   // Método para obtener las máquinas en progreso del usuario

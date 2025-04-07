@@ -5,7 +5,8 @@ const Intenta = require('../models/IntentaModel');
 
 module.exports = {
     obtenerMaquinasRecomendadas: async (req, res) => {
-        const { rango } = req.body;
+        const { rango } = req.query;
+
         const idUsuario = req.user.idUsuario;
 
         // Obtenemos la dificultad según el rango
