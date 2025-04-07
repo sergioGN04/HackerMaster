@@ -5,6 +5,7 @@ const NotificacionUsuario = require('../models/notificacionUsuarioModel');
 module.exports = {
     obtenerNotificaciones: async (req, res) => {
         const idUsuario = req.user.idUsuario;
+        const username = req.user.username;
 
         try {
             // Obtener los IDs de las notificaciones que ya han sido vistas por el usuario
@@ -32,7 +33,7 @@ module.exports = {
                 }
             });
 
-            return res.json(nuevasNotificaciones);
+            return res.json({ username, nuevasNotificaciones });
 
         } catch (error) {
             console.error(error);

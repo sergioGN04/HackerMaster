@@ -17,7 +17,6 @@ import { MaquinaService } from '../../core/services/maquina.service';
 export class DashboardUsuarioComponent {
   sidebarExpandido = true;
   resumen: any = null;
-  username: string = '';
   maquinasRecomendadas: any[] = [];
   maquinasEnProgreso: any[] = [];
   activeTab: string = 'recomendadas';
@@ -43,7 +42,6 @@ export class DashboardUsuarioComponent {
     this.usuarioService.obtenerResumenUsuario().subscribe({
       next: (response: any) => {
         this.resumen = response;
-        this.username = this.resumen?.nombreUsuario;
 
         // Obtenemos las máquinas recomendadas del usuario
         this.getMaquinasRecomendadas();

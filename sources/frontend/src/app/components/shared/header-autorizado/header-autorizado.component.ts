@@ -13,7 +13,7 @@ import { NotificacionService } from '../../../core/services/notificacion.service
   styleUrls: ['./header-autorizado.component.css']
 })
 export class HeaderAutorizadoComponent {
-  @Input() username!: string;
+  username: string = '';
 
   menuPerfilAbierto = false;
   menuNotificacionesAbierto = false;
@@ -29,7 +29,8 @@ export class HeaderAutorizadoComponent {
   obtenerNotificaciones() {
     this.notificacionService.obtenerNotificacionesUsuario().subscribe({
       next: (response: any) => {
-        this.notificaciones = response;
+        this.username = response.username;
+        this.notificaciones = response.nuevasNotificaciones;
       },
       error: (error: any) => {
         console.error(error.error.message);
