@@ -4,6 +4,7 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DashboardUsuarioComponent } from './pages/dashboard-usuario/dashboard-usuario.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard-usuario', component: DashboardUsuarioComponent },
+  { path: 'perfil', component: PerfilComponent },
   { path: '**', redirectTo: 'inicio' }
 ];
