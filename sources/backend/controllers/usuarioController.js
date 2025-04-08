@@ -74,6 +74,8 @@ module.exports = {
             // Obtener el total de máquinas completadas
             const maquinasCompletadas = await Intenta.count({
                 where: { idUsuario, estado: 'Completado' },
+                distinct: true,
+                col: 'idMaquina',
             });
 
             // Obtener el total de logros obtenidos
