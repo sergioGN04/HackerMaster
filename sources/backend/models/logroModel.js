@@ -18,7 +18,7 @@ const Logro = sequelize.define('Logro', {
     },
     fotoLogro: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'fotoLogro.png'
     },
     puntuacion: {

@@ -19,4 +19,12 @@ export class UsuarioService {
     return this.http.get(`${this.apiUrl}/dashboard-usuario`, { headers });
   }
 
+  // Método para obtener la información del usuario
+  obtenerInformacionUsuario(): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.get(`${this.apiUrl}/informacion-usuario`, { headers });
+  }
+
 }

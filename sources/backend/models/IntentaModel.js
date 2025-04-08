@@ -19,7 +19,7 @@ const Intenta = sequelize.define('Intenta', {
     },
     fechaInicio: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.NOW
     },
     fechaFin: {
@@ -28,7 +28,7 @@ const Intenta = sequelize.define('Intenta', {
     },
     estado: {
         type: DataTypes.ENUM('Completado', 'En Progreso'),
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'En Progreso'
     }
 }, {

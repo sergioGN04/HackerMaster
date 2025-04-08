@@ -19,7 +19,7 @@ const UsuarioLogro = sequelize.define('UsuarioLogro', {
     },
     fechaObtencion: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.NOW
     }
 }, {
