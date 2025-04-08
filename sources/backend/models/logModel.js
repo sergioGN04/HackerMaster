@@ -22,7 +22,7 @@ const Log = sequelize.define('Log', {
     },
     fechaHora: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.NOW
     }
 }, {

@@ -33,24 +33,27 @@ const Usuario = sequelize.define('Usuario', {
     },
     pais: {
         type: DataTypes.STRING(100),
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'España'
     },
     fechaNacimiento: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
+        defaultValue: new Date('2000-01-01')
     },
     telefono: {
         type: DataTypes.STRING(15),
-        allowNull: true
+        allowNull: true,
+        defaultValue: '000000000'
     },
     fechaRegistro: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.NOW
     },
     rol: {
         type: DataTypes.ENUM('Administrador', 'Usuario'),
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'Usuario'
     }
 }, {

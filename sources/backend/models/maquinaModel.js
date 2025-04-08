@@ -32,7 +32,7 @@ const Maquina = sequelize.define('Maquina', {
     },
     fechaCreacion: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.NOW
     },
     descripcion: {
@@ -53,7 +53,7 @@ const Maquina = sequelize.define('Maquina', {
     },
     estado: {
         type: DataTypes.ENUM('Aceptada', 'En Espera'),
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'En Espera'
     }
 }, {

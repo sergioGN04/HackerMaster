@@ -17,7 +17,7 @@ const Notificacion = sequelize.define('Notificacion', {
     },
     fotoNotificacion: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'fotoNotificacion.png'
     },
     fechaLimite: {
@@ -26,7 +26,7 @@ const Notificacion = sequelize.define('Notificacion', {
     },
     destinatario: {
         type: DataTypes.ENUM('Administrador', 'Usuario'),
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'Usuario'
     }
 }, {

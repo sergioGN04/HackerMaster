@@ -22,6 +22,7 @@ router.post('/api/register', authenticationController.registrarUsuario);
 
 // Usuarios
 router.get('/api/dashboard-usuario', verifyToken, usuarioController.obtenerResumenUsuario);
+router.get('/api/informacion-usuario', verifyToken, usuarioController.obtenerInformacionUsuario);
 
 // Maquinas
 router.get('/api/maquinas-recomendadas', verifyToken, maquinaController.obtenerMaquinasRecomendadas);
