@@ -20,7 +20,7 @@ module.exports = {
             const nuevasNotificaciones = await Notificacion.findAll({
                 attributes: [
                     'idNotificacion',
-                    [ Sequelize.fn('CONCAT','http://192.168.2.2:3000/uploads/notificaciones/', Sequelize.col('fotoNotificacion')),'fotoNotificacion' ],
+                    [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/notificaciones/', Sequelize.col('fotoNotificacion')), 'fotoNotificacion'],
                     'titulo',
                     'descripcion',
                     'fechaLimite'
@@ -30,8 +30,23 @@ module.exports = {
                     idNotificacion: {
                         [Op.notIn]: idsNotificacionesVistas.length > 0 ? idsNotificacionesVistas : [0]
                     }
-                }
+                },
+                order: [['fechaLimite', 'ASC']],
+                limit: 3
             });
+
+            // Registrar como "vistas" en la tabla NotificacionUsuario
+            const registrosNuevos = nuevasNotificaciones.map(notificacion => ({
+                idUsuario,
+                idNotificacion: notificacion.idNotificacion
+            }));
+
+            // Registra las nuevas notificaciones vistas evitando duplicados si ya existen.
+            if (registrosNuevos.length > 0) {
+                await NotificacionUsuario.bulkCreate(registrosNuevos, {
+                    ignoreDuplicates: true
+                });
+            }
 
             return res.json({ username, nuevasNotificaciones });
 
