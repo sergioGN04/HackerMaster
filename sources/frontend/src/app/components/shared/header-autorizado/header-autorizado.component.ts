@@ -19,6 +19,7 @@ export class HeaderAutorizadoComponent {
   menuNotificacionesAbierto = false;
 
   notificaciones: any[] = [];
+  marcarNotificaciones = false;
 
   constructor(private authService: AuthService, private notificacionService: NotificacionService, private router: Router) { }
 
@@ -38,14 +39,34 @@ export class HeaderAutorizadoComponent {
     });
   }
 
+  // Método para desplegar o no el menú del perfil
   toggleMenuPerfil(event: Event) {
     event.stopPropagation();
     this.menuPerfilAbierto = !this.menuPerfilAbierto;
   }
 
+  // Método para desplegar o no el menú de notificaciones y marcar las notificaciones en visto
   toggleMenuNotificaciones(event: Event) {
     event.stopPropagation();
     this.menuNotificacionesAbierto = !this.menuNotificacionesAbierto;
+
+    if (!this.marcarNotificaciones) {
+
+      this.marcarNotificaciones = true;
+
+      let notificaciones = this.notificaciones.map(n => n.idNotificacion);
+
+      this.notificacionService.marcarNotificaciones(notificaciones).subscribe({
+        next: (response: any) => {
+          // Se ha marcado las notificaciones correctamente
+        },
+        error: (error: any) => {
+          console.error(error.error.message);
+        }
+      });
+
+    }
+
   }
 
   cerrarSesion() {

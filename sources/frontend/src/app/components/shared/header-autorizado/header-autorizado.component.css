@@ -105,6 +105,23 @@
     margin-top: 4px;
 }
 
+.no-notificaciones {
+    background-color: #1A324A;
+    color: #B0B0B0;
+    border: 1px solid #6FFF00;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* Perfil */
 .perfil {
     position: relative;
@@ -216,6 +233,19 @@
     .notificacion-descripcion {
         font-size: 12px;
     }
+
+    .no-notificaciones {
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-width: 480px) {
@@ -263,5 +293,11 @@
     .menu-perfil i {
         font-size: 16px;
         margin-right: 6px;
+    }
+
+    .no-notificaciones {
+        font-size: 14px;
+        padding: 12px;
+        max-width: 320px;
     }
 }
