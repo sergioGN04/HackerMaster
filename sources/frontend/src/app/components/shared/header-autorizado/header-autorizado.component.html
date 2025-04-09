@@ -16,7 +16,11 @@
                         <p class="notificacion-descripcion">{{ notificacion.descripcion }}</p>
                         <p class="notificacion-fecha">{{ notificacion.fechaLimite | date:'dd/MM/yyyy' }}</p>
                     </div>
-                </div>                
+                </div>
+                <!-- Mensaje cuando no haya notificaciones -->
+                <div *ngIf="notificaciones.length === 0" class="no-notificaciones">
+                    <p>No tienes ninguna notificación pendiente</p>
+                </div>
             </div>
 
             <!-- Perfil -->

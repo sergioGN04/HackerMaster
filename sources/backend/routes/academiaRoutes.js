@@ -30,6 +30,7 @@ router.get('/api/maquinas-en-progreso', verifyToken, maquinaController.obtenerMa
 
 // Notificaciones
 router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNotificaciones);
+router.get('/api/marcar-notificaciones', verifyToken, notificacionController.marcarNotificacionesComoVistas);
 
 // Logros
 router.get('/api/logros', logroController.obtenerLogros);

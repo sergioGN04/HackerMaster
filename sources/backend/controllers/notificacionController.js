@@ -35,24 +35,37 @@ module.exports = {
                 limit: 3
             });
 
-            // Registrar como "vistas" en la tabla NotificacionUsuario
-            const registrosNuevos = nuevasNotificaciones.map(notificacion => ({
-                idUsuario,
-                idNotificacion: notificacion.idNotificacion
-            }));
-
-            // Registra las nuevas notificaciones vistas evitando duplicados si ya existen.
-            if (registrosNuevos.length > 0) {
-                await NotificacionUsuario.bulkCreate(registrosNuevos, {
-                    ignoreDuplicates: true
-                });
-            }
-
             return res.json({ username, nuevasNotificaciones });
 
         } catch (error) {
             console.error(error);
             return res.status(500).json({ mensaje: 'Error del servidor' });
         }
+    },
+    marcarNotificacionesComoVistas: async (req, res) => {
+        const { idsNotificaciones } = req.query;
+        const idUsuario = req.user.idUsuario;
+    
+        try {
+            // Convertir en un array de enteros
+            const idsArray = idsNotificaciones.split(',').map(id => parseInt(id)).filter(Boolean);
+
+            const registros = idsArray.map(idNotificacion => ({
+                idUsuario,
+                idNotificacion
+            }));
+
+            // Marcar las notificaciones como vistas para el usuario
+            await NotificacionUsuario.bulkCreate(registros, {
+                ignoreDuplicates: true
+            });
+    
+            res.status(200).json({ mensaje: 'Notificaciones marcadas como vistas' });
+    
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ mensaje: 'Error al marcar notificaciones como vistas' });
+        }
     }
+
 }
