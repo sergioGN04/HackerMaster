@@ -8,6 +8,15 @@ module.exports = {
         const username = req.user.username;
 
         try {
+            // Eliminar notificaciones vencidas (fechaLimite pasada)
+            await Notificacion.destroy({
+                where: {
+                    fechaLimite: {
+                        [Op.lt]: Sequelize.fn('NOW')
+                    }
+                }
+            });
+            
             // Obtener los IDs de las notificaciones que ya han sido vistas por el usuario
             const notificacionesVistas = await NotificacionUsuario.findAll({
                 where: { idUsuario },
@@ -45,7 +54,7 @@ module.exports = {
     marcarNotificacionesComoVistas: async (req, res) => {
         const { idsNotificaciones } = req.query;
         const idUsuario = req.user.idUsuario;
-    
+
         try {
             // Convertir en un array de enteros
             const idsArray = idsNotificaciones.split(',').map(id => parseInt(id)).filter(Boolean);
@@ -59,9 +68,9 @@ module.exports = {
             await NotificacionUsuario.bulkCreate(registros, {
                 ignoreDuplicates: true
             });
-    
+
             res.status(200).json({ mensaje: 'Notificaciones marcadas como vistas' });
-    
+
         } catch (error) {
             console.error(error);
             res.status(500).json({ mensaje: 'Error al marcar notificaciones como vistas' });
