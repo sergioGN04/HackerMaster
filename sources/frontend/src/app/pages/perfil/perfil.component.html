@@ -1,3 +1,126 @@
 <app-header-autorizado></app-header-autorizado>
 <app-sidebar-autorizado (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-autorizado>
 
+<!-- Primer Apartado: Información Personal -->
+<div class="containers container-first primarySections resumen-usuario" [class.colapsado]="!sidebarExpandido"
+    *ngIf="informacionUsuario">
+    <div class="resumen-perfil text-center">
+
+        <h2 class="titulo-seccion">Información Personal</h2>
+        <hr class="separator">
+        <p class="descripcion-seccion">
+            Bienvenido a tu espacio personal en HackerMaster. Aquí puedes ver tus datos personales y logros
+            obtenidos en la plataforma.
+        </p>
+
+        <div class="perfil-foto-container">
+            <img class="foto-perfil-grande" [src]="informacionUsuario.usuario.fotoPerfil" alt="Foto de perfil">
+        </div>
+
+        <button class="btn btn-editar-perfil mt-3 mb-4" [routerLink]="['/configurar-perfil']">Editar Perfil</button>
+
+        <!-- Datos del perfil en dos columnas -->
+        <div class="row datos-usuario justify-content-center">
+            <!-- Columna izquierda -->
+            <div class="col-md-5 mb-3">
+                <div class="dato-box">
+                    <h4>Nombre Usuario</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-person-fill"></i>
+                        <p>{{ informacionUsuario.usuario.username }}</p>
+                    </div>
+                </div>
+                <div class="dato-box">
+                    <h4>Email</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>{{ informacionUsuario.usuario.email }}</p>
+                    </div>
+                </div>
+                <div class="dato-box">
+                    <h4>País</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-globe"></i>
+                        <p>{{ informacionUsuario.usuario.pais }}</p>
+                    </div>
+                </div>
+                <div class="dato-box">
+                    <h4>Rango</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-trophy-fill"></i>
+                        <p>{{ informacionUsuario.rango }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="col-md-5 mb-3">
+                <div class="dato-box">
+                    <h4>Fecha Nacimiento</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-calendar-fill"></i>
+                        <p>{{ informacionUsuario.usuario.fechaNacimiento | date: 'dd/MM/yyyy' }}</p>
+                    </div>
+                </div>
+                <div class="dato-box">
+                    <h4>Teléfono</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-phone-fill"></i>
+                        <span *ngIf="informacionUsuario.usuario.telefono != '000000000'; else sinTelefono">
+                            <p>{{ informacionUsuario.usuario.telefono }}</p>
+                        </span>
+                        <ng-template #sinTelefono>
+                            <p>No disponible</p>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="dato-box">
+                    <h4>Fecha Registro</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-clock"></i>
+                        <p>{{ informacionUsuario.usuario.fechaRegistro | date: 'dd/MM/yyyy' }}</p>
+                    </div>
+                </div>
+                <div class="dato-box">
+                    <h4>Última Máquina</h4>
+                    <div class="dato-content">
+                        <i class="bi bi-cpu"></i>
+                        <span *ngIf="informacionUsuario.ultimaMaquina; else sinMaquina">
+                            <p>{{ informacionUsuario.ultimaMaquina.nombre }}</p>
+                        </span>
+                        <ng-template #sinMaquina>
+                            <p>No disponible</p>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Segundo Apartado: Logros Obtenidos -->
+<div class="containers secondarySections seccion-logros" [class.colapsado]="!sidebarExpandido" *ngIf="logrosObtenidos">
+    <div class="logros-obtenidos">
+        <h2 class="titulo-seccion mb-3">Logros Obtenidos</h2>
+        <hr class="separator">
+        <p class="descripcion-seccion">Aquí puedes ver los logros que has obtenido en HackerMaster. Completa desafíos,
+            resuelve máquinas y alcanza nuevas metas para desbloquear más insignias. ¡Demuestra tu habilidad!</p>
+        
+        <!-- Mostrar los logros solo si la lista tiene elementos -->
+        <div class="logros-lista" *ngIf="logrosObtenidos?.length > 0">
+            <div class="logro-card" *ngFor="let logro of logrosObtenidos">
+                <!-- Puntuación en la parte superior derecha -->
+                <div class="logro-puntuacion">
+                    <i class="bi bi-star-fill"></i> {{ logro.puntuacion }}
+                </div>                
+            
+                <img [src]="logro.fotoLogro" alt="Imagen del logro" class="logro-imagen">
+                <h4>{{ logro.nombre }}</h4>
+                <p>{{ logro.descripcion }}</p>
+            </div>            
+        </div>
+
+        <!-- Mensaje si no se tienen logros -->
+        <p *ngIf="logrosObtenidos?.length === 0" class="no-logros">No has obtenido logros aún.</p>
+    </div>
+</div>

@@ -50,7 +50,8 @@
 </div>
 
 <!-- Segundo Apartado: Máquinas Recomendadas y En Progreso -->
-<div class="dashboard-container secondarySections seccion-maquinas" [class.colapsado]="!sidebarExpandido" *ngIf="resumen">
+<div class="dashboard-container secondarySections seccion-maquinas" [class.colapsado]="!sidebarExpandido"
+    *ngIf="resumen">
     <div class="maquinas-recomendadas">
         <!-- Pestañas para cambiar entre Recomendadas y En Progreso -->
         <div class="tabs">
@@ -62,6 +63,12 @@
         <hr class="separator">
 
         <div class="maquinas-lista">
+            <!-- Si la lista de máquinas está vacía, mostrar mensaje -->
+            <div *ngIf="(activeTab === 'recomendadas' ? maquinasRecomendadas : maquinasEnProgreso).length === 0"
+                class="no-maquinas">
+                <p>No hay máquinas</p>
+            </div>
+
             <!-- Mostrar las máquinas según la pestaña activa -->
             <div *ngFor="let maquina of (activeTab === 'recomendadas' ? maquinasRecomendadas : maquinasEnProgreso)"
                 class="maquina-card">

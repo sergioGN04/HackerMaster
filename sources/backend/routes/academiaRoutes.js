@@ -33,6 +33,6 @@ router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNot
 router.get('/api/marcar-notificaciones', verifyToken, notificacionController.marcarNotificacionesComoVistas);
 
 // Logros
-router.get('/api/logros', logroController.obtenerLogros);
+router.get('/api/logros-usuario', verifyToken, logroController.obtenerLogrosUsuario);
 
 module.exports = router;
