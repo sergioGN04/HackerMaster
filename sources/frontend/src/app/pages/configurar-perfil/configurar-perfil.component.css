@@ -1,0 +1,186 @@
+/* Estilo general de los apartados */
+.containers {
+    color: white;
+    padding: 150px 80px 90px 80px;
+    margin-left: 280px;
+}
+
+.containers.colapsado {
+    margin-left: 80px;
+}
+
+.titulo-configuracion {
+    font-size: 2.3rem;
+    font-weight: bold;
+    color: #6FFF00;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.descripcion-configuracion {
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto 50px auto;
+}
+
+.separator {
+    border-top: 1px solid white;
+    width: 80%;
+    margin: 20px auto;
+}
+
+/* Contenedor Modificar Imagen */
+.seccion-perfil {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-top: 150px;
+    margin-left: 80px;
+    flex-wrap: wrap;
+}
+
+.imagen-perfil-config {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-height: 200px;
+}
+
+.info-foto-perfil {
+    max-width: 350px;
+    color: white;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.foto-perfil-config {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 3px solid #6FFF00;
+}
+
+.btn-actualizar-foto {
+    background-color: #6FFF00;
+    color: black;
+    border: none;
+    padding: 8px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+.btn-actualizar-foto:hover {
+    background-color: #57cc00;
+    color: white;
+}
+
+.btn-actualizar-foto input[type="file"] {
+    display: none;
+}
+
+/* Estilos para los formularios */
+.seccion-formulario {
+    padding: 30px;
+    margin: 180px auto;
+    border-radius: 12px;
+    max-width: 800px;
+    color: white;
+}
+
+.passwordForm {
+    margin-top: 150px;
+}
+
+.seccion-formulario h3 {
+    color: #6FFF00;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.btn-guardar {
+    background-color: #6FFF00;
+    color: black;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-guardar:hover {
+    background-color: #57cc00;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .seccion-perfil {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .info-foto-perfil {
+        max-width: 100%;
+    }
+
+    .foto-perfil-config {
+        width: 160px;
+        height: 160px;
+    }
+
+    .btn-actualizar-foto {
+        padding: 6px 16px;
+    }
+
+    .seccion-formulario {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .form-group input {
+        padding: 12px;
+    }
+
+    .btn-guardar {
+        width: 100%;
+        padding: 12px;
+    }
+}
