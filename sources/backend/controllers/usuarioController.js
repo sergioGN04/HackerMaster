@@ -106,7 +106,6 @@ module.exports = {
             res.status(500).json({ message: 'Error - No se ha podido obtener el resumen del usuario' });
         }
     },
-
     obtenerInformacionUsuario: async (req, res) => {
         try {
             const idUsuario = req.user.idUsuario;
@@ -114,6 +113,7 @@ module.exports = {
             // Obtener datos del usuario
             const usuario = await Usuario.findOne({
                 attributes: [
+                    'idUsuario',
                     'username',
                     [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/usuarios/', Sequelize.col('fotoPerfil')), 'fotoPerfil'],
                     'email',

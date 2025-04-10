@@ -163,6 +163,11 @@ button.active {
     max-width: 100%;
 }
 
+/* Estilo para el mensaje cuando no hay máquinas */
+.no-maquinas {
+    color: #6FFF00;
+}
+
 .maquina-card {
     background: #0A1A2A;
     padding: 20px;
