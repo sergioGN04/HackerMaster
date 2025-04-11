@@ -15,9 +15,10 @@
 
 /* Sección "Información Personal" */
 .titulo-seccion {
-    font-size: 2rem;
+    font-size: 2.6rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    color: #6FFF00;
+    text-align: center;
 }
 
 .descripcion-seccion {
@@ -125,13 +126,6 @@
 
 .perfil-foto-container {
     margin-bottom: 30px;
-}
-
-.titulo-seccion {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #6FFF00;
-    text-align: center;
 }
 
 .descripcion-seccion {

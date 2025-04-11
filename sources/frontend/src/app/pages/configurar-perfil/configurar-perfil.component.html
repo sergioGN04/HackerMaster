@@ -1,7 +1,8 @@
 <app-header-autorizado></app-header-autorizado>
 <app-sidebar-autorizado (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-autorizado>
 
-<div class="containers container-first primarySections" [class.colapsado]="!sidebarExpandido" *ngIf="informacionUsuario">
+<div class="containers container-first primarySections" [class.colapsado]="!sidebarExpandido"
+  *ngIf="informacionUsuario">
   <h2 class="titulo-configuracion">Configuración Usuario</h2>
   <hr class="separator" />
   <p class="descripcion-configuracion">
@@ -17,7 +18,8 @@
       <!-- Input file -->
       <label for="inputFotoPerfil" class="btn-actualizar-foto">
         Actualizar Foto
-        <input type="file" id="inputFotoPerfil" accept="image/png, image/jpeg" hidden (change)="onFotoSeleccionada($event)" />
+        <input type="file" id="inputFotoPerfil" accept="image/png, image/jpeg" hidden
+          (change)="onFotoSeleccionada($event)" />
       </label>
     </div>
 
@@ -31,26 +33,58 @@
 
   <!-- Contenedor para modificar datos del usuario -->
   <div class="secondarySections seccion-formulario">
-    <h3>Modificar Datos Personales</h3>
-    <form>
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" class="form-control" />
+    <h3>Información del Perfil</h3>
+    <hr class="linea-blanca" />
+    <p class="descripcion-formulario">
+      Actualiza tu información personal para mantener tu perfil al día. Asegúrate de guardar los cambios antes de salir.
+    </p>
+
+    <form class="form-dos-columnas">
+      <div class="columna">
+        <div class="form-group">
+          <label for="nombre">Nombre Usuario</label>
+          <input type="text" [value]="informacionUsuario.usuario.username" id="nombre" name="nombre"
+            class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo Electrónico</label>
+          <input type="email" [value]="informacionUsuario.usuario.email" id="email" name="email" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="pais">País</label>
+          <input type="text" id="pais" [value]="informacionUsuario.usuario.pais" name="pais" class="form-control" />
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="email">Correo Electrónico</label>
-        <input type="email" id="email" name="email" class="form-control" />
+      <div class="columna">
+        <div class="form-group">
+          <label for="fechaNacimiento">Fecha de Nacimiento</label>
+          <input type="date" [value]="informacionUsuario.usuario.fechaNacimiento" id="fechaNacimiento"
+            name="fechaNacimiento" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" [value]="informacionUsuario.usuario.telefono"
+            class="form-control" />
+        </div>
       </div>
 
-      <button type="submit" class="btn-guardar">Guardar Cambios</button>
+      <div class="form-boton">
+        <button type="submit" class="btn-guardar">Actualizar</button>
+      </div>
     </form>
   </div>
 
   <!-- Contenedor para cambiar contraseña -->
   <div class="secondarySections seccion-formulario passwordForm">
     <h3>Cambiar Contraseña</h3>
-    <form>
+    <hr class="linea-blanca" />
+    <p class="descripcion-formulario">Protege tu cuenta cambiando tu contraseña regularmente. Ingresa tu contraseña
+      actual y establece una nueva para mantener tu perfil seguro.</p>
+    <form class="form-password">
       <div class="form-group">
         <label for="contrasenaActual">Contraseña Actual</label>
         <input type="password" id="contrasenaActual" name="contrasenaActual" class="form-control" />
@@ -66,7 +100,7 @@
         <input type="password" id="confirmarContrasena" name="confirmarContrasena" class="form-control" />
       </div>
 
-      <button type="submit" class="btn-guardar">Actualizar Contraseña</button>
+      <button type="submit" class="btn-guardar-password">Actualizar Contraseña</button>
     </form>
   </div>
 </div>

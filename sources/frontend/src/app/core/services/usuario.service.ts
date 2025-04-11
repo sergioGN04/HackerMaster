@@ -27,4 +27,12 @@ export class UsuarioService {
     return this.http.get(`${this.apiUrl}/informacion-usuario`, { headers });
   }
 
+  // Método para actualizar la foto de perfil
+  actualizarFotoPerfil(formData: FormData): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+
+    return this.http.post(`${this.apiUrl}/actualizar-imagen-perfil`, formData, { headers });
+  }
+
 }

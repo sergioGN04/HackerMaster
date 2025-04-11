@@ -8,6 +8,7 @@ const maquinaController = require('../controllers/maquinaController');
 const notificacionController = require('../controllers/notificacionController');
 const logroController = require('../controllers/logroController');
 const verifyToken = require('../middlewares/verifyToken');
+const upload = require('../config/multerUsuarioConfig')
 
 // ------ Rutas HackerMaster ------
 // Informacion del sitio
@@ -23,6 +24,7 @@ router.post('/api/register', authenticationController.registrarUsuario);
 // Usuarios
 router.get('/api/dashboard-usuario', verifyToken, usuarioController.obtenerResumenUsuario);
 router.get('/api/informacion-usuario', verifyToken, usuarioController.obtenerInformacionUsuario);
+router.post('/api/actualizar-imagen-perfil', verifyToken, upload, usuarioController.actualizarFotoPerfil);
 
 // Maquinas
 router.get('/api/maquinas-recomendadas', verifyToken, maquinaController.obtenerMaquinasRecomendadas);

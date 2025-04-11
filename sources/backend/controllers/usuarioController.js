@@ -152,5 +152,39 @@ module.exports = {
             console.error(error);
             res.status(500).json({ message: 'Error - No se ha podido obtener la información del usuario' });
         }
-    }
+    },
+    actualizarFotoPerfil: async (req, res) => {
+        try {
+            // Verificar que se haya subido un archivo
+            if (!req.file) {
+                return res.status(400).json({ message: 'No se ha enviado ningún archivo.' });
+            }
+    
+            // Obtener el nombre del archivo subido
+            const nombreArchivo = req.file.filename;
+    
+            // Obtener el id del usuario
+            const idUsuario = req.user.idUsuario;
+    
+            if (!idUsuario) {
+                return res.status(400).json({ message: 'No se ha encontrado el ID de usuario.' });
+            }
+
+            // Actualizar fotoPerfil del usuario
+            const [filasActualizadas] = await Usuario.update(
+                { fotoPerfil: nombreArchivo },
+                { where: { idUsuario } }
+            );
+    
+            if (filasActualizadas === 0) {
+                return res.status(404).json({ message: 'Usuario no encontrado o no se realizó ningún cambio.' });
+            }
+
+            res.status(200).json({ message: 'Foto de perfil actualizada correctamente.' });
+    
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error al registrar la foto de perfil.' });
+        }
+    }    
 }
