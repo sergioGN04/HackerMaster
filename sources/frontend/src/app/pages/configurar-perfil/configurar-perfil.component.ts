@@ -38,6 +38,13 @@ export class ConfigurarPerfilComponent {
     this.usuarioService.obtenerInformacionUsuario().subscribe({
       next: (response: any) => {
         this.informacionUsuario = response;
+
+        // Obtener fechaNacimiento con el formato correcto para el input 
+        if (this.informacionUsuario.usuario.fechaNacimiento) {
+          const fecha = new Date(this.informacionUsuario.usuario.fechaNacimiento);
+          this.informacionUsuario.usuario.fechaNacimiento = fecha.toISOString().split('T')[0];
+        }
+
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
@@ -51,31 +58,31 @@ export class ConfigurarPerfilComponent {
     });
   }
 
-  // 
+  // Método para actualizar la foto de perfil del usuario
   onFotoSeleccionada(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const archivo = input.files[0];
   
-      // Validaciones
+      // Validaciones foto
       if (archivo.size > 5 * 1024 * 1024) {
         alert('El archivo es demasiado grande. Máximo permitido: 5MB.');
         return;
       }
   
-      // Obtener archivo seleccionado
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.informacionUsuario.fotoPerfil = e.target.result;
-      };
-      reader.readAsDataURL(archivo);
-
-      console.log(reader);
-      
+      // Crear FormData para enviar el archivo
+      const formData = new FormData();
+      formData.append('fotoPerfil', archivo);
   
-      // Llamar al servicio que sube la imagen
-      // this.usuarioService.actualizarInformacionUsuario(informacion).subscribe(...)
-      
+      // Subir la imagen al servidor
+      this.usuarioService.actualizarFotoPerfil(formData).subscribe({
+        next: (response: any) => {
+          this.getInformacionPerfil();
+        },
+        error: (error: any) => {
+          console.error('Error al actualizar la foto de perfil', error);
+        }
+      });
     }
   }  
 

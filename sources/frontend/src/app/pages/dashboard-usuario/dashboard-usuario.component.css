@@ -266,6 +266,10 @@ button.active {
         margin-left: 60px;
     }
 
+    .perfil-header h1 {
+        font-size: 23px;
+    }
+
     .maquinas-lista {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
