@@ -4,6 +4,9 @@ const Maquina = require('../models/maquinaModel');
 const Intenta = require('../models/IntentaModel');
 const Logro = require('../models/logroModel');
 const UsuarioLogro = require('../models/usuarioLogroModel');
+const bcrypt = require('bcrypt');
+const fs = require('fs');
+const path = require('path');
 
 // Función para calcular el rango y puntuación
 const calcularRangoYPuntuacion = async (idUsuario) => {
@@ -37,7 +40,7 @@ const calcularRangoYPuntuacion = async (idUsuario) => {
     // Puntuación total
     const puntuacion = puntosMaquinas + puntosLogros;
 
-    // Determinar el rango
+    // Obtener el rango mediante la puntuación
     let rango = 'Principiante';
     if (puntuacion >= 500 && puntuacion < 1000) {
         rango = 'Intermedio';
@@ -91,15 +94,7 @@ module.exports = {
 
             const progreso = totalPosibles > 0 ? Math.round((totalCompletado * 100) / totalPosibles) : 0;
 
-            return res.status(200).json({
-                nombreUsuario,
-                fotoPerfil,
-                rango,
-                progreso,
-                puntuacion,
-                maquinasCompletadas,
-                logrosCompletados
-            });
+            return res.status(200).json({ nombreUsuario, fotoPerfil, rango, progreso, puntuacion, maquinasCompletadas, logrosCompletados });
 
         } catch (error) {
             console.error(error);
@@ -142,11 +137,7 @@ module.exports = {
                 }]
             });
 
-            return res.status(200).json({
-                usuario,
-                rango,
-                ultimaMaquina: ultimaMaquina?.Maquina || null
-            });
+            return res.status(200).json({ usuario, rango, ultimaMaquina: ultimaMaquina?.Maquina || null });
 
         } catch (error) {
             console.error(error);
@@ -155,36 +146,177 @@ module.exports = {
     },
     actualizarFotoPerfil: async (req, res) => {
         try {
-            // Verificar que se haya subido un archivo
+            // Verificar que se haya subido un archivo y manda el error si no es un archivo formato correcto
             if (!req.file) {
-                return res.status(400).json({ message: 'No se ha enviado ningún archivo.' });
+                return res.status(400).json({ message: req.fileValidationError });
             }
-    
+
             // Obtener el nombre del archivo subido
-            const nombreArchivo = req.file.filename;
-    
+            const nombreArchivoNuevo = req.file.filename;
+
             // Obtener el id del usuario
             const idUsuario = req.user.idUsuario;
-    
             if (!idUsuario) {
-                return res.status(400).json({ message: 'No se ha encontrado el ID de usuario.' });
+                return res.status(400).json({ message: 'No se ha encontrado el ID de usuario' });
             }
 
-            // Actualizar fotoPerfil del usuario
+            // Obtener el usuario actual
+            const usuario = await Usuario.findOne({ where: { idUsuario } });
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            // Obtener el nombre de la foto anterior
+            const nombreArchivoAnterior = usuario.fotoPerfil;
+
+            // Verificar si la foto anterior es la foto predeterminada, para no borrarla
+            if (nombreArchivoAnterior !== 'fotoPerfil.png') {
+
+                const rutaArchivoAnterior = path.join(__dirname, '../uploads/usuarios', nombreArchivoAnterior);
+
+                // Verificar si el archivo existe y eliminarlo
+                if (fs.existsSync(rutaArchivoAnterior)) {
+                    fs.unlinkSync(rutaArchivoAnterior);
+                }
+            }
+
+            // Actualizar la foto de perfil en la base de datos
             const [filasActualizadas] = await Usuario.update(
-                { fotoPerfil: nombreArchivo },
+                { fotoPerfil: nombreArchivoNuevo },
                 { where: { idUsuario } }
             );
-    
+
             if (filasActualizadas === 0) {
-                return res.status(404).json({ message: 'Usuario no encontrado o no se realizó ningún cambio.' });
+                return res.status(404).json({ message: 'No se realizó ningún cambio' });
             }
 
-            res.status(200).json({ message: 'Foto de perfil actualizada correctamente.' });
-    
+            res.status(200).json({ message: 'Foto de perfil actualizada correctamente' });
+
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Error al registrar la foto de perfil.' });
+            res.status(500).json({ message: 'Error - No se ha podido actualizar la foto de perfil' });
         }
-    }    
+    },
+    actualizarDatosUsuario: async (req, res) => {
+        try {
+            const { username, email, pais, fechaNacimiento, telefono } = req.body;
+            const idUsuario = req.user.idUsuario;
+
+            // Buscamos al usuario actual en la base de datos
+            const usuario = await Usuario.findByPk(idUsuario);
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            // Comprobamos si el nombre de usuario ya está en uso
+            if (username && username !== usuario.username) {
+                const usuarioExistente = await Usuario.findOne({ where: { username } });
+                if (usuarioExistente) {
+                    return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
+                }
+            }
+
+            // Comprobamos si el email ya está en uso
+            if (email && email !== usuario.email) {
+                const emailExistente = await Usuario.findOne({ where: { email } });
+                if (emailExistente) {
+                    return res.status(400).json({ message: 'El correo electrónico ya está en uso' });
+                }
+            }
+
+            // Validamos el número de teléfono
+            if (telefono) {
+                const telefonoValido = /^(\+?\d{1,4})?[\s]?(?:\d[\s]?){6,14}\d$/;
+                if (!telefonoValido.test(telefono)) {
+                    return res.status(400).json({
+                        message: 'Formato de teléfono no válido. Solo se permiten números y espacios opcionales. Ej: "+34 612 345 678"'
+                    });
+                }
+            }
+
+            // Actualizamos los datos del usuario
+            const [filasActualizadas] = await Usuario.update(
+                {
+                    username: username || usuario.username,
+                    email: email || usuario.email,
+                    pais: pais || usuario.pais,
+                    fechaNacimiento: fechaNacimiento || usuario.fechaNacimiento,
+                    telefono: telefono || usuario.telefono
+                },
+                {
+                    where: { idUsuario },
+                }
+            );
+
+            if (filasActualizadas === 0) {
+                return res.status(404).json({ message: 'No se han realizado cambios en el usuario' });
+            }
+
+            res.status(200).json({ message: 'Datos actualizados correctamente' });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'No se ha podido actualizar los datos del usuario' });
+        }
+    },
+    actualizarPassword: async (req, res) => {
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+        try {
+            const { contrasenaActual, nuevaPassword, confirmarPassword } = req.body;
+            const idUsuario = req.user.idUsuario;
+
+            // Comprobamos que el usuario existe
+            const usuario = await Usuario.findByPk(idUsuario);
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            // Validaciones Campos
+            if (!contrasenaActual || !nuevaPassword || !confirmarPassword) {
+                return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+            }
+
+            // Comparar la contraseña actual con la que tiene en la base de datos
+            const match = await bcrypt.compare(contrasenaActual, usuario.password);
+            if (!match) {
+                return res.status(400).json({ message: 'La contraseña actual es incorrecta' });
+            }
+
+            // Verificar que la nueva contraseña no sea igual a la actual
+            if (contrasenaActual === nuevaPassword) {
+                return res.status(400).json({ message: 'La nueva contraseña debe ser diferente a la contraseña actual' });
+            }
+
+            // Comprobamos que las contraseñas nuevas coinciden
+            if (nuevaPassword !== confirmarPassword) {
+                return res.status(400).json({ message: 'Las nuevas contraseñas no coinciden' });
+            }
+
+            // Verificamos que la contraseña nueva sea segura
+            if (!passwordRegex.test(nuevaPassword)) {
+                return res.status(400).json({ message: 'La contraseña debe tener mínimo 8 caracteres, una mayúscula y un número' });
+            }
+
+            // Encriptar la nueva contraseña
+            const hashedPassword = await bcrypt.hash(nuevaPassword, 10);
+
+            // Actualizar la contraseña
+            const [filasActualizadas] = await Usuario.update(
+                { password: hashedPassword },
+                { where: { idUsuario } }
+            );
+
+            // Verificar si la actualización se realizó correctamente
+            if (filasActualizadas === 0) {
+                return res.status(400).json({ message: 'No se pudo actualizar la contraseña' });
+            }
+
+            return res.status(200).json({ message: 'Contraseña actualizada con éxito' });
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Error al actualizar la contraseña' });
+        }
+    }
 }

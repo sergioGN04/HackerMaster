@@ -15,20 +15,25 @@
     <div class="imagen-perfil-config">
       <img [src]="informacionUsuario.usuario.fotoPerfil" alt="Foto de perfil" class="foto-perfil-config" />
 
-      <!-- Input file -->
       <label for="inputFotoPerfil" class="btn-actualizar-foto">
         Actualizar Foto
         <input type="file" id="inputFotoPerfil" accept="image/png, image/jpeg" hidden
           (change)="onFotoSeleccionada($event)" />
       </label>
-    </div>
 
+    </div>
     <div class="info-foto-perfil">
       <p>
         Se admiten imágenes en formato <strong>JPG</strong>, <strong>PNG</strong>, con un tamaño máximo de
         <strong>5MB</strong>. Asegúrate de que la imagen sea clara y adecuada, ya que será visible en tu perfil público.
       </p>
     </div>
+  </div>
+
+  <div class="mensajeErrorImagen" *ngIf="mensajeImagen !== ''">
+    <p [ngClass]="{ 'mensaje-error': mensajeErrorImagen, 'mensaje-exito': !mensajeErrorImagen }">
+      {{ mensajeImagen }}
+    </p>
   </div>
 
   <!-- Contenedor para modificar datos del usuario -->
@@ -39,35 +44,39 @@
       Actualiza tu información personal para mantener tu perfil al día. Asegúrate de guardar los cambios antes de salir.
     </p>
 
-    <form class="form-dos-columnas">
+    <form class="form-dos-columnas" (ngSubmit)="actualizarUsuario()">
       <div class="columna">
         <div class="form-group">
           <label for="nombre">Nombre Usuario</label>
-          <input type="text" [value]="informacionUsuario.usuario.username" id="nombre" name="nombre"
-            class="form-control" />
+          <input type="text" [(ngModel)]="informacionUsuario.usuario.username" name="nombre" id="nombre"
+            class="form-control" required />
         </div>
 
         <div class="form-group">
           <label for="email">Correo Electrónico</label>
-          <input type="email" [value]="informacionUsuario.usuario.email" id="email" name="email" class="form-control" />
+          <input type="email" [(ngModel)]="informacionUsuario.usuario.email" name="email" id="email"
+            class="form-control" required />
         </div>
 
         <div class="form-group">
           <label for="pais">País</label>
-          <input type="text" id="pais" [value]="informacionUsuario.usuario.pais" name="pais" class="form-control" />
+          <select [(ngModel)]="informacionUsuario.usuario.pais" name="pais" id="pais" class="form-control">
+            <option value="" disabled selected>Selecciona tu país</option>
+            <option *ngFor="let pais of listaPaises" [value]="pais">{{ pais }}</option>
+          </select>
         </div>
       </div>
 
       <div class="columna">
         <div class="form-group">
           <label for="fechaNacimiento">Fecha de Nacimiento</label>
-          <input type="date" [value]="informacionUsuario.usuario.fechaNacimiento" id="fechaNacimiento"
-            name="fechaNacimiento" class="form-control" />
+          <input type="date" [(ngModel)]="informacionUsuario.usuario.fechaNacimiento" name="fechaNacimiento"
+            id="fechaNacimiento" class="form-control" />
         </div>
 
         <div class="form-group">
           <label for="telefono">Teléfono</label>
-          <input type="tel" id="telefono" name="telefono" [value]="informacionUsuario.usuario.telefono"
+          <input type="tel" [(ngModel)]="informacionUsuario.usuario.telefono" name="telefono" id="telefono"
             class="form-control" />
         </div>
       </div>
@@ -76,31 +85,44 @@
         <button type="submit" class="btn-guardar">Actualizar</button>
       </div>
     </form>
+    <div *ngIf=" mensajeFormDatos !== '' ">
+      <p [ngClass]="{ 'mensaje-error': mensajeErrorFormDatos, 'mensaje-exito': !mensajeErrorFormDatos }">
+        {{ mensajeFormDatos }}
+      </p>
+    </div>
   </div>
 
-  <!-- Contenedor para cambiar contraseña -->
+  <!-- Contenedor para modificar contraseña -->
   <div class="secondarySections seccion-formulario passwordForm">
     <h3>Cambiar Contraseña</h3>
     <hr class="linea-blanca" />
     <p class="descripcion-formulario">Protege tu cuenta cambiando tu contraseña regularmente. Ingresa tu contraseña
       actual y establece una nueva para mantener tu perfil seguro.</p>
-    <form class="form-password">
+    <form #formPassword class="form-password" (ngSubmit)="actualizarPassword(formPassword)">
       <div class="form-group">
         <label for="contrasenaActual">Contraseña Actual</label>
-        <input type="password" id="contrasenaActual" name="contrasenaActual" class="form-control" />
+        <input type="password" id="contrasenaActual" name="contrasenaActual" [(ngModel)]="contrasenaActual"
+          class="form-control" />
       </div>
 
       <div class="form-group">
-        <label for="nuevaContrasena">Nueva Contraseña</label>
-        <input type="password" id="nuevaContrasena" name="nuevaContrasena" class="form-control" />
+        <label for="nuevaPassword">Nueva Contraseña</label>
+        <input type="password" id="nuevaPassword" name="nuevaPassword" [(ngModel)]="nuevaPassword"
+          class="form-control" />
       </div>
 
       <div class="form-group">
-        <label for="confirmarContrasena">Confirmar Nueva Contraseña</label>
-        <input type="password" id="confirmarContrasena" name="confirmarContrasena" class="form-control" />
+        <label for="confirmarPassword">Confirmar Nueva Contraseña</label>
+        <input type="password" id="confirmarPassword" name="confirmarPassword" [(ngModel)]="confirmarPassword"
+          class="form-control" />
       </div>
 
-      <button type="submit" class="btn-guardar-password">Actualizar Contraseña</button>
+      <button type="submit" class="btn-guardar-password">Actualizar</button>
     </form>
+    <div *ngIf=" mensajeFormPassword !== '' ">
+      <p [ngClass]="{ 'mensaje-error': mensajeErrorFormPassword, 'mensaje-exito': !mensajeErrorFormPassword }">
+        {{ mensajeFormPassword }}
+      </p>
+    </div>
   </div>
 </div>

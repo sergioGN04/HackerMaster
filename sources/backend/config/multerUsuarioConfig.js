@@ -31,7 +31,8 @@ const fileFilter = (req, file, cb) => {
   if (extname && mimetype) {
     return cb(null, true);
   } else {
-    cb(new Error('El archivo debe ser una imagen JPG, JPEG o PNG'), false);
+    req.fileValidationError = 'El archivo debe ser una imagen JPG, JPEG o PNG';
+    cb(null, false);
   }
 };
 

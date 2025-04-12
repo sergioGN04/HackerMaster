@@ -48,7 +48,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ mensaje: 'Error del servidor' });
+            return res.status(500).json({ message: 'Error del servidor' });
         }
     },
     marcarNotificacionesComoVistas: async (req, res) => {
@@ -69,11 +69,11 @@ module.exports = {
                 ignoreDuplicates: true
             });
 
-            res.status(200).json({ mensaje: 'Notificaciones marcadas como vistas' });
+            res.status(200).json({ message: 'Notificaciones marcadas como vistas' });
 
         } catch (error) {
             console.error(error);
-            res.status(500).json({ mensaje: 'Error al marcar notificaciones como vistas' });
+            res.status(500).json({ message: 'Error al marcar notificaciones como vistas' });
         }
     }
 

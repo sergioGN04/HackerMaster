@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .foto-perfil-config {
@@ -122,17 +122,54 @@
     margin-left: 10px;
 }
 
+.mensaje-error {
+    color: #ff4d4d;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff4d4d;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.mensajeErrorImagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin: 30px 0 0 0;
+    text-align: center;
+}
+
+.mensajeErrorImagen p {
+    width: 60%;
+}
+
+.mensaje-exito {
+    color: #4dff4d;
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #4dff4d;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+/* Estilos formulario datos usuario */
 .form-dos-columnas {
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 .columna {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
 }
 
 .form-group {
@@ -147,7 +184,6 @@
 }
 
 .form-group input {
-    width: 100%;
     padding: 12px;
     border-radius: 5px;
     border: 1px solid #B0B0B0;
@@ -164,6 +200,19 @@
 
 .form-group input::placeholder {
     color: white;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #B0B0B0;
+    background-color: #0A1A2A;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    appearance: none;
 }
 
 .form-boton {
@@ -188,7 +237,7 @@
     color: white;
 }
 
-/* Estilo Formulario Password */
+/* Estilos formulario password */
 .form-password {
     margin: auto 15% auto 15%;
     text-align: center;
@@ -210,11 +259,10 @@
     transition: background 0.3s ease;
 }
 
-.btn-guardar-password:hover  {
+.btn-guardar-password:hover {
     background-color: #57cc00;
     color: white;
 }
-
 
 /* Responsive */
 @media (max-width: 909px) {
@@ -235,7 +283,7 @@
         padding: 130px 40px 90px 40px;
         margin-left: 60px;
     }
-    
+
     .containers.colapsado {
         margin-left: 60px;
     }
@@ -257,7 +305,7 @@
 
     .seccion-formulario {
         padding: 20px;
-        margin: 80px auto;
+        margin: 100px auto;
         max-width: 99%;
     }
 
@@ -266,7 +314,8 @@
         gap: 20px;
     }
 
-    .seccion-formulario h3, .descripcion-formulario {
+    .seccion-formulario h3,
+    .descripcion-formulario {
         text-align: center;
     }
 
@@ -298,7 +347,7 @@
         padding: 130px 25px 90px 40px;
         margin-left: 40px;
     }
-    
+
     .containers.colapsado {
         margin-left: 40px;
     }
@@ -307,7 +356,8 @@
         font-size: 1.8rem;
     }
 
-    .descripcion-configuracion, .descripcion-formulario {
+    .descripcion-configuracion,
+    .descripcion-formulario {
         font-size: 0.9rem;
     }
 
@@ -334,7 +384,7 @@
 
     .seccion-formulario {
         padding: 15px;
-        margin: 60px auto;
+        margin: 80px auto;
     }
 
     .seccion-formulario h3 {
@@ -367,7 +417,7 @@
     }
 
     .form-password {
-        margin: 30px 0;
+        margin: 20px 0;
     }
 
     .form-password label {
