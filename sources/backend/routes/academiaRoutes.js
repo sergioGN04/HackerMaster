@@ -25,6 +25,8 @@ router.post('/api/register', authenticationController.registrarUsuario);
 router.get('/api/dashboard-usuario', verifyToken, usuarioController.obtenerResumenUsuario);
 router.get('/api/informacion-usuario', verifyToken, usuarioController.obtenerInformacionUsuario);
 router.post('/api/actualizar-imagen-perfil', verifyToken, upload, usuarioController.actualizarFotoPerfil);
+router.put('/api/actualizar-datos-usuario', verifyToken, usuarioController.actualizarDatosUsuario);
+router.post('/api/actualizar-password', verifyToken, usuarioController.actualizarPassword);
 
 // Maquinas
 router.get('/api/maquinas-recomendadas', verifyToken, maquinaController.obtenerMaquinasRecomendadas);

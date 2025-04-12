@@ -35,4 +35,20 @@ export class UsuarioService {
     return this.http.post(`${this.apiUrl}/actualizar-imagen-perfil`, formData, { headers });
   }
 
+  // Método para actualizar los datos de usuario
+  actualizarUsuario(usuario: any): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+
+    return this.http.put(`${this.apiUrl}/actualizar-datos-usuario`, usuario, { headers });
+  }
+
+  // Método para actualizar la contraseña del usuario
+  actualizarPassword(data: any): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+  
+    return this.http.post(`${this.apiUrl}/actualizar-password`, data, { headers });
+  }
+
 }

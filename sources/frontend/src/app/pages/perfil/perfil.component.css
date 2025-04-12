@@ -1,12 +1,12 @@
 /* Estilo general de los apartados */
 .containers {
     color: white;
-    padding: 100px 35px 90px 35px;
+    padding: 80px 35px 70px 35px;
     margin-left: 280px;
 }
 
 .container-first {
-    padding: 160px 35px 90px 35px;
+    padding: 140px 35px 70px 35px;
 }
 
 .containers.colapsado {
@@ -15,16 +15,16 @@
 
 /* Sección "Información Personal" */
 .titulo-seccion {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     font-weight: bold;
     color: #6FFF00;
     text-align: center;
 }
 
 .descripcion-seccion {
-    max-width: 900px;
-    margin: 0 auto 90px auto;
-    font-size: 1rem;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    font-size: 0.9rem;
     color: #ccc;
     text-align: center;
 }
@@ -36,8 +36,8 @@
 }
 
 .foto-perfil-grande {
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
     border: 3px solid #6FFF00;
     border-radius: 150px;
@@ -48,13 +48,13 @@
     background-color: #6FFF00;
     color: black;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .btn-editar-perfil:hover {
@@ -75,8 +75,8 @@
 .dato-box {
     background-color: #4DB300;
     color: black;
-    padding: 10px 25px;
-    margin-bottom: 15px;
+    padding: 8px 20px;
+    margin-bottom: 12px;
     font-weight: 500;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     text-align: left;
@@ -91,23 +91,23 @@
 .dato-content {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .dato-content p {
     margin-bottom: 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .dato-box i {
-    font-size: 2.3rem;
+    font-size: 1.9rem;
 }
 
 .row.datos-usuario {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
-    margin-top: 80px;
+    gap: 20px;
+    margin-top: 60px;
 }
 
 .row .col-md-5 {
@@ -125,13 +125,13 @@
 }
 
 .perfil-foto-container {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .descripcion-seccion {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: white;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -148,7 +148,7 @@
     background-color: #4DB300;
     color: white;
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -162,25 +162,25 @@
 .logro-imagen {
     width: auto;
     height: auto;
-    max-height: 250px;
+    max-height: 200px;
     object-fit: cover;
     border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.logro-card h4 {
-    font-size: 1.2rem;
-    font-weight: bold;
     margin-bottom: 10px;
 }
 
+.logro-card h4 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
 .logro-card p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #ccc;
 }
 
 .no-logros {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #6FFF00;
     text-align: center;
     margin-top: 20px;
@@ -194,9 +194,9 @@
     background: #1A324A;
     color: #6FFF00;
     font-weight: bold;
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: 50px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     border: 2px solid #6FFF00;
     box-shadow: 0 0 8px rgba(111, 255, 0, 0.6);
     z-index: 2;
@@ -208,15 +208,14 @@
 }
 
 .logro-puntuacion i {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #FFD700;
 }
-
 
 /* Responsive */
 @media (max-width: 1080px) {
     .titulo-seccion {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     .descripcion-seccion {
@@ -225,8 +224,8 @@
     }
 
     .foto-perfil-grande {
-        width: 220px;
-        height: 220px;
+        width: 210px;
+        height: 210px;
     }
 
     .btn-editar-perfil {
@@ -266,7 +265,7 @@
     }
 
     .logro-imagen {
-        max-height: 150px;
+        max-height: 180px;
     }
 
     .logro-card {
@@ -306,8 +305,8 @@
     }
 
     .foto-perfil-grande {
-        width: 220px;
-        height: 220px;
+        width: 200px;
+        height: 200px;
     }
 
     .btn-editar-perfil {
@@ -386,8 +385,8 @@
     }
 
     .foto-perfil-grande {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
 
     .btn-editar-perfil {
