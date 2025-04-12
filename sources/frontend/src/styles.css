@@ -69,3 +69,11 @@ a:hover {
     color: #57cc00;
     text-decoration: none;
 }
+
+/* Inputs, Select y Textarea, quitar el borde azul */
+.form-group input,
+.form-group select,
+.form-group textarea,
+.form-control:focus {
+    outline: none;
+}

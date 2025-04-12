@@ -6,6 +6,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DashboardUsuarioComponent } from './pages/dashboard-usuario/dashboard-usuario.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ConfigurarPerfilComponent } from './pages/configurar-perfil/configurar-perfil.component';
+import { MaquinasComponent } from './pages/maquinas/maquinas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'dashboard-usuario', component: DashboardUsuarioComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'configurar-perfil', component: ConfigurarPerfilComponent },
+  { path: 'maquinas', component: MaquinasComponent },
   { path: '**', redirectTo: 'inicio' }
 ];

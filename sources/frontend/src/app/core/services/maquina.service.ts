@@ -28,4 +28,13 @@ export class MaquinaService {
     return this.http.get(`${this.apiUrl}/maquinas-en-progreso`, { headers });
   }
 
+  // Método para obtener las máquinas filtradas por el buscador
+  obtenerMaquinasFiltradas(busqueda: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const params = new HttpParams().set('nombreMaquina', busqueda);
+
+    return this.http.get(`${this.apiUrl}/obtener-maquinas-filtradas`, { headers, params });
+  }
+
 }

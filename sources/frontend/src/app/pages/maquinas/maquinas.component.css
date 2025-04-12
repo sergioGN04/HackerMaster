@@ -1,0 +1,296 @@
+/* Estilo general de los apartados */
+.containers {
+    color: white;
+    padding: 50px 80px 80px 80px;
+    margin-left: 280px;
+}
+
+.containers.colapsado {
+    margin-left: 80px;
+}
+
+/* Crear Máquina */
+.crear-maquina-section {
+    color: white;
+    padding: 80px 0 0 0;
+    margin-left: 275px;
+}
+
+.crear-maquina-section.colapsado {
+    margin-left: 75px;
+}
+
+/* Estilos del Acordeón */
+.accordion-item {
+    border: none;
+}
+
+.accordion-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A324A;
+    color: #6FFF00;
+    font-weight: bold;
+    border: none;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 0;
+}
+
+.accordion-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.accordion-button i {
+    margin-right: 10px;
+    font-size: 1.4rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.accordion-button::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    font-weight: 900;
+    font-size: 20px;
+    color: #6FFF00;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 20px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg);
+}
+
+.accordion-body {
+    background-color: #0A1A2A;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 15px 20px;
+    border-radius: 0;
+    border: none;
+}
+
+/* Sección del formulario de la máquina */
+.formulario-maquina {
+    padding: 80px 200px 40px 200px;
+    background-color: #0A1A2A;
+}
+
+.formCrearMaquina {
+    background-color: #1A324A;
+    border-radius: 20px;
+    padding: 50px 70px;
+}
+
+.formCrearMaquina label {
+    font-size: 1.2rem;
+    margin: 50px 0 10px 0;
+}
+
+.formulario-maquina .form-label {
+    color: #6FFF00;
+    font-weight: bold;
+}
+
+.label-centrar {
+    display: block;
+    text-align: center;
+}
+
+.formulario-maquina .form-group textarea {
+    display: block;
+    margin: 0 auto;
+    max-width: 60%;
+}
+
+h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.linea-separadora {
+    border: 1px solid white;
+    margin-bottom: 20px;
+}
+
+.descripcion-formulario {
+    font-size: 1rem;
+    margin-bottom: 80px;
+    color: #CCCCCC;
+}
+
+.formulario-contenedor {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.columna {
+    flex: 1 1 48%;
+}
+
+/* Estilo para los inputs, selects y textareas dentro del formulario */
+.formulario-maquina input,
+.formulario-maquina select,
+.formulario-maquina textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #B0B0B0;
+    border-radius: 5px;
+    background-color: #0A1A2A;
+    color: white;
+    font-size: 1rem;
+}
+
+.formulario-maquina input:focus,
+.formulario-maquina select:focus,
+.formulario-maquina textarea:focus {
+    outline: none;
+    border: 1px solid #6FFF00;
+}
+
+.formulario-maquina input::placeholder,
+.formulario-maquina select::placeholder,
+.formulario-maquina textarea::placeholder {
+    color: white;
+    opacity: 90%;
+}
+
+.btn-seleccionar {
+    background-color: #6FFF00;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-seleccionar:hover, .btn-enviar:hover {
+    background-color: #57cc00;
+    color: #FFFFFF;
+}
+
+.btn-seleccionar:active, .btn-enviar:active {
+    background-color: #4DB300;
+    color: #FFFFFF;
+}
+
+.btn-seleccionar:focus, .btn-enviar:focus {
+    background-color: #368000;
+    color: #FFFFFF;
+}
+
+.custom-file-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    background-color: #0A1A2A;
+    padding: 7px;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-enviar {
+    background-color: #6FFF00;
+    color: black;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 80px auto 20px auto;
+    width: 250px;
+}
+
+.mensaje-exito {
+    color: #6FFF00;
+    text-align: center;
+    margin: 40px auto 10px auto;
+    font-size: 18px;
+}
+
+.mensaje-error {
+    color: #FF4C4C;
+    text-align: center;
+    margin: 40px auto 10px auto;
+    font-size: 18px;
+}
+
+/* Lista de máquinas */
+.lista-maquinas-section {
+    margin-top: 40px;
+}
+
+.titulo-seccion {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.buscador-maquinas {
+    margin-bottom: 20px;
+}
+
+.buscador-maquinas input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    background-color: #102535;
+    color: white;
+    border: 1px solid #B0B0B0;
+}
+
+.buscador-maquinas input:focus {
+    outline: none;
+    border: 1px solid #6FFF00;
+}
+
+/* Contenedor de máquinas */
+.contenedor-maquinas {
+    padding: 20px;
+    border-radius: 0;
+    min-height: 100px;
+    color: #ccc;
+}
+
+.contenedor-maquinas-error {
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-top: 60px;
+}
+
+.contenedor-maquinas-error p {
+    margin: 0;
+    font-weight: bold;
+    color: #6FFF00;
+}
