@@ -70,7 +70,7 @@
                             <p>{{ informacionUsuario.usuario.telefono }}</p>
                         </span>
                         <ng-template #sinTelefono>
-                            <p>No disponible</p>
+                            <p>No registrado</p>
                         </ng-template>
                     </div>
                 </div>
@@ -121,6 +121,6 @@
         </div>
 
         <!-- Mensaje si no se tienen logros -->
-        <p *ngIf="logrosObtenidos?.length === 0" class="no-logros">No has obtenido logros aún.</p>
+        <p *ngIf="logrosObtenidos?.length === 0" class="no-logros">No has obtenido logros aún</p>
     </div>
 </div>
