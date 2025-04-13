@@ -94,6 +94,10 @@ export class MaquinasComponent {
       this.mensajeErrorFormNuevaMaquina = true;
       this.mensajeFormNuevaMaquina = "Todos los campos son obligatorios";
 
+      setTimeout(() => {
+        this.mensajeFormNuevaMaquina = '';
+      }, 4000);
+
     } else {
 
       const data = new FormData();
