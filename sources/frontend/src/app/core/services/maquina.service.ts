@@ -37,4 +37,12 @@ export class MaquinaService {
     return this.http.get(`${this.apiUrl}/obtener-maquinas-filtradas`, { headers, params });
   }
 
+  // Método para que el usuario pueda subir una máquina
+  crearMaquina(data: any): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+  
+    return this.http.post(`${this.apiUrl}/crear-maquina`, data, { headers });
+  }
+
 }

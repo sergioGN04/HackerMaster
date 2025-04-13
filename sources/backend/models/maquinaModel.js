@@ -23,7 +23,7 @@ const Maquina = sequelize.define('Maquina', {
         defaultValue: 'fotoMaquina.png'
     },
     dificultad: {
-        type: DataTypes.ENUM('Facil', 'Medio', 'Dificil'),
+        type: DataTypes.ENUM('Facil', 'Media', 'Dificil'),
         allowNull: false
     },
     puntuacion: {

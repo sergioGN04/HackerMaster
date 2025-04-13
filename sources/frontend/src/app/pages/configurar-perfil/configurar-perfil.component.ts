@@ -151,20 +151,27 @@ export class ConfigurarPerfilComponent {
       nuevaPassword: this.nuevaPassword,
       confirmarPassword: this.confirmarPassword
     };
+
+    if (!datos.contrasenaActual || !datos.nuevaPassword || !datos.confirmarPassword) {
+      this.mensajeFormPassword = 'Todos los campos son obligatorios ';
+      this.mensajeErrorFormPassword = true;
+
+    } else {
+      this.usuarioService.actualizarPassword(datos).subscribe({
+        next: (response: any) => {
+          this.mensajeFormPassword = response.message;
+          this.mensajeErrorFormPassword = false;
   
-    this.usuarioService.actualizarPassword(datos).subscribe({
-      next: (response: any) => {
-        this.mensajeFormPassword = response.message;
-        this.mensajeErrorFormPassword = false;
+          formPassword.reset();
+  
+        },
+        error: (error: any) => {
+          this.mensajeFormPassword = error.error.message;
+          this.mensajeErrorFormPassword = true;
+        }
+      });
 
-        formPassword.reset();
-
-      },
-      error: (error: any) => {
-        this.mensajeFormPassword = error.error.message;
-        this.mensajeErrorFormPassword = true;
-      }
-    });
+    }
 
     setTimeout(() => {
       this.mensajeFormPassword = '';
