@@ -87,26 +87,28 @@ export class ConfigurarPerfilComponent {
 
       // Validaciones foto
       if (archivo.size > 5 * 1024 * 1024) {
-        alert('El archivo es demasiado grande. Máximo permitido: 5MB.');
-        return;
+        this.mensajeErrorImagen = true;
+        this.mensajeImagen = 'La foto no puede superar los 5MB';
+
+      } else {
+        // Crear FormData para enviar el archivo
+        const formData = new FormData();
+        formData.append('fotoPerfil', archivo);
+
+        // Subir la imagen al servidor
+        this.usuarioService.actualizarFotoPerfil(formData).subscribe({
+          next: (response: any) => {
+            this.mensajeErrorImagen = false;
+            this.mensajeImagen = response.message;
+            this.getInformacionPerfil();
+          },
+          error: (error: any) => {
+            this.mensajeErrorImagen = true;
+            this.mensajeImagen = error.error.message;
+          }
+        });
+
       }
-
-      // Crear FormData para enviar el archivo
-      const formData = new FormData();
-      formData.append('fotoPerfil', archivo);
-
-      // Subir la imagen al servidor
-      this.usuarioService.actualizarFotoPerfil(formData).subscribe({
-        next: (response: any) => {
-          this.mensajeErrorImagen = false;
-          this.mensajeImagen = response.message;
-          this.getInformacionPerfil();
-        },
-        error: (error: any) => {
-          this.mensajeErrorImagen = true;
-          this.mensajeImagen = error.error.message;
-        }
-      });
 
       setTimeout(() => {
         this.mensajeImagen = '';
@@ -161,9 +163,9 @@ export class ConfigurarPerfilComponent {
         next: (response: any) => {
           this.mensajeFormPassword = response.message;
           this.mensajeErrorFormPassword = false;
-  
+
           formPassword.reset();
-  
+
         },
         error: (error: any) => {
           this.mensajeFormPassword = error.error.message;

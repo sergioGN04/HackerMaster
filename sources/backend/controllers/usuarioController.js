@@ -229,7 +229,7 @@ module.exports = {
                 const telefonoValido = /^(\+?\d{1,4})?[\s]?(?:\d[\s]?){6,14}\d$/;
                 if (!telefonoValido.test(telefono)) {
                     return res.status(400).json({
-                        message: 'Formato de teléfono no válido. Solo se permiten números y espacios opcionales. Ej: "+34 612 345 678"'
+                        message: 'Formato de teléfono no válido. Solo se permiten números y espacios opcionales. Ej: "612 345 678"'
                     });
                 }
             }
