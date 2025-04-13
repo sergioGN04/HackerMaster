@@ -6,6 +6,8 @@ import { AuthService } from '../../core/auth/auth.service';
 import { MaquinaService } from '../../core/services/maquina.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-maquinas',
@@ -17,10 +19,11 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class MaquinasComponent {
   sidebarExpandido = true;
 
-  nuevaMaquina: any = {};
+  nuevaMaquina: any = { dificultad: "" };
   mensajeFormNuevaMaquina: string = '';
   mensajeErrorFormNuevaMaquina: boolean = false;
 
+  busquedaSubject: Subject<string> = new Subject();
   busqueda = '';
   listaMaquinas: any[] = [];
 
@@ -28,6 +31,14 @@ export class MaquinasComponent {
 
   ngOnInit(): void {
     this.comprobarToken();
+
+    // Espera 500ms antes de buscar para evitar peticiones innecesarias
+    this.busquedaSubject
+      .pipe(debounceTime(500))
+      .subscribe((valor: string) => {
+        this.getObtenerMaquinas(valor);
+      });
+
   }
 
   // Método para comprobar si el token existe y si es válido obtener las maquinas
@@ -44,7 +55,7 @@ export class MaquinasComponent {
   getObtenerMaquinas(busqueda: string) {
     this.maquinaService.obtenerMaquinasFiltradas(busqueda).subscribe({
       next: (response: any) => {
-        this.listaMaquinas = response;
+        this.listaMaquinas = response.maquinasFiltradas;
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
@@ -74,53 +85,69 @@ export class MaquinasComponent {
 
   // Función que maneja el envío del formulario
   guardarMaquina(crearMaquinaForm: NgForm) {
-    if (crearMaquinaForm.valid) {
 
-      // Comprobamos que todos los campos tienen datos
-      if (!this.nuevaMaquina.nombre || !this.nuevaMaquina.fotoMaquina || !this.nuevaMaquina.dificultad || !this.nuevaMaquina.writeUp 
-        || !this.nuevaMaquina.imagenMaquina || !this.nuevaMaquina.descripcion || !this.nuevaMaquina.flagUsuario 
-        || !this.nuevaMaquina.flagRoot) {
+    // Comprobamos que todos los campos tienen datos
+    if (!this.nuevaMaquina.nombre || !this.nuevaMaquina.fotoMaquina || !this.nuevaMaquina.dificultad || !this.nuevaMaquina.writeUp
+      || !this.nuevaMaquina.imagenMaquina || !this.nuevaMaquina.descripcion || !this.nuevaMaquina.flagUsuario
+      || !this.nuevaMaquina.flagRoot) {
 
-        this.mensajeErrorFormNuevaMaquina = true;
-        this.mensajeFormNuevaMaquina = "Todos los campos son obligatorios";
+      this.mensajeErrorFormNuevaMaquina = true;
+      this.mensajeFormNuevaMaquina = "Todos los campos son obligatorios";
 
-      } else {
+    } else {
 
-        const formData = new FormData();
+      const data = new FormData();
 
-        // Añadimos los archivos seleccionados al FormData
-        if (this.nuevaMaquina.fotoMaquina) {
-          formData.append('fotoMaquina', this.nuevaMaquina.fotoMaquina);
-        }
-        if (this.nuevaMaquina.imagenMaquina) {
-          formData.append('imagenMaquina', this.nuevaMaquina.imagenMaquina);
-        }
-  
-        // Añadimos los otros datos del formulario
-        formData.append('nombre', this.nuevaMaquina.nombre);
-        formData.append('dificultad', this.nuevaMaquina.dificultad);
-        formData.append('writeUp', this.nuevaMaquina.writeUp);
-        formData.append('descripcion', this.nuevaMaquina.descripcion);
-        formData.append('flagUsuario', this.nuevaMaquina.flagUsuario);
-        formData.append('flagRoot', this.nuevaMaquina.flagRoot);
-  
-        console.log(formData);
-
-        // this.servicioMaquina.crearMaquina(formData).subscribe(...);
-
-        // Reiniciamos el formulario
-        crearMaquinaForm.reset();
-        this.nuevaMaquina.fotoMaquina = null;
-        this.nuevaMaquina.imagenMaquina = null;
-
+      // Añadimos los archivos seleccionados al FormData
+      if (this.nuevaMaquina.fotoMaquina) {
+        data.append('fotoMaquina', this.nuevaMaquina.fotoMaquina);
       }
 
-      setTimeout(() => {
-        this.mensajeFormNuevaMaquina = '';
-      }, 3000);
+      if (this.nuevaMaquina.imagenMaquina) {
+        data.append('imagenMaquina', this.nuevaMaquina.imagenMaquina);
+      }
 
+      // Añadimos los otros datos del formulario
+      data.append('nombre', this.nuevaMaquina.nombre);
+      data.append('dificultad', this.nuevaMaquina.dificultad);
+      data.append('writeUp', this.nuevaMaquina.writeUp);
+      data.append('flagUsuario', this.nuevaMaquina.flagUsuario);
+      data.append('flagRoot', this.nuevaMaquina.flagRoot);
+      data.append('puntuacion', this.nuevaMaquina.puntuacion);
+      data.append('descripcion', this.nuevaMaquina.descripcion);
+
+      // Subimos la nueva máquina
+      this.maquinaService.crearMaquina(data).subscribe({
+        next: (response: any) => {
+          this.mensajeFormNuevaMaquina = response.message;
+          this.mensajeErrorFormNuevaMaquina = false;
+
+          // Reiniciamos el formulario
+          crearMaquinaForm.reset();
+          this.nuevaMaquina.fotoMaquina = null;
+          this.nuevaMaquina.imagenMaquina = null;
+
+          setTimeout(() => {
+            this.mensajeFormNuevaMaquina = '';
+          }, 4000);
+
+        },
+        error: (error: any) => {
+          this.mensajeFormNuevaMaquina = error.error.message;
+          this.mensajeErrorFormNuevaMaquina = true;
+
+          setTimeout(() => {
+            this.mensajeFormNuevaMaquina = '';
+          }, 4000);
+
+        }
+      });
     }
+  }
 
+  // Método para esperar que el usuario termine de escribir antes de buscar
+  onBusquedaChange(valor: string): void {
+    this.busquedaSubject.next(valor);
   }
 
 }

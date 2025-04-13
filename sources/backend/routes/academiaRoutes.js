@@ -8,7 +8,8 @@ const maquinaController = require('../controllers/maquinaController');
 const notificacionController = require('../controllers/notificacionController');
 const logroController = require('../controllers/logroController');
 const verifyToken = require('../middlewares/verifyToken');
-const upload = require('../config/multerUsuarioConfig')
+const uploadUsuario = require('../config/multerUsuarioConfig');
+const uploadMaquina = require('../config/multerMaquinaConfig');
 
 // ------ Rutas HackerMaster ------
 // Informacion del sitio
@@ -24,13 +25,15 @@ router.post('/api/register', authenticationController.registrarUsuario);
 // Usuarios
 router.get('/api/dashboard-usuario', verifyToken, usuarioController.obtenerResumenUsuario);
 router.get('/api/informacion-usuario', verifyToken, usuarioController.obtenerInformacionUsuario);
-router.post('/api/actualizar-imagen-perfil', verifyToken, upload, usuarioController.actualizarFotoPerfil);
+router.post('/api/actualizar-imagen-perfil', verifyToken, uploadUsuario, usuarioController.actualizarFotoPerfil);
 router.put('/api/actualizar-datos-usuario', verifyToken, usuarioController.actualizarDatosUsuario);
 router.post('/api/actualizar-password', verifyToken, usuarioController.actualizarPassword);
 
 // Maquinas
 router.get('/api/maquinas-recomendadas', verifyToken, maquinaController.obtenerMaquinasRecomendadas);
 router.get('/api/maquinas-en-progreso', verifyToken, maquinaController.obtenerMaquinasEnProgreso);
+router.get('/api/obtener-maquinas-filtradas', verifyToken, maquinaController.obtenerMaquinasFiltradas);
+router.post('/api/crear-maquina', verifyToken, uploadMaquina, maquinaController.crearMaquina);
 
 // Notificaciones
 router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNotificaciones);

@@ -38,26 +38,33 @@ export class ContactoComponent {
 
     const { nombreUsuario, asunto, descripcion } = contactoForm.form.value;
 
-    this.contactoService.enviarFormulario(nombreUsuario, asunto, descripcion).subscribe({
-      next: (response: any) => {
-        this.mensajeRespuesta = response.message;
-        this.mensajeEsError = false;
-        contactoForm.reset();
-        this.asunto = '';
-      },
-      error: (error: any) => {
-        if (error.error && error.error.message) {
-          this.mensajeRespuesta = error.error.message;
-        } else {
-          this.mensajeRespuesta = 'Ocurrió un error inesperado. Intenta nuevamente.';
+    if (!nombreUsuario || !asunto || !descripcion) {
+      this.mensajeRespuesta = 'Todos los campos son obligatorios';
+      this.mensajeEsError = true;
+    } else {
+
+      this.contactoService.enviarFormulario(nombreUsuario, asunto, descripcion).subscribe({
+        next: (response: any) => {
+          this.mensajeRespuesta = response.message;
+          this.mensajeEsError = false;
+          contactoForm.reset();
+          this.asunto = '';
+        },
+        error: (error: any) => {
+          if (error.error && error.error.message) {
+            this.mensajeRespuesta = error.error.message;
+          } else {
+            this.mensajeRespuesta = 'Ocurrió un error inesperado. Intenta nuevamente.';
+          }
+          this.mensajeEsError = true;
         }
-        this.mensajeEsError = true;
-      }
-    });
+      });
+
+    }
 
     setTimeout(() => {
       this.mensajeRespuesta = '';
-    }, 5000)
+    }, 4000)
 
   }
   

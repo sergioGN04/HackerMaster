@@ -27,7 +27,7 @@
                         antes de su publicación.
                     </p>
 
-                    <!-- Formulario -->
+                    <!-- Formulario Crear Máquina -->
                     <form class="formCrearMaquina" #crearMaquinaForm="ngForm" id="crearMaquinaForm"
                         (ngSubmit)="guardarMaquina(crearMaquinaForm)">
                         <!-- Contenedor para las columnas del formulario -->
@@ -45,9 +45,9 @@
                                     <select id="dificultadMaquina" [(ngModel)]="nuevaMaquina.dificultad"
                                         name="dificultad">
                                         <option value="" disabled selected>Selecciona una dificultad</option>
-                                        <option value="Fácil">Fácil</option>
+                                        <option value="Facil">Fácil</option>
                                         <option value="Media">Media</option>
-                                        <option value="Difícil">Difícil</option>
+                                        <option value="Dificil">Difícil</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                             <div class="columna">
                                 <div class="form-group">
                                     <label class="label-centrar" for="fotoMaquina">Foto de la Máquina</label>
-                                    <!-- Campo de archivo personalizado -->
+                                    <!-- Campo Foto Máquina -->
                                     <div class="custom-file-input">
                                         <span *ngIf="!nuevaMaquina.fotoMaquina">Ningún Archivo Seleccionado</span>
                                         <span *ngIf="nuevaMaquina.fotoMaquina">{{ nuevaMaquina.fotoMaquina.name
@@ -100,7 +100,7 @@
                         <!-- Imagen Máquina -->
                         <div class="form-group">
                             <label class="label-centrar" for="imagenMaquina">Imágen Máquina</label>
-                            <!-- Campo de archivo personalizado -->
+                            <!-- Campo Imagen Máquina -->
                             <div class="custom-file-input">
                                 <span *ngIf="!nuevaMaquina.imagenMaquina">Ningún Archivo Seleccionado</span>
                                 <span *ngIf="nuevaMaquina.imagenMaquina">{{ nuevaMaquina.imagenMaquina.name }}</span>
@@ -109,6 +109,13 @@
                                 <input type="file" id="imagenMaquina" (change)="onFileSelected('imagenMaquina', $event)"
                                     hidden accept=".tar" />
                             </div>
+                        </div>
+
+                        <!-- Puntuacion -->
+                        <div class="form-group">
+                            <label class="label-centrar" for="puntuacion">Puntuación</label>
+                            <input type="text" id="puntuacion" [(ngModel)]="nuevaMaquina.puntuacion" name="puntuacion"
+                                class="input-puntuacion" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" />
                         </div>
 
                         <!-- Descripción -->
@@ -139,7 +146,6 @@
         <h2 class="titulo-seccion">Máquinas Disponibles</h2>
         <hr class="linea-separadora" />
 
-        <!-- Descripción -->
         <p class="descripcion-formulario">
             Descubre una selección de máquinas para desafiar tus habilidades. Filtra por nombre y encuentra fácilmente
             la que se ajuste a tus intereses.
@@ -147,16 +153,26 @@
 
         <!-- Buscador -->
         <div class="buscador-maquinas">
-            <input type="text" placeholder="Buscar por nombre..." [(ngModel)]="busqueda" />
+            <input type="text" placeholder="Buscar por nombre..." [(ngModel)]="busqueda"
+                (ngModelChange)="onBusquedaChange($event)" />
         </div>
 
+        <!-- Lista de Máquinas -->
         <div *ngIf="listaMaquinas && listaMaquinas.length > 0" class="contenedor-maquinas">
-            <!-- Mostrar la lista de máquinas -->
+            <div class="grid-maquinas">
+                <div *ngFor="let maquina of listaMaquinas" class="item-maquina">
+                    <a href="{{ maquina.idMaquina }}">
+                        <img [src]="maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
+                        <h3>{{ maquina.nombre }}</h3>
+                        <p>{{ maquina.dificultad }}</p>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Mostrar mensaje cuando no haya máquinas -->
         <div *ngIf="listaMaquinas && listaMaquinas.length === 0" class="contenedor-maquinas-error">
-            <p>No hay máquinas disponibles en este momento</p>
+            <p>No hay máquinas disponibles</p>
         </div>
     </div>
 </div>
