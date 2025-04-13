@@ -214,7 +214,7 @@ module.exports = {
             if (req.files.imagenMaquina?.[0]?.size > 2 * 1024 * 1024 * 1024) {
                 await eliminarArchivosSubidos(req);
                 return res.status(400).json({ message: 'La imágen no puede superar los 2GB' });
-            }            
+            }
 
             const { nombre, dificultad, writeUp, flagUsuario, flagRoot, puntuacion, descripcion } = req.body;
 
