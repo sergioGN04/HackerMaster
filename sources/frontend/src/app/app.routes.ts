@@ -7,7 +7,7 @@ import { DashboardUsuarioComponent } from './pages/dashboard-usuario/dashboard-u
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ConfigurarPerfilComponent } from './pages/configurar-perfil/configurar-perfil.component';
 import { MaquinasComponent } from './pages/maquinas/maquinas.component';
-import { MaquinaDetalleComponent } from './pages/maquina-detalle/maquina-detalle.component';
+import { MaquinaDetallesComponent } from './pages/maquina-detalles/maquina-detalles.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -19,6 +19,6 @@ export const routes: Routes = [
   { path: 'perfil', component: PerfilComponent },
   { path: 'configurar-perfil', component: ConfigurarPerfilComponent },
   { path: 'maquinas', component: MaquinasComponent },
-  { path: 'maquina/:id', component: MaquinaDetalleComponent },
+  { path: 'maquina/:id', component: MaquinaDetallesComponent },
   { path: '**', redirectTo: 'inicio' }
 ];
