@@ -210,7 +210,7 @@ module.exports = {
                 await eliminarArchivosSubidos(req);
                 return res.status(400).json({ message: 'La foto no puede superar los 5MB' });
             }
-            
+
             if (req.files.imagenMaquina?.[0]?.size > 2 * 1024 * 1024 * 1024) {
                 await eliminarArchivosSubidos(req);
                 return res.status(400).json({ message: 'La imágen no puede superar los 2GB' });
@@ -270,6 +270,48 @@ module.exports = {
             await eliminarArchivosSubidos(req);
             console.error(error);
             res.status(500).json({ message: 'Error al crear la máquina' });
+        }
+    },
+    obtenerDetallesMaquina: async (req, res) => {
+        const idMaquina = req.query.idMaquina;
+
+        // Verificar que se ha proporcionado el idMaquina
+        if (!idMaquina) {
+            return res.status(400).json({ message: 'Fallo al obtener el idMaquina' });
+        }
+
+        try {
+            // Obtener los detalles de la máquina sugerida
+            const maquina = await Maquina.findOne({
+                attributes: [
+                    'idMaquina',
+                    [
+                        Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/maquinas/imagenes/', Sequelize.col('fotoMaquina')),
+                        'fotoMaquina'
+                    ],
+                    'nombre',
+                    'dificultad',
+                    'descripcion',
+                    'writeUp',
+                    'puntuacion',
+                    'fechaCreacion'
+                ],
+                include: [{
+                    model: Usuario,
+                    attributes: ['username']
+                }],
+                where: { idMaquina }
+            });
+
+            // Verificar que se ha obtenido los detalles de la máquina correctamente
+            if (!maquina) {
+                return res.status(404).json({ message: 'Máquina no encontrada' });
+            }
+
+            res.status(200).json({ maquina });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error del servidor' });
         }
     }
 

@@ -45,4 +45,13 @@ export class MaquinaService {
     return this.http.post(`${this.apiUrl}/crear-maquina`, data, { headers });
   }
 
+  // Método para obtener los detalles de una máquina en especifico
+  obtenerDetallesMaquina(id: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const params = new HttpParams().set('idMaquina', id);
+
+    return this.http.get(`${this.apiUrl}/maquina-detalle`, { headers, params });
+  }
+
 }

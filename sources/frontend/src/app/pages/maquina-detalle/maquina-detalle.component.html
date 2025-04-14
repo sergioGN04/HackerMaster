@@ -1,0 +1,33 @@
+<app-header-autorizado></app-header-autorizado>
+<app-sidebar-autorizado (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-autorizado>
+
+<!-- Sección Detalles Máquina -->
+<div class="containers primarySections" [class.colapsado]="!sidebarExpandido">
+    <div class="detalles-maquina-layout">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img [src]="maquinaDetalles.fotoMaquina" alt="Foto de la Máquina" class="imagen-maquina" />
+            <div class="info-maquina">
+                <h3>{{ maquinaDetalles.nombre }}</h3>
+                <p><strong>Autor: </strong>{{ maquinaDetalles.Usuario.username }}</p>
+                <p><strong>Dificultad:</strong> {{ maquinaDetalles.dificultad }}</p>
+            </div>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <div class="estado-maquina">
+                <i class="bi bi-wifi-off estado-icono"></i> {{ maquinaDetalles.nombre }} está desconectada
+            </div>            
+            <div class="descripcion-maquina">
+                <h4>Descripción</h4>
+                <p>{{ maquinaDetalles.descripcion }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sección Formulario Máquina -->
+<div class="containers secondarySections" [class.colapsado]="!sidebarExpandido">
+
+</div>

@@ -1,0 +1,74 @@
+/* Estilo general de los apartados */
+.containers {
+    color: white;
+    padding: 150px 120px 90px 120px;
+    margin-left: 280px;
+}
+
+.containers.colapsado {
+    margin-left: 80px;
+}
+
+/* Sección Detalles Máquina */
+.detalles-maquina-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.columna-izquierda {
+    display: flex;
+    flex: 1;
+    min-width: 300px;
+    gap: 20px;
+    align-items: center;
+}
+
+.imagen-maquina {
+    height: auto;
+    width: 300px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.info-maquina h3 {
+    margin: 0;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.columna-derecha {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.estado-maquina {
+    background-color: #B0B0B0;
+    padding: 0 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    max-width: fit-content;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+}
+
+.estado-icono {
+    font-size: 2.5rem;
+    color: #6FFF00;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.descripcion-maquina h4 {
+    margin-bottom: 10px;
+}
+
+.descripcion-maquina p {
+    margin: 0;
+    line-height: 1.6;
+}
