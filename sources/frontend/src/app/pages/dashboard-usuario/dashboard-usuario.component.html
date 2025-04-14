@@ -72,7 +72,7 @@
             <!-- Mostrar las máquinas según la pestaña activa -->
             <div *ngFor="let maquina of (activeTab === 'recomendadas' ? maquinasRecomendadas : maquinasEnProgreso)"
                 class="maquina-card">
-                <a href="{{ maquina.idMaquina }}">
+                <a href="maquina/{{ maquina.idMaquina }}">
                     <img [src]="maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
                     <h3>{{ maquina.nombre }}</h3>
                     <p>{{ maquina.dificultad }}</p>

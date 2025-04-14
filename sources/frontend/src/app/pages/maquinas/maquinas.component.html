@@ -161,7 +161,7 @@
         <div *ngIf="listaMaquinas && listaMaquinas.length > 0" class="contenedor-maquinas">
             <div class="grid-maquinas">
                 <div *ngFor="let maquina of listaMaquinas" class="item-maquina">
-                    <a href="{{ maquina.idMaquina }}">
+                    <a href="maquina/{{ maquina.idMaquina }}">
                         <img [src]="maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
                         <h3>{{ maquina.nombre }}</h3>
                         <p>{{ maquina.dificultad }}</p>
