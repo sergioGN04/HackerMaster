@@ -5,6 +5,8 @@ const Intenta = require('../models/IntentaModel');
 const Usuario = require('../models/usuarioModel');
 const path = require('path');
 const fs = require('fs').promises;
+const Docker = require('dockerode');
+const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
 // Eliminar los archivos subidos en caso de error
 const eliminarArchivosSubidos = async (req) => {
@@ -293,6 +295,8 @@ module.exports = {
                     'dificultad',
                     'descripcion',
                     'writeUp',
+                    'flagUsuario',
+                    'flagRoot',
                     'puntuacion',
                     'fechaCreacion'
                 ],
@@ -312,6 +316,77 @@ module.exports = {
 
         } catch (error) {
             res.status(500).json({ message: 'Error del servidor' });
+        }
+    },
+    desplegarMaquina: async (req, res) => {
+        const { idMaquina } = req.body;
+        const username = req.user.username;
+
+        try {
+
+            // Obtener el nombre de la máquina
+            const maquina = await Maquina.findOne({ where: { idMaquina } });
+            if (!maquina) {
+                return res.status(400).json({ message: 'Error al obtener la maquina' });
+            }
+
+            // Nombre único para el contenedor
+            const nombreImagen = maquina.nombre.toLowerCase();
+            const nombreContenedor = `${maquina.nombre}-${username}`;
+
+            // Creación del contenedor
+            const contenedor = await docker.createContainer({
+                Image: nombreImagen,
+                name: nombreContenedor,
+                HostConfig: {
+                    NetworkMode: 'hackermaster_red_maquinas',
+                },
+            });
+
+            // Iniciar el contenedor
+            await contenedor.start();
+
+            // Obtener información del contenedor
+            const info = await contenedor.inspect();
+            const ip = info.NetworkSettings.Networks.hackermaster_red_maquinas.IPAddress;
+
+            return res.status(200).json({ ip });
+
+        } catch (error) {
+            console.error('ERROR desplegarMaquina:', error);
+            res.status(500).json({ message: 'Error en el servidor' });
+        }
+    },
+    detenerMaquina: async (req, res) => {
+        const { idMaquina } = req.body;
+        const username = req.user.username;
+    
+        try {
+            // Obtener la máquina
+            const maquina = await Maquina.findOne({ where: { idMaquina } });
+            if (!maquina) {
+                return res.status(400).json({ message: 'Error al obtener la máquina' });
+            }
+    
+            // Nombre del contenedor
+            const nombreContenedor = `${maquina.nombre}-${username}`;
+    
+            // Obtener el contenedor por nombre
+            const contenedor = docker.getContainer(nombreContenedor);
+    
+            // Verificar si el contenedor existe y está corriendo
+            const info = await contenedor.inspect();
+            if (info.State.Running) {
+                await contenedor.stop({ t: 5 });
+            }
+    
+            // Eliminar el contenedor
+            await contenedor.remove();
+    
+            return res.status(200).json({ success: true });
+    
+        } catch (error) {
+            res.status(500).json({ message: 'Error al detener la máquina' });
         }
     }
 
