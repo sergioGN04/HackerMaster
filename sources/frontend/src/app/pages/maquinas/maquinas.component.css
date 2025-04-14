@@ -1,8 +1,9 @@
 /* Estilo general de los apartados */
 .containers {
     color: white;
-    padding: 50px 80px 80px 80px;
+    padding: 50px 60px 80px 60px;
     margin-left: 280px;
+    text-align: center;
 }
 
 .containers.colapsado {
@@ -103,7 +104,7 @@
     font-weight: bold;
 }
 
-.label-centrar {
+.label-centrar, .titulo-centrar {
     display: block;
     text-align: center;
 }
@@ -133,13 +134,14 @@ h3 {
 
 .linea-separadora {
     border: 1px solid white;
-    margin-bottom: 20px;
+    margin: 0 5% 20px 5%;
 }
 
 .descripcion-formulario {
     font-size: 1rem;
     margin-bottom: 80px;
     color: #CCCCCC;
+    text-align: center;
 }
 
 .formulario-contenedor {
@@ -193,17 +195,20 @@ h3 {
     transition: background-color 0.3s ease;
 }
 
-.btn-seleccionar:hover, .btn-enviar:hover {
+.btn-seleccionar:hover,
+.btn-enviar:hover {
     background-color: #57cc00;
     color: #FFFFFF;
 }
 
-.btn-seleccionar:active, .btn-enviar:active {
+.btn-seleccionar:active,
+.btn-enviar:active {
     background-color: #4DB300;
     color: #FFFFFF;
 }
 
-.btn-seleccionar:focus, .btn-enviar:focus {
+.btn-seleccionar:focus,
+.btn-enviar:focus {
     background-color: #368000;
     color: #FFFFFF;
 }
@@ -243,7 +248,7 @@ h3 {
     border: none;
     padding: 12px 25px;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
     cursor: pointer;
     display: block;
@@ -279,10 +284,12 @@ h3 {
 
 .buscador-maquinas {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .buscador-maquinas input {
     width: 100%;
+    max-width: 800px;
     padding: 10px 15px;
     border-radius: 8px;
     border: none;
@@ -361,4 +368,130 @@ h3 {
 .item-maquina p {
     font-size: 16px;
     color: #6FFF00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .crear-maquina-section {
+        padding: 65px 0 0 0;
+        margin-left: 65px;
+    }
+
+    .crear-maquina-section.colapsado {
+        margin-left: 65px;
+    }
+
+    .containers {
+        color: white;
+        padding: 80px 40px 80px 40px;
+        margin-left: 65px;
+        text-align: center;
+    }
+
+    .containers.colapsado {
+        margin-left: 65px;
+    }
+
+    .formCrearMaquina {
+        padding: 30px 20px;
+    }
+
+    .formulario-contenedor {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .grid-maquinas {
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .columna {
+        flex: 1 1 100%;
+    }
+
+    .formulario-maquina .input-puntuacion {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .crear-maquina-section {
+        padding: 60px 0 0 0;
+        margin-left: 60px;
+        text-align: center;
+    }
+
+    .crear-maquina-section.colapsado {
+        margin-left: 60px;
+    }
+
+    .containers {
+        color: white;
+        padding: 40px 30px 80px 30px;
+        margin-left: 65px;
+        text-align: center;
+    }
+
+    .containers.colapsado {
+        margin-left: 60px;
+    }
+
+    h3,
+    .titulo-seccion {
+        font-size: 1.5rem;
+    }
+
+    .formCrearMaquina label {
+        font-size: 1.1rem;
+    }
+
+    .formulario-maquina .form-group textarea,
+    .formulario-maquina .input-puntuacion {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .formulario-maquina input::placeholder,
+    .formulario-maquina select::placeholder,
+    .formulario-maquina textarea::placeholder,
+    #dificultadMaquina {
+        font-size: 14px;
+    }
+
+    .custom-file-input span {
+        font-size: 14px;
+    }
+
+    .formCrearMaquina {
+        padding: 20px 15px;
+    }
+
+    .descripcion-formulario {
+        font-size: 0.95rem;
+        margin-bottom: 40px;
+    }
+
+    .btn-enviar {
+        width: 100%;
+    }
+
+    .custom-file-input {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .grid-maquinas {
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .item-maquina {
+        max-width: 90%;
+    }
+
+    .foto-maquina {
+        width: 100%;
+        height: auto;
+    }
 }
