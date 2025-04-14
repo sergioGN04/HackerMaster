@@ -1,7 +1,7 @@
 /* Estilo general de los apartados */
 .containers {
     color: white;
-    padding: 150px 120px 90px 120px;
+    padding: 120px 100px 90px 100px;
     margin-left: 280px;
 }
 
@@ -66,6 +66,7 @@
 
 .descripcion-maquina h4 {
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .descripcion-maquina p {
