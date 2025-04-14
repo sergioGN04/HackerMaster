@@ -18,7 +18,13 @@
         <!-- Columna derecha -->
         <div class="columna-derecha">
             <div class="estado-maquina">
-                <i class="bi bi-wifi-off estado-icono"></i> {{ maquinaDetalles.nombre }} está desconectada
+                <ng-container *ngIf="maquinaDetalles.estado === 'desplegada'; else desconectada">
+                    <i class="bi bi-wifi estado-icono"></i> {{ maquinaDetalles.ip }}
+                </ng-container>
+
+                <ng-template #desconectada>
+                    <i class="bi bi-wifi-off estado-icono"></i> {{ maquinaDetalles.nombre }} está desconectada
+                </ng-template>
             </div>
             <div class="descripcion-maquina">
                 <h4>Descripción</h4>
@@ -32,19 +38,31 @@
 <div class="containers secondarySections" [class.colapsado]="!sidebarExpandido">
     <div class="formulario-maquina-card">
         <div class="formulario-header">
-            <button class="btn">Iniciar Máquina</button>
+            <button class="btn" *ngIf="!maquinaDetalles.ip" (click)="iniciarMaquina()" [disabled]="accionEnCurso">
+                <ng-container *ngIf="!accionEnCurso; else cargando">
+                    Iniciar Máquina
+                </ng-container>
+                <ng-template #cargando>
+                    <i class="bi bi-arrow-repeat spinner-icon"></i>
+                </ng-template>
+            </button>
+            <button class="btn stop-button" *ngIf="maquinaDetalles.ip" (click)="detenerMaquina()"
+                [disabled]="accionEnCurso">
+                <i class="bi" [ngClass]="accionEnCurso ? 'bi-arrow-repeat spinner-icon' : 'bi-square-fill'"></i>
+            </button>
+
             <a class="btn" [href]="maquinaDetalles.writeUp" target="_blank">WriteUp</a>
         </div>
-    
+
         <div class="formulario-body">
             <div class="preguntas-maquina">
                 <div class="pregunta-con-icono">
                     <i class="bi bi-flag icono-bandera"></i>
                     <input type="text" class="form-control" placeholder="Enviar Flag Usuario">
                 </div>
-            
+
                 <div class="separator-vertical"></div>
-            
+
                 <div class="pregunta-con-icono">
                     <i class="bi bi-flag icono-bandera"></i>
                     <input type="text" class="form-control" placeholder="Enviar Flag Root">
@@ -53,8 +71,8 @@
             <button class="btn btn-submit">Comprobar</button>
         </div>
     </div>
-    
+
     <div class="publicacion-fecha">
         <p>Publicado el {{ maquinaDetalles.fechaCreacion | date:'dd/MM/yyyy' }}</p>
-    </div>    
+    </div>
 </div>

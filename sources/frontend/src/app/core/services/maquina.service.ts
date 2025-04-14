@@ -46,12 +46,28 @@ export class MaquinaService {
   }
 
   // Método para obtener los detalles de una máquina en especifico
-  obtenerDetallesMaquina(id: string): Observable<any> {
+  obtenerDetallesMaquina(idMaquina: string): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    const params = new HttpParams().set('idMaquina', id);
+    const params = new HttpParams().set('idMaquina', idMaquina);
 
     return this.http.get(`${this.apiUrl}/maquina-detalle`, { headers, params });
+  }
+
+  // Método para desplegar la máquina
+  desplegarMaquina(idMaquina: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.post(`${this.apiUrl}/desplegar-maquina`, { idMaquina }, { headers });
+  }
+
+  // Método para detener la máquina desplegada
+  detenerMaquina(idMaquina: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.post(`${this.apiUrl}/detener-maquina`, { idMaquina }, { headers });
   }
 
 }

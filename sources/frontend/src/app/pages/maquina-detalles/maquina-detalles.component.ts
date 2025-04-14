@@ -16,7 +16,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class MaquinaDetallesComponent {
   sidebarExpandido = true;
+
+  idMaquina: any;
+
   maquinaDetalles: any = { Usuario: {} };
+
+  accionEnCurso: boolean = false;
 
   flagUsuario: string = '';
   flagRoot: string = '';
@@ -34,15 +39,15 @@ export class MaquinaDetallesComponent {
     if (!token) {
       this.router.navigate(['/login']);
     } else {
-      const id = this.route.snapshot.paramMap.get('id');
-      if (id) {
-        this.getObtenerDetallesMaquina(id);
+      this.idMaquina = this.route.snapshot.paramMap.get('id');
+      if (this.idMaquina) {
+        this.getObtenerDetallesMaquina(this.idMaquina);
       }
     }
   }
 
-  getObtenerDetallesMaquina(id: string): void {
-    this.maquinaService.obtenerDetallesMaquina(id).subscribe({
+  getObtenerDetallesMaquina(idMaquina: string): void {
+    this.maquinaService.obtenerDetallesMaquina(idMaquina).subscribe({
       next: (response: any) => {
         this.maquinaDetalles = response.maquina;
       },
@@ -54,6 +59,49 @@ export class MaquinaDetallesComponent {
         } else {
           console.error('Error - No se ha podido obtener los detalles de la máquina');
         }
+      }
+    });
+  }
+
+  // Método para crear el contenedor de la máquina
+  iniciarMaquina(): void {
+    if (this.accionEnCurso) return;
+
+    this.accionEnCurso = true;
+    this.maquinaService.desplegarMaquina(this.idMaquina).subscribe({
+      next: (response) => {
+        setTimeout(() => {
+          this.accionEnCurso = false;
+          this.maquinaDetalles.ip = response.ip;
+          this.maquinaDetalles.estado = 'desplegada';
+        }, 5000);
+      },
+      error: (error) => {
+        this.accionEnCurso = false;
+        console.error('Error - No se ha podido desplegar la máquina');
+      }
+    });
+  }
+
+  // Método para detener el contenedor de la máquina
+  detenerMaquina(): void {
+    if (this.accionEnCurso || !this.maquinaDetalles.ip) return;
+
+    this.accionEnCurso = true;
+    this.maquinaService.detenerMaquina(this.idMaquina).subscribe({
+      next: (response) => {
+        this.accionEnCurso = false;
+        if (response.success) {
+          this.maquinaDetalles.ip = null;
+          this.maquinaDetalles.estado = '';
+        } else {
+          this.accionEnCurso = false;
+          console.error(response.message);
+        }
+      },
+      error: (error) => {
+        console.error(error);
+        console.error('Error - No se ha podido detener la máquina');
       }
     });
   }

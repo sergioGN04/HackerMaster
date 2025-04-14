@@ -119,6 +119,39 @@
     color: #FFFFFF;
 }
 
+.formulario-header .stop-button {
+    background-color: #D32F2F;
+    color: white;
+}
+
+.formulario-header .stop-button:hover {
+    background-color: #E64A19;
+}
+
+.formulario-header .stop-button:active {
+    background-color: #B71C1C;
+}
+
+.formulario-header .stop-button:focus {
+    background-color: #FF6F60;
+}
+
+.spinner-icon {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    font-size: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .formulario-body {
     background-color: #1A324A;
     padding: 60px 0;

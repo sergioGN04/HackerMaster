@@ -35,6 +35,8 @@ router.get('/api/maquinas-en-progreso', verifyToken, maquinaController.obtenerMa
 router.get('/api/obtener-maquinas-filtradas', verifyToken, maquinaController.obtenerMaquinasFiltradas);
 router.post('/api/crear-maquina', verifyToken, uploadMaquina, maquinaController.crearMaquina);
 router.get('/api/maquina-detalle', verifyToken, maquinaController.obtenerDetallesMaquina);
+router.post('/api/desplegar-maquina', verifyToken, maquinaController.desplegarMaquina);
+router.post('/api/detener-maquina', verifyToken, maquinaController.detenerMaquina);
 
 // Notificaciones
 router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNotificaciones);
