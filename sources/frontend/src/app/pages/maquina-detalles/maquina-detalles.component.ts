@@ -5,17 +5,21 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MaquinaService } from '../../core/services/maquina.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-maquina-detalles',
-  imports: [HeaderAutorizadoComponent, SidebarAutorizadoComponent, CommonModule],
+  imports: [HeaderAutorizadoComponent, SidebarAutorizadoComponent, CommonModule, FormsModule],
   templateUrl: './maquina-detalles.component.html',
   styleUrl: './maquina-detalles.component.css'
 })
 export class MaquinaDetallesComponent {
   sidebarExpandido = true;
   maquinaDetalles: any = { Usuario: {} };
+
+  flagUsuario: string = '';
+  flagRoot: string = '';
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private maquinaService: MaquinaService) { }
 
