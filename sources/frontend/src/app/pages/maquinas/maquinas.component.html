@@ -61,7 +61,7 @@
                                         <span *ngIf="!nuevaMaquina.fotoMaquina">Ningún Archivo Seleccionado</span>
                                         <span *ngIf="nuevaMaquina.fotoMaquina">{{ nuevaMaquina.fotoMaquina.name
                                             }}</span>
-                                        <button type="button" class="btn-seleccionar"
+                                        <button type="button" class="btn btn-seleccionar"
                                             (click)="selectFile('fotoMaquina')">Seleccionar</button>
                                         <input type="file" id="fotoMaquina"
                                             (change)="onFileSelected('fotoMaquina', $event)" hidden
@@ -104,7 +104,7 @@
                             <div class="custom-file-input">
                                 <span *ngIf="!nuevaMaquina.imagenMaquina">Ningún Archivo Seleccionado</span>
                                 <span *ngIf="nuevaMaquina.imagenMaquina">{{ nuevaMaquina.imagenMaquina.name }}</span>
-                                <button type="button" class="btn-seleccionar"
+                                <button type="button" class="btn btn-seleccionar"
                                     (click)="selectFile('imagenMaquina')">Seleccionar</button>
                                 <input type="file" id="imagenMaquina" (change)="onFileSelected('imagenMaquina', $event)"
                                     hidden accept=".tar" />
@@ -126,7 +126,7 @@
                         </div>
 
                         <!-- Botón de Enviar -->
-                        <button type="submit" class="btn-enviar">Crear máquina</button>
+                        <button type="submit" class="btn btn-enviar">Crear máquina</button>
                         <div class="mensajeErrorFormNuevaMaquina" *ngIf="mensajeFormNuevaMaquina !== ''">
                             <p
                                 [ngClass]="{ 'mensaje-error': mensajeErrorFormNuevaMaquina, 'mensaje-exito': !mensajeErrorFormNuevaMaquina }">
