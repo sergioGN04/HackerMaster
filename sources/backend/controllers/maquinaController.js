@@ -53,15 +53,40 @@ const detenerAutomaticamente = (nombre) => {
         try {
             const contenedor = docker.getContainer(nombre);
             const info = await contenedor.inspect();
+
             if (info.State.Running) {
                 await contenedor.stop({ t: 5 });
                 await contenedor.remove();
-                console.log(`Contenedor ${nombre} detenido automáticamente después de 30 segundos.`);
+
+                console.log(`Contenedor ${nombre} detenido automáticamente después de 3 horas.`);
+
+                // Extraer nombre de la máquina y del usuario
+                const [nombreMaquina, username] = nombre.split('-');
+
+                // Buscar máquina y usuario para cerrar el intento
+                const maquina = await Maquina.findOne({ where: { nombre: nombreMaquina } });
+                const usuario = await Usuario.findOne({ where: { username } });
+
+                if (maquina && usuario) {
+                    await Intenta.update(
+                        { fechaFin: new Date() },
+                        {
+                            where: {
+                                idUsuario: usuario.idUsuario,
+                                idMaquina: maquina.idMaquina,
+                                fechaFin: null
+                            }
+                        }
+                    );
+
+                    console.log(`Intento cerrado automáticamente para ${username} en la máquina ${nombreMaquina}.`);
+                }
+
             }
         } catch (error) {
             console.error(`Error al detener automáticamente el contenedor ${nombre}:`, error.message);
         }
-    }, 10800000); // 3 horas por defecto
+    }, 10800000); // 3 horas
 };
 
 module.exports = {
@@ -293,6 +318,7 @@ module.exports = {
     },
     obtenerDetallesMaquina: async (req, res) => {
         const idMaquina = req.query.idMaquina;
+        const username = req.user.username;
 
         // Verificar que se ha proporcionado el idMaquina
         if (!idMaquina) {
@@ -300,7 +326,7 @@ module.exports = {
         }
 
         try {
-            // Obtener los detalles de la máquina sugerida
+            // Obtener los detalles de la máquina
             const maquina = await Maquina.findOne({
                 attributes: [
                     'idMaquina',
@@ -327,7 +353,22 @@ module.exports = {
                 return res.status(404).json({ message: 'Máquina no encontrada' });
             }
 
-            res.status(200).json({ maquina });
+            // Obtener la IP si la máquina ya está desplegada
+            const nombreContenedor = `${maquina.nombre}-${username}`;
+            let ip = null;
+            try {
+                const contenedor = docker.getContainer(nombreContenedor);
+                const infoContenedor = await contenedor.inspect();
+
+                if (infoContenedor.State.Running) {
+                    ip = infoContenedor.NetworkSettings.Networks['hackermaster_red_maquinas'].IPAddress;
+                }
+
+            } catch (error) {
+                // No hay ningún contenedor desplegado
+            }
+
+            res.status(200).json({ maquina, ip });
 
         } catch (error) {
             res.status(500).json({ message: 'Error del servidor' });
@@ -338,16 +379,27 @@ module.exports = {
         const username = req.user.username;
 
         try {
-
-            // Obtener el nombre de la máquina
+            // Obtener la máquina
             const maquina = await Maquina.findOne({ where: { idMaquina } });
             if (!maquina) {
-                return res.status(400).json({ message: 'Error al obtener la maquina' });
+                return res.status(400).json({ message: 'Error al obtener la máquina' });
             }
 
             // Nombre único para el contenedor
             const nombreImagen = maquina.nombre.toLowerCase();
             const nombreContenedor = `${maquina.nombre}-${username}`;
+
+            // Verificar si el contenedor ya existe y está corriendo
+            const contenedorExistente = docker.getContainer(nombreContenedor);
+            try {
+                const infoContenedor = await contenedorExistente.inspect();
+                if (infoContenedor.State.Running) {
+                    const ip = infoContenedor.NetworkSettings.Networks.hackermaster_red_maquinas.IPAddress;
+                    return res.status(200).json({ ip });
+                }
+            } catch (error) {
+                // El contenedor no existe, se crea uno nuevo
+            }
 
             // Creación del contenedor
             const contenedor = await docker.createContainer({
@@ -358,6 +410,26 @@ module.exports = {
                 },
             });
 
+            // Comprobar si ya hay un intento para esta máquina
+            let intento = await Intenta.findOne({
+                where: {
+                    idMaquina,
+                    idUsuario: req.user.idUsuario,
+                    fechaFin: null
+                }
+            });
+
+            // Si no hay intento, creamos un nuevo intento
+            if (!intento) {
+                intento = await Intenta.create({
+                    idUsuario: req.user.idUsuario,
+                    idMaquina,
+                    fechaInicio: new Date(),
+                    estado: 'En Progreso',
+                    fechaFin: null
+                });
+            }
+
             // Iniciar el contenedor
             await contenedor.start();
 
@@ -365,7 +437,7 @@ module.exports = {
             const info = await contenedor.inspect();
             const ip = info.NetworkSettings.Networks.hackermaster_red_maquinas.IPAddress;
 
-            // Añadir tiempo de vida del contenedor
+            // Añadir tiempo de vida al contenedor (detención automática)
             detenerAutomaticamente(nombreContenedor);
 
             return res.status(200).json({ ip });
@@ -400,6 +472,18 @@ module.exports = {
 
             // Eliminar el contenedor
             await contenedor.remove();
+
+            // Cerrar el intento
+            await Intenta.update(
+                { fechaFin: new Date() },
+                {
+                    where: {
+                        idUsuario: req.user.idUsuario,
+                        idMaquina,
+                        fechaFin: null
+                    }
+                }
+            );
 
             return res.status(200).json({ success: true });
 
@@ -438,20 +522,18 @@ module.exports = {
                 return res.status(400).json({ message: 'La máquina no está desplegada' });
             }
 
-            // Verificar si el usuario ya ha intentado resolver la máquina
-            let intento = await Intenta.findOne({
-                where: { idUsuario: req.user.idUsuario, idMaquina },
-            });
-
-            // Si no existe el intento, creamos un nuevo intento
-            if (!intento) {
-                intento = await Intenta.create({
+            // Buscar el intento, ya que se va a tener que desplegar la máquina (creará un intento nuevo), el intento será el más reciente
+            const intento = await Intenta.findOne({
+                where: {
                     idUsuario: req.user.idUsuario,
                     idMaquina,
-                    fechaInicio: new Date(),
-                    estado: 'En Progreso',
-                    fechaFin: null
-                });
+                },
+                order: [['fechaInicio', 'DESC']]
+            });
+
+            // Si no existe el intento
+            if (!intento) {
+                return res.status(400).json({ message: 'No hay un intento para esta máquina' });
             }
 
             // Verificaciones de las flags
@@ -474,30 +556,39 @@ module.exports = {
                 }
             }
 
-            // Si ambas flags son correctas, sumamos los puntos solo si no se había completado antes
+            // Si ambas flags son correctas
             if (flagsCorrectas.includes('usuario') && flagsCorrectas.includes('root')) {
-                if (intento.estado !== 'Completado') {
-                    // Añadir el Completado y la fechaFin
-                    await Intenta.update(
-                        {
-                            estado: 'Completado',
-                            fechaFin: new Date()
-                        },
-                        {
-                            where: {
-                                idUsuario: req.user.idUsuario,
-                                idMaquina
-                            }
-                        }
-                    );
 
-                    return res.status(200).json({ message: 'Ambas flags son correctas.', puntosSumados: true });
-                } else {
-                    return res.status(200).json({ message: '¡Correcto! Ya has completado esta máquina', puntosSumados: false });
+                // Comprobar si ya completó la máquina en otro intento anterior
+                const yaCompletado = await Intenta.findOne({
+                    where: {
+                        idUsuario: req.user.idUsuario,
+                        idMaquina,
+                        estado: 'Completado'
+                    }
+                });
+
+                // Actualizar intento actual
+                await Intenta.update(
+                    {
+                        estado: 'Completado',
+                        fechaFin: new Date()
+                    },
+                    {
+                        where: {
+                            idIntento: intento.idIntento
+                        }
+                    }
+                );
+
+                if (yaCompletado) {
+                    return res.status(200).json({ message: '¡Correcto! Ya habías completado esta máquina', puntosSumados: false });
                 }
+
+                return res.status(200).json({ message: 'Ambas flags son correctas', puntosSumados: true });
             }
 
-            // Si alguna flag está incorrecta, devolvemos el mensaje correspondiente
+            // Si alguna flag está incorrecta
             if (flagsIncorrectas.length === 2) {
                 return res.status(401).json({ message: 'Ambas flags son incorrectas' });
             }
@@ -506,10 +597,10 @@ module.exports = {
                 return res.status(401).json({ message: `La flag de ${flagsIncorrectas[0]} es incorrecta` });
             }
 
-            res.status(200).json({ message: 'Una de las flags es correcta, pero falta la otra para completar la máquina', puntosSumados: false });
+            return res.status(200).json({ message: 'Una de las flags es correcta, pero falta la otra para completar la máquina', puntosSumados: false });
 
         } catch (error) {
-            console.error(error);
+            console.error('Error en verificarMaquina:', error);
             res.status(500).json({ message: 'Error del servidor al verificar la máquina' });
         }
     }

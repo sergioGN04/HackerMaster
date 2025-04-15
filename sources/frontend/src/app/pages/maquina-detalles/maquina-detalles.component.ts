@@ -26,6 +26,8 @@ export class MaquinaDetallesComponent {
   flagUsuario: string = '';
   flagRoot: string = '';
 
+  acierto: boolean = false;
+
   mensajeFlags: string = '';
   mensajeErrorFlags: boolean = false;
 
@@ -53,6 +55,12 @@ export class MaquinaDetallesComponent {
     this.maquinaService.obtenerDetallesMaquina(idMaquina).subscribe({
       next: (response: any) => {
         this.maquinaDetalles = response.maquina;
+        
+        if (response.ip) {
+          this.maquinaDetalles.ip = response.ip;
+          this.maquinaDetalles.estado = 'desplegada';
+        }
+
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
@@ -117,25 +125,24 @@ export class MaquinaDetallesComponent {
       this.mensajeErrorFlags = true;
 
     } else if (!this.flagUsuario && !this.flagRoot) {
-      this.mensajeFlags = 'Debes introducir al menos una flag';
+      this.mensajeFlags = 'Debes introducir al menos una Flag';
       this.mensajeErrorFlags = true;
 
     } else {
       const payload: any = {};
       if (this.flagUsuario) payload.flagUsuario = this.flagUsuario;
       if (this.flagRoot) payload.flagRoot = this.flagRoot;
-  
+
       this.maquinaService.verificarFlags(this.idMaquina, payload).subscribe({
         next: (response: any) => {
           this.mensajeErrorFlags = false;
 
+          this.mensajeFlags = response.message;
+
           if (response.puntosSumados === true) {
-            this.mensajeFlags = response.message + `¡Has sumado ${this.maquinaDetalles.puntuacion} puntos!`;
-          } else if (response.puntosSumados === false && response.message.includes('completado')) {
-            this.mensajeFlags = response.message;
-          } else {
-            this.mensajeFlags = response.message;
+              this.mensajeFlags += ` ¡Has sumado ${this.maquinaDetalles.puntuacion} puntos!`;
           }
+          
         },
         error: (error) => {
           this.mensajeFlags = error.error.message;
@@ -149,4 +156,5 @@ export class MaquinaDetallesComponent {
     }, 3000);
 
   }
+
 }

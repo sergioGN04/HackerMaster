@@ -24,7 +24,7 @@ const Intenta = sequelize.define('Intenta', {
     },
     fechaFin: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     estado: {
         type: DataTypes.ENUM('Completado', 'En Progreso'),
