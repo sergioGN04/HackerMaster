@@ -155,7 +155,7 @@ export class ConfigurarPerfilComponent {
     };
 
     if (!datos.contrasenaActual || !datos.nuevaPassword || !datos.confirmarPassword) {
-      this.mensajeFormPassword = 'Todos los campos son obligatorios ';
+      this.mensajeFormPassword = 'Todos los campos son obligatorios';
       this.mensajeErrorFormPassword = true;
 
     } else {

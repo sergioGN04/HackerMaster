@@ -26,6 +26,9 @@ export class MaquinaDetallesComponent {
   flagUsuario: string = '';
   flagRoot: string = '';
 
+  mensajeFlags: string = '';
+  mensajeErrorFlags: boolean = false;
+
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private maquinaService: MaquinaService) { }
 
   ngOnInit(): void {
@@ -106,4 +109,44 @@ export class MaquinaDetallesComponent {
     });
   }
 
+  // Método para comprobar las flags
+  comprobarFlags(): void {
+    // Verificamos si la máquina está iniciada y validamos que al menos una flag haya sido introducida
+    if (!this.maquinaDetalles.ip || this.maquinaDetalles.estado !== 'desplegada') {
+      this.mensajeFlags = 'La máquina debe estar iniciada antes';
+      this.mensajeErrorFlags = true;
+
+    } else if (!this.flagUsuario && !this.flagRoot) {
+      this.mensajeFlags = 'Debes introducir al menos una flag';
+      this.mensajeErrorFlags = true;
+
+    } else {
+      const payload: any = {};
+      if (this.flagUsuario) payload.flagUsuario = this.flagUsuario;
+      if (this.flagRoot) payload.flagRoot = this.flagRoot;
+  
+      this.maquinaService.verificarFlags(this.idMaquina, payload).subscribe({
+        next: (response: any) => {
+          this.mensajeErrorFlags = false;
+
+          if (response.puntosSumados === true) {
+            this.mensajeFlags = response.message + `¡Has sumado ${this.maquinaDetalles.puntuacion} puntos!`;
+          } else if (response.puntosSumados === false && response.message.includes('completado')) {
+            this.mensajeFlags = response.message;
+          } else {
+            this.mensajeFlags = response.message;
+          }
+        },
+        error: (error) => {
+          this.mensajeFlags = error.error.message;
+          this.mensajeErrorFlags = true;
+        }
+      });
+    }
+
+    setTimeout(() => {
+      this.mensajeFlags = '';
+    }, 3000);
+
+  }
 }

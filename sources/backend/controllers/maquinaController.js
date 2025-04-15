@@ -47,6 +47,23 @@ const eliminarArchivosSubidos = async (req) => {
     }
 };
 
+// Timeout para detener automáticamente la máquina
+const detenerAutomaticamente = (nombre) => {
+    setTimeout(async () => {
+        try {
+            const contenedor = docker.getContainer(nombre);
+            const info = await contenedor.inspect();
+            if (info.State.Running) {
+                await contenedor.stop({ t: 5 });
+                await contenedor.remove();
+                console.log(`Contenedor ${nombre} detenido automáticamente después de 30 segundos.`);
+            }
+        } catch (error) {
+            console.error(`Error al detener automáticamente el contenedor ${nombre}:`, error.message);
+        }
+    }, 10800000); // 3 horas por defecto
+};
+
 module.exports = {
     obtenerMaquinasRecomendadas: async (req, res) => {
         const { rango } = req.query;
@@ -295,8 +312,6 @@ module.exports = {
                     'dificultad',
                     'descripcion',
                     'writeUp',
-                    'flagUsuario',
-                    'flagRoot',
                     'puntuacion',
                     'fechaCreacion'
                 ],
@@ -350,6 +365,9 @@ module.exports = {
             const info = await contenedor.inspect();
             const ip = info.NetworkSettings.Networks.hackermaster_red_maquinas.IPAddress;
 
+            // Añadir tiempo de vida del contenedor
+            detenerAutomaticamente(nombreContenedor);
+
             return res.status(200).json({ ip });
 
         } catch (error) {
@@ -360,33 +378,139 @@ module.exports = {
     detenerMaquina: async (req, res) => {
         const { idMaquina } = req.body;
         const username = req.user.username;
-    
+
         try {
             // Obtener la máquina
             const maquina = await Maquina.findOne({ where: { idMaquina } });
             if (!maquina) {
                 return res.status(400).json({ message: 'Error al obtener la máquina' });
             }
-    
+
             // Nombre del contenedor
             const nombreContenedor = `${maquina.nombre}-${username}`;
-    
+
             // Obtener el contenedor por nombre
             const contenedor = docker.getContainer(nombreContenedor);
-    
+
             // Verificar si el contenedor existe y está corriendo
             const info = await contenedor.inspect();
             if (info.State.Running) {
                 await contenedor.stop({ t: 5 });
             }
-    
+
             // Eliminar el contenedor
             await contenedor.remove();
-    
+
             return res.status(200).json({ success: true });
-    
+
         } catch (error) {
             res.status(500).json({ message: 'Error al detener la máquina' });
+        }
+    },
+    verificarMaquina: async (req, res) => {
+        const { idMaquina, flagUsuario, flagRoot } = req.body;
+        const username = req.user.username;
+
+        if (!idMaquina) {
+            return res.status(400).json({ message: 'Falta el idMaquina' });
+        }
+
+        try {
+            // Buscar la máquina
+            const maquina = await Maquina.findByPk(idMaquina);
+            if (!maquina) {
+                return res.status(404).json({ message: 'Máquina no encontrada' });
+            }
+
+            // Verificar si el contenedor está desplegado
+            const nombreContenedor = `${maquina.nombre}-${username}`;
+            const contenedor = docker.getContainer(nombreContenedor);
+
+            let estaCorriendo = false;
+            try {
+                const info = await contenedor.inspect();
+                estaCorriendo = info?.State?.Running || false;
+            } catch (error) {
+                estaCorriendo = false;
+            }
+
+            if (!estaCorriendo) {
+                return res.status(400).json({ message: 'La máquina no está desplegada' });
+            }
+
+            // Verificar si el usuario ya ha intentado resolver la máquina
+            let intento = await Intenta.findOne({
+                where: { idUsuario: req.user.idUsuario, idMaquina },
+            });
+
+            // Si no existe el intento, creamos un nuevo intento
+            if (!intento) {
+                intento = await Intenta.create({
+                    idUsuario: req.user.idUsuario,
+                    idMaquina,
+                    fechaInicio: new Date(),
+                    estado: 'En Progreso',
+                    fechaFin: null
+                });
+            }
+
+            // Verificaciones de las flags
+            const flagsIncorrectas = [];
+            const flagsCorrectas = [];
+
+            if (typeof flagUsuario !== 'undefined') {
+                if (flagUsuario === maquina.flagUsuario) {
+                    flagsCorrectas.push('usuario');
+                } else {
+                    flagsIncorrectas.push('usuario');
+                }
+            }
+
+            if (typeof flagRoot !== 'undefined') {
+                if (flagRoot === maquina.flagRoot) {
+                    flagsCorrectas.push('root');
+                } else {
+                    flagsIncorrectas.push('root');
+                }
+            }
+
+            // Si ambas flags son correctas, sumamos los puntos solo si no se había completado antes
+            if (flagsCorrectas.includes('usuario') && flagsCorrectas.includes('root')) {
+                if (intento.estado !== 'Completado') {
+                    // Añadir el Completado y la fechaFin
+                    await Intenta.update(
+                        {
+                            estado: 'Completado',
+                            fechaFin: new Date()
+                        },
+                        {
+                            where: {
+                                idUsuario: req.user.idUsuario,
+                                idMaquina
+                            }
+                        }
+                    );
+
+                    return res.status(200).json({ message: 'Ambas flags son correctas.', puntosSumados: true });
+                } else {
+                    return res.status(200).json({ message: '¡Correcto! Ya has completado esta máquina', puntosSumados: false });
+                }
+            }
+
+            // Si alguna flag está incorrecta, devolvemos el mensaje correspondiente
+            if (flagsIncorrectas.length === 2) {
+                return res.status(401).json({ message: 'Ambas flags son incorrectas' });
+            }
+
+            if (flagsIncorrectas.length === 1) {
+                return res.status(401).json({ message: `La flag de ${flagsIncorrectas[0]} es incorrecta` });
+            }
+
+            res.status(200).json({ message: 'Una de las flags es correcta, pero falta la otra para completar la máquina', puntosSumados: false });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error del servidor al verificar la máquina' });
         }
     }
 

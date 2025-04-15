@@ -70,4 +70,13 @@ export class MaquinaService {
     return this.http.post(`${this.apiUrl}/detener-maquina`, { idMaquina }, { headers });
   }
 
+  // Método para comprobar las flags introducidas
+  verificarFlags(idMaquina: string, payload: any): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const body = { idMaquina, ...payload };
+
+    return this.http.post(`${this.apiUrl}/verificar-flags`, body, { headers });
+  }
+
 }
