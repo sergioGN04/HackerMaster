@@ -256,18 +256,25 @@ h3 {
     width: 250px;
 }
 
-.mensaje-exito {
-    color: #6FFF00;
+.mensaje-error {
+    color: #ff4d4d;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff4d4d;
     text-align: center;
-    margin: 40px auto 10px auto;
-    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    width: 100%;
 }
 
-.mensaje-error {
-    color: #FF4C4C;
+.mensaje-exito {
+    color: #4dff4d;
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #4dff4d;
     text-align: center;
-    margin: 40px auto 10px auto;
-    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
 }
 
 /* Lista de máquinas */

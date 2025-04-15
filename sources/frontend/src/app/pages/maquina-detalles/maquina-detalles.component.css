@@ -220,6 +220,29 @@
     transition: background-color 0.3s ease;
 }
 
+.mensaje-error {
+    color: #ff4d4d;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff4d4d;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.mensaje-exito {
+    color: #4dff4d;
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #4dff4d;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
 .btn-submit:hover {
     background-color: #57cc00;
     color: #FFFFFF;
