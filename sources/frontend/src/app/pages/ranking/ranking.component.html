@@ -1,0 +1,39 @@
+<app-header-autorizado></app-header-autorizado>
+<app-sidebar-autorizado (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-autorizado>
+
+<div class="containers primarySections" [class.colapsado]="!sidebarExpandido">
+
+    <h1 class="titulo">Ranking Global</h1>
+    <hr class="separator" />
+    <p class="descripcion">
+        Consulta la clasificación de los jugadores según su puntuación y logros.
+        Encuentra tu posición y compite por el primer puesto. ¡Sigue mejorando y sube en la tabla!
+    </p>
+
+    <div class="tabla-container">
+        <table class="ranking-tabla">
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Nombre</th>
+                    <th>Máquinas</th>
+                    <th>Logros</th>
+                    <th>Puntos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of rankingUsuarios; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>
+                        <img [src]="usuario.fotoPerfil" alt="foto" class="foto-perfil" />
+                        {{ usuario.username }}
+                    </td>
+                    <td>{{ usuario.maquinasCompletadas }}</td>
+                    <td>{{ usuario.logrosCompletados }}</td>
+                    <td>{{ usuario.puntuacion }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
