@@ -30,7 +30,7 @@ export class UsuarioService {
   // Método para actualizar la foto de perfil
   actualizarFotoPerfil(formData: FormData): Observable<any> {
     const token = this.authService.getToken();
-    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     return this.http.post(`${this.apiUrl}/actualizar-imagen-perfil`, formData, { headers });
   }
@@ -38,7 +38,7 @@ export class UsuarioService {
   // Método para actualizar los datos de usuario
   actualizarUsuario(usuario: any): Observable<any> {
     const token = this.authService.getToken();
-    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     return this.http.put(`${this.apiUrl}/actualizar-datos-usuario`, usuario, { headers });
   }
@@ -47,8 +47,16 @@ export class UsuarioService {
   actualizarPassword(data: any): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-  
+
     return this.http.post(`${this.apiUrl}/actualizar-password`, data, { headers });
+  }
+
+  // Método para comprobar las flags introducidas
+  obtenerRanking(): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.get(`${this.apiUrl}/ranking`, { headers });
   }
 
 }

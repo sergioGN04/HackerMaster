@@ -1,0 +1,78 @@
+/* Estilo general de los apartados */
+.containers {
+    color: white;
+    padding: 150px 80px 80px 80px;
+    margin-left: 280px;
+    text-align: center;
+}
+
+.containers.colapsado {
+    margin-left: 80px;
+}
+
+/* Seccion Ranking */
+.titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.separator {
+    border: 1px solid white;
+    margin: 0 5% 20px 5%;
+}
+
+.descripcion {
+    max-width: 800px;
+    margin: 0 auto 100px auto;
+    font-size: 0.9rem;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Tabla Ranking */
+.tabla-container {
+    overflow-x: auto;
+    background-color: #0A1A2A;
+    border-radius: 8px;
+}
+
+.ranking-tabla {
+    min-width: 600px;
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    font-size: 1rem;
+}
+
+.ranking-tabla thead {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.ranking-tabla th,
+.ranking-tabla td {
+    padding: 15px;
+    text-align: center;
+    background-color: #0A1A2A;
+    white-space: nowrap;
+}
+
+.ranking-tabla td {
+    border-bottom: 1px solid white;
+    color: #6FFF00;
+}
+
+.ranking-tabla td.nombre-columna {
+    min-width: 180px;
+    justify-content: flex-start;
+}
+
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}

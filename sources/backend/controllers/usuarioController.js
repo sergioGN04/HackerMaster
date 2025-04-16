@@ -318,5 +318,52 @@ module.exports = {
             console.error(error);
             return res.status(500).json({ message: 'Error al actualizar la contraseña' });
         }
+    },
+    obtenerRanking: async (req, res) => {
+        try {
+            // Obtener todos los usuarios
+            const usuarios = await Usuario.findAll({
+                attributes: ['idUsuario', 'username', 'fotoPerfil']
+            });
+
+            const ranking = [];
+
+            // Obtener todos los datos de cada usuario
+            for (const usuario of usuarios) {
+                const idUsuario = usuario.idUsuario;
+
+                // Calcular puntuación
+                const { puntuacion } = await calcularRangoYPuntuacion(idUsuario);
+
+                // Obtener máquinas completadas
+                const maquinasCompletadas = await Intenta.count({
+                    where: { idUsuario, estado: 'Completado' },
+                    distinct: true,
+                    col: 'idMaquina',
+                });
+
+                // Obtener logros completados
+                const logrosCompletados = await UsuarioLogro.count({
+                    where: { idUsuario }
+                });
+
+                // Añadir usuario con sus datos
+                ranking.push({
+                    username: usuario.username,
+                    fotoPerfil: `http://192.168.2.2:3000/uploads/usuarios/${usuario.fotoPerfil}`,
+                    maquinasCompletadas,
+                    logrosCompletados,
+                    puntuacion
+                });
+            }
+
+            // Ordenar por puntuación
+            ranking.sort((a, b) => b.puntuacion - a.puntuacion);
+
+            return res.status(200).json({ ranking });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener el ranking de usuarios' });
+        }
     }
 }
