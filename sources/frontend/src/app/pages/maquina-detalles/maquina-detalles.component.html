@@ -55,21 +55,19 @@
         </div>
 
         <div class="formulario-body">
-            <div class="preguntas-maquina">
+            <div class="preguntas-maquina lineal">
                 <div class="pregunta-con-icono">
                     <i class="bi bi-flag icono-bandera"></i>
-                    <input type="text" class="form-control" placeholder="Enviar Flag Usuario" [(ngModel)]="flagUsuario"
-                        name="flagUsuario">
+                    <input type="text" class="form-control" placeholder="Enviar Flag Usuario" [(ngModel)]="flagUsuario" name="flagUsuario">
                 </div>
 
                 <div class="separator-vertical"></div>
-
+            
                 <div class="pregunta-con-icono">
                     <i class="bi bi-flag icono-bandera"></i>
-                    <input type="text" class="form-control" placeholder="Enviar Flag Root" [(ngModel)]="flagRoot"
-                        name="flagRoot">
+                    <input type="text" class="form-control" placeholder="Enviar Flag Root" [(ngModel)]="flagRoot" name="flagRoot">
                 </div>
-            </div>
+            </div>            
             <button class="btn btn-submit" (click)="comprobarFlags()">Comprobar</button>
             <div *ngIf=" mensajeFlags !== '' ">
                 <p [ngClass]="{ 'mensaje-error': mensajeErrorFlags, 'mensaje-exito': !mensajeErrorFlags }">

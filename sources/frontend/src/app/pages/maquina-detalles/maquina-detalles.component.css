@@ -1,7 +1,7 @@
 /* Estilo general de los apartados */
 .containers {
     color: white;
-    padding: 120px 100px 90px 100px;
+    padding: 120px 110px 90px 110px;
     margin-left: 280px;
 }
 
@@ -20,9 +20,12 @@
 .columna-izquierda {
     display: flex;
     flex: 1;
+    flex-wrap: wrap;
     min-width: 300px;
     gap: 20px;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .imagen-maquina {
@@ -44,6 +47,12 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 20px;
+}
+
+.columna-izquierda,
+.columna-derecha {
+    flex: 1 1 300px;
 }
 
 .estado-maquina {
@@ -68,11 +77,13 @@
 .descripcion-maquina h4 {
     margin: 10px 0;
     font-weight: bold;
+    text-align: center;
 }
 
 .descripcion-maquina p {
     margin: 0;
     line-height: 1.6;
+    text-align: center;
 }
 
 /* Sección Formulario Máquina */
@@ -81,7 +92,6 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -89,6 +99,7 @@
     background-color: #0A1A2A;
     padding: 25px 40px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 30px;
     border-top: 1px solid black;
@@ -174,25 +185,26 @@
     align-items: center;
     gap: 30px;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .pregunta-con-icono {
     display: flex;
     align-items: center;
     gap: 15px;
-    width: 100%;
+    width: 85%;
     max-width: 800px;
+    justify-content: center;
 }
 
 .icono-bandera {
     color: #6FFF00;
     font-size: 1.8rem;
-    transform: rotate(10deg);
+    margin-right: 10px;
 }
 
 .form-control {
-    flex: 1;
-    min-width: 600px;
+    flex-grow: 1;
     padding: 14px;
     border-radius: 5px;
     border: 1px solid #B0B0B0;
@@ -226,6 +238,22 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.btn-submit:hover {
+    background-color: #57cc00;
+    color: #FFFFFF;
+}
+
+.btn-submit:active {
+    background-color: #4DB300;
+    color: #FFFFFF;
+}
+
+.btn-submit:focus {
+    background-color: #368000;
+    color: #FFFFFF;
 }
 
 .mensaje-error {
@@ -251,21 +279,6 @@
     font-size: 0.95rem;
 }
 
-.btn-submit:hover {
-    background-color: #57cc00;
-    color: #FFFFFF;
-}
-
-.btn-submit:active {
-    background-color: #4DB300;
-    color: #FFFFFF;
-}
-
-.btn-submit:focus {
-    background-color: #368000;
-    color: #FFFFFF;
-}
-
 /* Fecha publicación */
 .publicacion-fecha {
     margin-top: 150px;
@@ -278,4 +291,174 @@
     padding: 12px;
     color: #6FFF00;
     font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .containers {
+        padding: 100px 30px 90px 30px;
+        margin-left: 65px;
+    }
+
+    .containers.colapsado {
+        margin-left: 65px;
+    }
+
+    .formulario-header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .formulario-header .btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+    }
+
+    .imagen-maquina {
+        width: 250px;
+    }
+
+    .estado-maquina {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .pregunta-con-icono {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .icono-bandera {
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    .form-control {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .formulario-body {
+        padding: 40px 20px;
+        width: 100%;
+    }
+
+    .btn-submit {
+        width: 100%;
+        max-width: 250px;
+        margin-top: 20px;
+    }
+
+    .publicacion-fecha {
+        margin-top: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containers {
+        color: white;
+        padding: 40px 15px 60px 15px;
+        margin-left: 60px;
+    }
+
+    .containers.colapsado {
+        margin-left: 60px;
+    }
+
+    .detalles-maquina-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+
+    .columna-izquierda,
+    .columna-derecha {
+        min-width: 100%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .columna-derecha {
+        flex: 1 1 50px;
+        margin-top: 10px;
+    }
+
+    .info-maquina h3 {
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+    }
+
+    .estado-icono {
+        font-size: 1.8rem;
+    }
+
+    .estado-maquina {
+        font-size: 1.2rem;
+        padding: 4px 12px;
+    }
+
+    .imagen-maquina {
+        width: 180px;
+    }
+
+    .descripcion-maquina h4 {
+        font-size: 1rem;
+        margin: 4px 0;
+    }
+
+    .descripcion-maquina p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .formulario-header {
+        padding: 15px 10px;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .formulario-header .btn {
+        padding: 10px;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .formulario-body {
+        padding: 30px 10px;
+    }
+
+    .pregunta-con-icono {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .form-control {
+        font-size: 14px;
+        padding: 12px;
+        width: 100%;
+    }
+
+    .btn-submit {
+        padding: 10px;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 220px;
+    }
+
+    .publicacion-fecha {
+        margin-top: 80px;
+    }
+
+    .publicacion-fecha p {
+        font-size: 0.9rem;
+    }
 }

@@ -29,5 +29,5 @@ const academiaRoutes = require('./routes/academiaRoutes');
 app.use(academiaRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Se ha iniciado correctamente en http://192.168.1.2:${PORT}/usuarios`);
+    console.log(`Se ha iniciado correctamente. Ejemplo: http://192.168.1.2:${PORT}/api/estadisticas-actuales`);
 });
