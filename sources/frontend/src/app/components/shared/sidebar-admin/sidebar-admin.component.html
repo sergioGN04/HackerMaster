@@ -1,0 +1,30 @@
+<aside class="sidebar" [ngClass]="{ 'colapsado': !expandido }">
+    <!-- Logo dentro del Sidebar -->
+    <div class="logo-sidebar" (click)="onLogoClick()">
+        <a class="navbar-brand logo">
+            <img [src]="logoUrl" alt="Logo">
+        </a>
+    </div>
+
+    <!-- Lista de navegación -->
+    <ul class="nav-list">
+        <li>
+            <a routerLink="/admin/gestion-usuarios" routerLinkActive="activo">
+                <i class="bi bi-person-circle"></i>
+                <span class="texto-link">Gestión Usuarios</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/admin/gestion-maquinas" routerLinkActive="activo">
+                <i class="bi bi-cpu"></i>
+                <span class="texto-link">Gestión Máquinas</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/admin/gestion-notificaciones" routerLinkActive="activo">
+                <i class="bi bi-trophy"></i>
+                <span class="texto-link">Gestión Notificaiones</span>
+            </a>
+        </li>
+    </ul>
+</aside>

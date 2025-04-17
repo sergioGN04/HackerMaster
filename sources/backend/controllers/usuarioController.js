@@ -383,5 +383,36 @@ module.exports = {
         } catch (error) {
             res.status(500).json({ message: 'Error al obtener el ranking de usuarios' });
         }
+    },
+    obtenerUsuariosRegistrados: async (req, res) => {
+        const rol = req.user.rol;
+
+        // Comprobamos que el rol del usuario sea Administrador
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para acceder a esta información' });
+        }
+
+        try {
+
+            // Obtenemos todos los usuarios registrados con sus datos
+            const usuariosRegistrados = await Usuario.findAll({
+                attributes: [
+                    'idUsuario',
+                    'username',
+                    [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/usuarios/', Sequelize.col('fotoPerfil')), 'fotoPerfil'],
+                    'email',
+                    'pais',
+                    'telefono',
+                    'rol',
+                    'fechaRegistro'
+                ],
+            });
+
+            res.status(200).json({ usuariosRegistrados });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener los usuarios registrados'});
+        }
+
     }
 }

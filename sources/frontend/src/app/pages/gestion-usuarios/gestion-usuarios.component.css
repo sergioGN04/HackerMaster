@@ -1,0 +1,10 @@
+/* Estilo general del contenedor del dashboard */
+.container {
+    color: white;
+    padding: 140px 80px 90px 80px;
+    margin-left: 280px;
+}
+
+.container.colapsado {
+    margin-left: 80px;
+}

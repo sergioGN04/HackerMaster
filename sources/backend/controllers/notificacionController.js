@@ -6,6 +6,7 @@ module.exports = {
     obtenerNotificaciones: async (req, res) => {
         const idUsuario = req.user.idUsuario;
         const username = req.user.username;
+        const rol = req.user.rol;
 
         try {
             // Eliminar notificaciones vencidas (fechaLimite pasada)
@@ -35,7 +36,7 @@ module.exports = {
                     'fechaLimite'
                 ],
                 where: {
-                    destinatario: 'Usuario',
+                    destinatario: rol,
                     idNotificacion: {
                         [Op.notIn]: idsNotificacionesVistas.length > 0 ? idsNotificacionesVistas : [0]
                     }
@@ -44,7 +45,7 @@ module.exports = {
                 limit: 3
             });
 
-            return res.json({ username, nuevasNotificaciones });
+            return res.json({ username, rol, nuevasNotificaciones });
 
         } catch (error) {
             console.error(error);

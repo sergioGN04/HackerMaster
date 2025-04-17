@@ -51,12 +51,20 @@ export class UsuarioService {
     return this.http.post(`${this.apiUrl}/actualizar-password`, data, { headers });
   }
 
-  // Método para comprobar las flags introducidas
+  // Método para obtener el ranking de usuarios
   obtenerRanking(): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     return this.http.get(`${this.apiUrl}/ranking`, { headers });
+  }
+
+  // Método para obtener el ranking de usuarios
+  obtenerUsuariosRegistrados(): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.get(`${this.apiUrl}/usuarios-registrados`, { headers });
   }
 
 }
