@@ -8,12 +8,14 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ranking',
+  standalone: true,
   imports: [HeaderAutorizadoComponent, SidebarAutorizadoComponent,CommonModule],
   templateUrl: './ranking.component.html',
   styleUrl: './ranking.component.css'
 })
 export class RankingComponent {
   sidebarExpandido = true;
+  miRanking: any;
   rankingUsuarios: any;
 
   constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService) { }
@@ -29,13 +31,14 @@ export class RankingComponent {
     if (!token) {
       this.router.navigate(['/login']);
     } else {
-      this.getInformacionPerfil();
+      this.getRanking();
     }
   }
 
-  getInformacionPerfil(): void {
+  getRanking(): void {
     this.usuarioService.obtenerRanking().subscribe({
       next: (response: any) => {
+        this.miRanking = response.miRanking;
         this.rankingUsuarios = response.ranking;
       },
       error: (error: any) => {

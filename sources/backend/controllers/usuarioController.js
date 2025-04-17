@@ -320,6 +320,8 @@ module.exports = {
         }
     },
     obtenerRanking: async (req, res) => {
+        const idUsuario = req.user.idUsuario;
+
         try {
             // Obtener todos los usuarios
             const usuarios = await Usuario.findAll({
@@ -349,6 +351,7 @@ module.exports = {
 
                 // Añadir usuario con sus datos
                 ranking.push({
+                    idUsuario,
                     username: usuario.username,
                     fotoPerfil: `http://192.168.2.2:3000/uploads/usuarios/${usuario.fotoPerfil}`,
                     maquinasCompletadas,
@@ -360,7 +363,22 @@ module.exports = {
             // Ordenar por puntuación
             ranking.sort((a, b) => b.puntuacion - a.puntuacion);
 
-            return res.status(200).json({ ranking });
+            // Obtener posición del usuario actual
+            const posicionUsuario = ranking.findIndex(u => u.idUsuario === idUsuario) + 1;
+
+            // Obtener los datos del usuario actual en el ranking
+            const usuarioActual = ranking.find(u => u.idUsuario === idUsuario);
+
+            return res.status(200).json({
+                miRanking: { posicion: posicionUsuario, ...usuarioActual }, ranking: ranking.map((usuario, index) => ({
+                    posicion: index + 1,
+                    username: usuario.username,
+                    fotoPerfil: usuario.fotoPerfil,
+                    maquinasCompletadas: usuario.maquinasCompletadas,
+                    logrosCompletados: usuario.logrosCompletados,
+                    puntuacion: usuario.puntuacion
+                }))
+            });
 
         } catch (error) {
             res.status(500).json({ message: 'Error al obtener el ranking de usuarios' });

@@ -22,11 +22,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let usuario of rankingUsuarios; let i = index">
-                    <td>{{ i + 1 }}</td>
+                <tr *ngIf="miRanking" class="fila-actual">
                     <td>
-                        <img [src]="usuario.fotoPerfil" alt="foto" class="foto-perfil" />
-                        {{ usuario.username }}
+                        <span class="posicion-circulo">{{ miRanking.posicion }}</span>
+                    </td>
+                    <td class="colum-nombre">
+                        <div class="nombre-wrapper">
+                            <img [src]="miRanking.fotoPerfil" alt="foto" class="foto-perfil" />
+                            <span class="nombre-usuario">{{ miRanking.username }}</span>
+                        </div>
+                    </td>
+                    <td>{{ miRanking.maquinasCompletadas }}</td>
+                    <td>{{ miRanking.logrosCompletados }}</td>
+                    <td>{{ miRanking.puntuacion }}</td>
+                </tr>
+
+                <tr *ngFor="let usuario of rankingUsuarios">
+                    <td>
+                        <span class="posicion-circulo">{{ usuario.posicion }}</span>
+                    </td>
+                    <td class="colum-nombre">
+                        <div class="nombre-wrapper">
+                            <img [src]="usuario.fotoPerfil" alt="foto" class="foto-perfil" />
+                            <span class="nombre-usuario">{{ usuario.username }}</span>
+                        </div>
                     </td>
                     <td>{{ usuario.maquinasCompletadas }}</td>
                     <td>{{ usuario.logrosCompletados }}</td>
@@ -35,5 +54,5 @@
             </tbody>
         </table>
     </div>
-    
+
 </div>
