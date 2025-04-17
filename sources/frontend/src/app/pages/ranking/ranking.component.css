@@ -1,7 +1,7 @@
 /* Estilo general de los apartados */
 .containers {
     color: white;
-    padding: 150px 80px 80px 80px;
+    padding: 150px 30px 80px 30px;
     margin-left: 280px;
     text-align: center;
 }
@@ -34,7 +34,7 @@
 /* Tabla Ranking */
 .tabla-container {
     overflow-x: auto;
-    background-color: #0A1A2A;
+    background-color: transparent;
     border-radius: 8px;
 }
 
@@ -42,13 +42,57 @@
     min-width: 600px;
     width: 100%;
     border-collapse: collapse;
+    border-spacing: 0;
     color: white;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .ranking-tabla thead {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
+    background-color: #0A1A2A;
+}
+
+.ranking-tabla tr {
+    height: 100%;
+}
+
+.fila-actual td {
+    background-color: #1A324A !important;
+}
+
+.colum-nombre {
+    text-align: center;
+}
+
+.nombre-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.nombre-usuario {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #6FFF00;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.posicion-circulo {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #6FFF00;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.3rem;
 }
 
 .ranking-tabla th,
@@ -57,10 +101,11 @@
     text-align: center;
     background-color: #0A1A2A;
     white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid white;
 }
 
 .ranking-tabla td {
-    border-bottom: 1px solid white;
     color: #6FFF00;
 }
 
@@ -75,4 +120,59 @@
     object-fit: cover;
     border-radius: 50%;
     flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .containers {
+        padding: 140px 50px 80px 50px;
+        margin-left: 65px;
+    }
+
+    .containers.colapsado {
+        margin-left: 65px;
+    }
+
+    .posicion-circulo {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .foto-perfil {
+        width: 35px;
+        height: 35px;
+    }
+
+    .ranking-tabla {
+        font-size: 1rem;
+    }
+
+    .ranking-tabla th,
+    .ranking-tabla td {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containers {
+        padding: 130px 30px 60px 30px;
+        margin-left: 60px;
+    }
+
+    .containers.colapsado {
+        margin-left: 60px;
+    }
+
+    .posicion-circulo {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 1rem;
+    }
+
+    .descripcion {
+        margin: 0 auto 60px auto;
+    }
 }

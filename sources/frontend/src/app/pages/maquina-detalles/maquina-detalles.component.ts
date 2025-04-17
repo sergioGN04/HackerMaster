@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-maquina-detalles',
+  standalone: true,
   imports: [HeaderAutorizadoComponent, SidebarAutorizadoComponent, CommonModule, FormsModule],
   templateUrl: './maquina-detalles.component.html',
   styleUrl: './maquina-detalles.component.css'
