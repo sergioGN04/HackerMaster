@@ -13,7 +13,7 @@
     justify-content: space-between;
 }
 
-/* Contenedor Notificaciones y Menú Perfil */
+/* Contenedor Panel Admin, Notificaciones, Menú Perfil */
 .acciones-derecha {
     display: flex;
     align-items: center;
@@ -21,15 +21,15 @@
     gap: 15px;
 }
 
-/* Notificaciones */
-.notificaciones {
+/* Panel Admin y Notificaciones */
+.panel-admin, .notificaciones {
     font-size: 24px;
     cursor: pointer;
     color: white;
     transition: color 0.3s;
 }
 
-.notificaciones:hover {
+.panel-admin:hover, .notificaciones:hover {
     color: #6FFF00;
 }
 

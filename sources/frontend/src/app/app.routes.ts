@@ -9,6 +9,7 @@ import { ConfigurarPerfilComponent } from './pages/configurar-perfil/configurar-
 import { MaquinasComponent } from './pages/maquinas/maquinas.component';
 import { MaquinaDetallesComponent } from './pages/maquina-detalles/maquina-detalles.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
+import { GestionUsuariosComponent } from './pages/gestion-usuarios/gestion-usuarios.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -22,5 +23,6 @@ export const routes: Routes = [
   { path: 'maquinas', component: MaquinasComponent },
   { path: 'maquina/:id', component: MaquinaDetallesComponent },
   { path: 'ranking', component: RankingComponent },
+  { path: 'admin/gestion-usuarios', component: GestionUsuariosComponent },
   { path: '**', redirectTo: 'inicio' }
 ];

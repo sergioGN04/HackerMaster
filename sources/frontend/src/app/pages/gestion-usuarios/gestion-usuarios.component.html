@@ -1,0 +1,7 @@
+<app-header-autorizado></app-header-autorizado>
+<app-sidebar-admin (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-admin>
+
+<!-- Contenedor Gestión Usuarios -->
+<div class="container primarySections" [class.colapsado]="!sidebarExpandido">
+    <p>Esto es un ejemplo de la página de Administrador para gestionar las cuentas de usuarios</p>
+</div>

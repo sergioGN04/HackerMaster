@@ -14,6 +14,7 @@ import { NotificacionService } from '../../../core/services/notificacion.service
 })
 export class HeaderAutorizadoComponent {
   username: string = '';
+  rol: string = '';
 
   menuPerfilAbierto = false;
   menuNotificacionesAbierto = false;
@@ -31,12 +32,26 @@ export class HeaderAutorizadoComponent {
     this.notificacionService.obtenerNotificacionesUsuario().subscribe({
       next: (response: any) => {
         this.username = response.username;
+        this.rol = response.rol;
         this.notificaciones = response.nuevasNotificaciones;
       },
       error: (error: any) => {
         console.error(error.error.message);
       }
     });
+  }
+
+  // Método para navegar entre las páginas de administración y el dashboard-usuario
+  navegarPaginaAdmin() {
+    const currentUrl = this.router.url;
+
+    if (currentUrl.includes('/admin')) {
+      this.router.navigate(['/dashboard-usuario']);
+    } else if (this.rol === 'Administrador') {
+      this.router.navigate(['/admin/gestion-usuarios']);
+    } else {
+      console.log('Error - Solo administradores pueden acceder al panel de administración');
+    }
   }
 
   // Método para desplegar o no el menú del perfil
