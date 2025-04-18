@@ -30,6 +30,8 @@ router.put('/api/actualizar-datos-usuario', verifyToken, usuarioController.actua
 router.post('/api/actualizar-password', verifyToken, usuarioController.actualizarPassword);
 router.get('/api/ranking', verifyToken, usuarioController.obtenerRanking);
 router.get('/api/usuarios-registrados', verifyToken, usuarioController.obtenerUsuariosRegistrados);
+router.put('/api/cambiar-rol', verifyToken, usuarioController.cambiarRolUsuario);
+router.delete('/api/eliminar-usuario', verifyToken, usuarioController.eliminarUsuario);
 
 // Maquinas
 router.get('/api/maquinas-recomendadas', verifyToken, maquinaController.obtenerMaquinasRecomendadas);

@@ -2,6 +2,50 @@
 <app-sidebar-admin (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-admin>
 
 <!-- Contenedor Gestión Usuarios -->
-<div class="container primarySections" [class.colapsado]="!sidebarExpandido">
-    <p>Esto es un ejemplo de la página de Administrador para gestionar las cuentas de usuarios</p>
+<div class="containers primarySections" [class.colapsado]="!sidebarExpandido">
+
+    <h1 class="titulo">Ranking Global</h1>
+    <hr class="separator" />
+    <p class="descripcion">
+        Consulta la clasificación de los jugadores según su puntuación y logros.
+        Encuentra tu posición y compite por el primer puesto. ¡Sigue mejorando y sube en la tabla!
+    </p>
+
+    <div class="tabla-container">
+        <table class="ranking-tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>País</th>
+                    <th>Fecha Registro</th>
+                    <th>Rol</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuariosRegistrados">
+                    <td class="colum-nombre">
+                        <div class="nombre-wrapper">
+                            <img [src]="usuario.fotoPerfil" alt="foto" class="foto-perfil" />
+                            <span class="nombre-usuario">{{ usuario.username }}</span>
+                        </div>
+                    </td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.pais }}</td>
+                    <td>{{ usuario.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ usuario.rol }}</td>
+                    <td>
+                        <button class="btn-operacion cambiar-rol" (click)="cambiarRol(usuario.idUsuario)">
+                            <i class="bi bi-arrow-left-right"></i> Cambiar Rol
+                        </button>
+                        <button class="btn-operacion eliminar-usuario" (click)="eliminarUsuario(usuario.idUsuario)">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
