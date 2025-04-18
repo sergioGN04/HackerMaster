@@ -179,7 +179,7 @@ module.exports = {
                     fs.unlinkSync(rutaArchivoAnterior);
                 }
             }
-
+            const { rango } = req.query;
             // Actualizar la foto de perfil en la base de datos
             const [filasActualizadas] = await Usuario.update(
                 { fotoPerfil: nombreArchivoNuevo },
@@ -213,7 +213,7 @@ module.exports = {
                 const usuarioExistente = await Usuario.findOne({ where: { username } });
                 if (usuarioExistente) {
                     return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
-                }
+                } const { rango } = req.query;
             }
 
             // Comprobamos si el email ya está en uso
@@ -411,8 +411,66 @@ module.exports = {
             res.status(200).json({ usuariosRegistrados });
 
         } catch (error) {
-            res.status(500).json({ message: 'Error al obtener los usuarios registrados'});
+            res.status(500).json({ message: 'Error al obtener los usuarios registrados' });
         }
 
+    },
+    cambiarRolUsuario: async (req, res) => {
+        const rol = req.user.rol;
+        const { idUsuario } = req.query;
+
+        // Comprobamos que el rol del usuario sea Administrador
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
+        }
+
+        try {
+            // Buscar el usuario por ID
+            const usuario = await Usuario.findByPk(idUsuario);
+
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            // Obtener el nuevo rol
+            const nuevoRol = usuario.rol === 'Usuario' ? 'Administrador' : 'Usuario';
+
+            // Actualizar el rol del usuario
+            await Usuario.update(
+                { rol: nuevoRol },
+                { where: { idUsuario } }
+            );
+
+            res.status(200).json({ message: 'Se ha actualizado el rol correctamente' });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error al actualizar el rol' });
+        }
+    },
+    eliminarUsuario: async (req, res) => {
+        const rol = req.user.rol;
+        const { idUsuario } = req.query;
+
+        // Verificamos que sea un administrador
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
+        }
+
+        try {
+            // Verificar que el usuario exista
+            const usuario = await Usuario.findByPk(idUsuario);
+
+            if (!usuario) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            // Eliminar el usuario
+            await Usuario.destroy({ where: { idUsuario } });
+
+            res.status(200).json({ message: 'Usuario eliminado correctamente' });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error del servidor al eliminar el usuario' });
+        }
     }
 }

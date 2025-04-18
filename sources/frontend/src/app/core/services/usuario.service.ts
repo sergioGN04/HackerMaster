@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -59,12 +59,30 @@ export class UsuarioService {
     return this.http.get(`${this.apiUrl}/ranking`, { headers });
   }
 
-  // Método para obtener el ranking de usuarios
+  // Método para obtener los usuarios registrados
   obtenerUsuariosRegistrados(): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     return this.http.get(`${this.apiUrl}/usuarios-registrados`, { headers });
+  }
+
+  // Método para modificar el rol del usuario
+  cambiarRol(idUsuario: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const params = new HttpParams().set('idUsuario', idUsuario);
+
+    return this.http.put(`${this.apiUrl}/cambiar-rol`, {}, { headers, params });
+  }
+
+  // Método para eliminar el usuario
+  eliminarUsuario(idUsuario: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const params = new HttpParams().set('idUsuario', idUsuario);
+
+    return this.http.delete(`${this.apiUrl}/eliminar-usuario`, { headers, params });
   }
 
 }

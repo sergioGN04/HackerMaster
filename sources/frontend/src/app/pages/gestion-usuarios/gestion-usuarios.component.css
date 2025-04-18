@@ -1,10 +1,170 @@
-/* Estilo general del contenedor del dashboard */
-.container {
+/* Estilo general de los apartados */
+.containers {
     color: white;
-    padding: 140px 80px 90px 80px;
+    padding: 150px 30px 80px 30px;
     margin-left: 280px;
+    text-align: center;
 }
 
-.container.colapsado {
+.containers.colapsado {
     margin-left: 80px;
+}
+
+/* Seccion Lista Usuarios */
+.titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.separator {
+    border: 1px solid white;
+    margin: 0 5% 20px 5%;
+}
+
+.descripcion {
+    max-width: 800px;
+    margin: 0 auto 100px auto;
+    font-size: 0.9rem;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Seccion Ranking */
+.titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.separator {
+    border: 1px solid white;
+    margin: 0 5% 20px 5%;
+}
+
+.descripcion {
+    max-width: 800px;
+    margin: 0 auto 100px auto;
+    font-size: 0.9rem;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Tabla Ranking */
+.tabla-container {
+    overflow-x: auto;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+.ranking-tabla {
+    min-width: 600px;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.ranking-tabla thead {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    background-color: #0A1A2A;
+}
+
+.ranking-tabla tr {
+    height: 100%;
+}
+
+.fila-actual td {
+    background-color: #1A324A !important;
+}
+
+.colum-nombre {
+    text-align: center;
+}
+
+.nombre-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.nombre-usuario {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #6FFF00;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.ranking-tabla th,
+.ranking-tabla td {
+    padding: 15px;
+    text-align: center;
+    background-color: #0A1A2A;
+    white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+
+.ranking-tabla td {
+    color: #6FFF00;
+}
+
+.ranking-tabla td.nombre-columna {
+    min-width: 180px;
+    justify-content: flex-start;
+}
+
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.btn-operacion {
+    margin: 4px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-operacion i {
+    font-size: 1rem;
+}
+
+/* Botón Cambiar Rol */
+.cambiar-rol {
+    background-color: #1A324A;
+    color: #6FFF00;
+}
+
+.cambiar-rol:hover {
+    background-color: #6FFF00;
+    color: #0A1A2A;
+}
+
+/* Botón Eliminar Usuario */
+.eliminar-usuario {
+    background-color: #460000;
+    color: white;
+}
+
+.eliminar-usuario:hover {
+    background-color: #a50000;
 }
