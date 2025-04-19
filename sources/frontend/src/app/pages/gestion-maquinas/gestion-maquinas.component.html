@@ -1,0 +1,119 @@
+<app-header-autorizado></app-header-autorizado>
+<app-sidebar-admin (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-admin>
+
+<!-- Contenedor Solicitudes Máquinas -->
+<div class="containers primarySections" [class.colapsado]="!sidebarExpandido">
+    <h1 class="titulo">Solicitudes Máquinas</h1>
+    <hr class="separator" />
+    <p class="descripcion">
+        En este apartado, los administradores pueden revisar y gestionar las solicitudes de nuevas máquinas enviadas por
+        los usuarios, aprobándolas o rechazándolas según los criterios establecidos.
+    </p>
+
+    <div class="tabla-container">
+        <div *ngIf="solicitudesMaquinas.length === 0; else tablaSolicitudes" class="mensaje-vacio">
+            No hay solicitudes de máquinas
+        </div>
+
+        <ng-template #tablaSolicitudes>
+            <table class="maquinas-tabla">
+                <thead>
+                    <tr>
+                        <th>Nº Solicitud</th>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Dificultad</th>
+                        <th>Flag Usuario</th>
+                        <th>Flag Root</th>
+                        <th>Puntos</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let maquina of solicitudesMaquinas">
+                        <td>
+                            <span class="posicion-circulo">{{ maquina.posicion }}</span>
+                        </td>
+                        <td class="colum-nombre">
+                            <div class="nombre-wrapper">
+                                <img [src]="maquina.Usuario.fotoPerfil" alt="foto" class="foto-perfil" />
+                                <span class="nombre-usuario">{{ maquina.Usuario.username }}</span>
+                            </div>
+                        </td>
+                        <td>{{ maquina.nombre }}</td>
+                        <td>{{ maquina.dificultad }}</td>
+                        <td>{{ maquina.flagUsuario }}</td>
+                        <td>{{ maquina.flagRoot }}</td>
+                        <td>{{ maquina.puntuacion }}</td>
+                        <td>
+                            <button class="btn-operacion aceptar-solicitud"
+                                (click)="aceptarSolicitud(maquina.idMaquina)">
+                                <i class="bi bi-check-circle"></i> Aceptar
+                            </button>
+                            <button class="btn-operacion denegar-solicitud"
+                                (click)="denegarSolicitud(maquina.idMaquina)">
+                                <i class="bi bi-x-circle"></i> Denegar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+    </div>
+
+</div>
+
+<!-- Contenedor Gestión Maquinas -->
+<div class="containers primarySections" [class.colapsado]="!sidebarExpandido">
+    <h1 class="titulo">Gestión Máquinas</h1>
+    <hr class="separator" />
+    <p class="descripcion">
+        En este apartado, los administradores pueden ver y gestionar todas las máquinas disponibles en la plataforma,
+        con la opción de eliminarlas.
+    </p>
+
+    <div class="tabla-container">
+        <div *ngIf="maquinasRegistradas.length === 0; else tablaMaquinas" class="mensaje-vacio">
+            No hay máquinas registradas
+        </div>
+
+        <ng-template #tablaMaquinas>
+            <table class="maquinas-tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Autor</th>
+                        <th>Dificultad</th>
+                        <th>Fecha Creación</th>
+                        <th>Puntos</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let maquina of maquinasRegistradas">
+                        <td>
+                            <span class="posicion-circulo">{{ maquina.idMaquina }}</span>
+                        </td>
+                        <td>{{ maquina.nombre }}</td>
+                        <td class="colum-nombre">
+                            <div class="nombre-wrapper">
+                                <img [src]="maquina.Usuario.fotoPerfil" alt="foto" class="foto-perfil" />
+                                <span class="nombre-usuario">{{ maquina.Usuario.username }}</span>
+                            </div>
+                        </td>
+                        <td>{{ maquina.dificultad }}</td>
+                        <td>{{ maquina.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ maquina.puntuacion }}</td>
+                        <td>
+                            <button class="btn-operacion eliminar-maquina" (click)="eliminarMaquina(maquina.idMaquina)">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+    </div>
+
+</div>

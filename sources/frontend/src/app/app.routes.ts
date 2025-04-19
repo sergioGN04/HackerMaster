@@ -10,6 +10,7 @@ import { MaquinasComponent } from './pages/maquinas/maquinas.component';
 import { MaquinaDetallesComponent } from './pages/maquina-detalles/maquina-detalles.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { GestionUsuariosComponent } from './pages/gestion-usuarios/gestion-usuarios.component';
+import { GestionMaquinasComponent } from './pages/gestion-maquinas/gestion-maquinas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -24,5 +25,6 @@ export const routes: Routes = [
   { path: 'maquina/:id', component: MaquinaDetallesComponent },
   { path: 'ranking', component: RankingComponent },
   { path: 'admin/gestion-usuarios', component: GestionUsuariosComponent },
+  { path: 'admin/gestion-maquinas', component: GestionMaquinasComponent },
   { path: '**', redirectTo: 'inicio' }
 ];
