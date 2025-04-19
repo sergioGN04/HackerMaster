@@ -1,7 +1,7 @@
-/* Estilo general de los apartados */
+/* Estilo General Contenedor */
 .containers {
     color: white;
-    padding: 150px 30px 80px 30px;
+    padding: 150px 30px 80px;
     margin-left: 280px;
     text-align: center;
 }
@@ -10,7 +10,6 @@
     margin-left: 80px;
 }
 
-/* Seccion Lista Usuarios */
 .titulo {
     font-size: 2rem;
     font-weight: bold;
@@ -20,66 +19,49 @@
 
 .separator {
     border: 1px solid white;
-    margin: 0 5% 20px 5%;
+    margin: 0 5% 20px;
 }
 
 .descripcion {
-    max-width: 800px;
-    margin: 0 auto 100px auto;
-    font-size: 0.9rem;
+    max-width: 1200px;
+    margin: 0 auto 100px;
+    font-size: 1rem;
     color: #ccc;
-    text-align: center;
 }
 
-/* Seccion Ranking */
-.titulo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #6FFF00;
-    margin-bottom: 20px;
-}
-
-.separator {
-    border: 1px solid white;
-    margin: 0 5% 20px 5%;
-}
-
-.descripcion {
-    max-width: 800px;
-    margin: 0 auto 100px auto;
-    font-size: 0.9rem;
-    color: #ccc;
-    text-align: center;
-}
-
-/* Tabla Ranking */
+/* Tabla de Usuarios */
 .tabla-container {
     overflow-x: auto;
     background-color: transparent;
     border-radius: 8px;
 }
 
-.ranking-tabla {
+.usuarios-tabla {
     min-width: 600px;
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 0;
     color: white;
     font-size: 1.1rem;
 }
 
-.ranking-tabla thead {
+.usuarios-tabla thead {
+    background-color: #0A1A2A;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
+}
+
+.usuarios-tabla th,
+.usuarios-tabla td {
+    padding: 15px;
+    text-align: center;
     background-color: #0A1A2A;
+    white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid white;
 }
 
-.ranking-tabla tr {
-    height: 100%;
-}
-
-.fila-actual td {
-    background-color: #1A324A !important;
+.usuarios-tabla td {
+    color: #6FFF00;
 }
 
 .colum-nombre {
@@ -103,25 +85,6 @@
     max-width: 200px;
 }
 
-.ranking-tabla th,
-.ranking-tabla td {
-    padding: 15px;
-    text-align: center;
-    background-color: #0A1A2A;
-    white-space: nowrap;
-    font-weight: bold;
-    border-bottom: 1px solid white;
-}
-
-.ranking-tabla td {
-    color: #6FFF00;
-}
-
-.ranking-tabla td.nombre-columna {
-    min-width: 180px;
-    justify-content: flex-start;
-}
-
 .foto-perfil {
     width: 40px;
     height: 40px;
@@ -130,6 +93,7 @@
     flex-shrink: 0;
 }
 
+/* Botones Operaciones */
 .btn-operacion {
     margin: 4px;
     padding: 8px 12px;
@@ -148,7 +112,7 @@
     font-size: 1rem;
 }
 
-/* Botón Cambiar Rol */
+/* Cambiar Rol */
 .cambiar-rol {
     background-color: #1A324A;
     color: #6FFF00;
@@ -159,7 +123,7 @@
     color: #0A1A2A;
 }
 
-/* Botón Eliminar Usuario */
+/* Eliminar Usuario */
 .eliminar-usuario {
     background-color: #460000;
     color: white;
@@ -167,4 +131,47 @@
 
 .eliminar-usuario:hover {
     background-color: #a50000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .containers {
+        margin-left: 65px;
+        padding: 120px 20px 60px;
+    }
+
+    .containers.colapsado {
+        margin-left: 65px;
+    }
+
+    .descripcion {
+        font-size: 0.8rem;
+        margin-bottom: 70px;
+    }
+
+    .foto-perfil {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containers {
+        margin-left: 60px;
+        padding: 110px 15px 40px;
+    }
+
+    .descripcion {
+        font-size: 0.8rem;
+        margin-bottom: 50px;
+    }
+
+    .btn-operacion {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+
+    .btn-operacion i {
+        font-size: 0.85rem;
+    }
 }
