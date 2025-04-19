@@ -24,9 +24,9 @@
 }
 
 .descripcion {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto 100px auto;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #ccc;
     text-align: center;
 }

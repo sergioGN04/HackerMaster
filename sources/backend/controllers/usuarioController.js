@@ -402,10 +402,10 @@ module.exports = {
                     [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/usuarios/', Sequelize.col('fotoPerfil')), 'fotoPerfil'],
                     'email',
                     'pais',
-                    'telefono',
-                    'rol',
-                    'fechaRegistro'
+                    'fechaRegistro',
+                    'rol'
                 ],
+                order: [['username', 'ASC']]
             });
 
             res.status(200).json({ usuariosRegistrados });
