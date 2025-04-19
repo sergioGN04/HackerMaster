@@ -4,7 +4,8 @@ const Maquina = require('../models/maquinaModel');
 const Intenta = require('../models/IntentaModel');
 const Usuario = require('../models/usuarioModel');
 const path = require('path');
-const fs = require('fs').promises;
+const fs = require('fs');
+const fsp = require('fs').promises;
 const Docker = require('dockerode');
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
@@ -29,11 +30,11 @@ const eliminarArchivosSubidos = async (req) => {
                         }
 
                         // Intentamos eliminar el archivo original
-                        await fs.unlink(rutaOriginal).catch(async (err) => {
+                        await fsp.unlink(rutaOriginal).catch(async (err) => {
                             if (err.code === 'ENOENT' && campo === 'imagenMaquina' && req.body?.nombre) {
                                 // Si el archivo no se encuentra, intentamos con el renombrado
                                 const rutaRenombrada = path.join(contenedorDir, `${req.body.nombre}.tar`);
-                                await fs.unlink(rutaRenombrada);
+                                await fsp.unlink(rutaRenombrada);
                             } else {
                                 throw err;
                             }
@@ -95,10 +96,10 @@ const crearImagenDocker = async (nombreMaquina) => {
 
     try {
         // Leemos el archivo .tar
-        const stream = await fs.readFile(tarPath);
+        const tarStream = fs.createReadStream(tarPath);
 
         // Cargar la imagen Docker desde el archivo .tar
-        await docker.loadImage(stream, { stdin: true });
+        await docker.loadImage(tarStream);
 
         console.log(`Imagen Docker cargada correctamente: ${nombreMaquina}`);
 
@@ -114,6 +115,7 @@ const crearImagenDocker = async (nombreMaquina) => {
 const eliminarArchivosMaquina = async (maquina) => {
     const contenedorDir = path.resolve(__dirname, '../uploads/maquinas/contenedores');
     const imagenesDir = path.resolve(__dirname, '../uploads/maquinas/imagenes');
+    const imagenPorDefecto = 'fotoMaquina.png';
 
     try {
         // Eliminar imagen .tar
@@ -122,13 +124,13 @@ const eliminarArchivosMaquina = async (maquina) => {
             const nombreImagen = `${maquina.nombre}.tar`;
 
             const rutaTar = path.join(contenedorDir, nombreImagen);
-            await fs.unlink(rutaTar).catch(() => console.warn(`No se encontró ${rutaTar}`));
+            await fsp.unlink(rutaTar).catch(() => console.error(`No se encontró ${rutaTar}`));
         }
 
-        // Eliminar imagen de la máquina
-        if (maquina.fotoMaquina) {
+        // Eliminar imagen de la máquina, si no es la imagen por defecto
+        if (maquina.fotoMaquina && maquina.fotoMaquina !== imagenPorDefecto) {
             const rutaFoto = path.join(imagenesDir, maquina.fotoMaquina);
-            await fs.unlink(rutaFoto).catch(() => console.warn(`No se encontró ${rutaFoto}`));
+            await fsp.unlink(rutaFoto).catch(() => console.error(`No se encontró ${rutaFoto}`));
         }
 
     } catch (err) {
@@ -338,7 +340,7 @@ module.exports = {
                 const contenedorDir = path.resolve(__dirname, '../uploads/maquinas/contenedores');
                 const rutaVieja = path.join(contenedorDir, imagenMaquinaTemp);
                 const rutaNueva = path.join(contenedorDir, `${nombre}.tar`);
-                fs.rename(rutaVieja, rutaNueva);
+                fsp.rename(rutaVieja, rutaNueva);
             }
 
             // Crear la nueva máquina en la base de datos
@@ -724,30 +726,24 @@ module.exports = {
     aceptarSolicitud: async (req, res) => {
         const rol = req.user.rol;
         const { idMaquina } = req.body;
-
+    
         // Verificamos que sea un administrador
         if (rol !== 'Administrador') {
             return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
         }
-
+    
         try {
             // Verificamos si la máquina existe
             const maquina = await Maquina.findByPk(idMaquina);
             if (!maquina) {
                 return res.status(404).json({ message: 'La máquina no existe' });
             }
-
+    
             // Verificamos si la máquina ya está aceptada
             if (maquina.estado === 'Aceptada') {
                 return res.status(400).json({ message: 'La máquina ya está aceptada' });
             }
-
-            // Crear la imagen Docker
-            const dockerResponse = await crearImagenDocker(maquina.nombre);
-            if (!dockerResponse.success) {
-                return res.status(500).json({ message: 'No se pudo crear la imagen Docker' });
-            }
-
+    
             // Actualizamos el estado a "Aceptada"
             await Maquina.update(
                 { estado: 'Aceptada' },
@@ -755,11 +751,25 @@ module.exports = {
             );
 
             res.status(200).json({ message: 'Solicitud de máquina aceptada correctamente' });
-
+    
+            // Creamos la imagen Docker en segundo plano
+            (async () => {
+                try {
+                    const dockerResponse = await crearImagenDocker(maquina.nombre);
+                    if (!dockerResponse.success) {
+                        console.error(`Error al crear imagen Docker para ${maquina.nombre}:`, dockerResponse.message);
+                    } else {
+                        console.log(`Imagen Docker creada correctamente para ${maquina.nombre}`);
+                    }
+                } catch (err) {
+                    console.error(`Error en creación de imagen Docker para ${maquina.nombre}:`, err.message);
+                }
+            })();
+    
         } catch (error) {
             res.status(500).json({ message: 'Error al aceptar la solicitud de la máquina' });
         }
-    },
+    },    
     denegarSolicitud: async (req, res) => {
         const rol = req.user.rol;
         const { idMaquina } = req.body;
@@ -790,14 +800,74 @@ module.exports = {
     },
     eliminarMaquina: async (req, res) => {
         const rol = req.user.rol;
-
-        // Verificamos que sea un administrador
+        const { idMaquina } = req.query;
+    
+        // Verificamos que el rol sea "Administrador"
         if (rol !== 'Administrador') {
             return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
         }
-
+    
         try {
+            // Verificamos si la máquina existe
+            const maquina = await Maquina.findByPk(idMaquina);
+            if (!maquina) {
+                return res.status(404).json({ message: 'Máquina no encontrada' });
+            }
+    
+            // Eliminamos la máquina
+            await maquina.destroy();
 
+            res.status(200).json({ message: 'Máquina eliminada correctamente' });
+    
+            // Eliminamos los archivos y contenedores asociados a la máquina, se hace en segundo plano
+            (async () => {
+                try {
+                    // Eliminar archivos asociados
+                    await eliminarArchivosMaquina(maquina);
+
+                    // Obtener el nombre de la imagen
+                    const nombreImagen = `${maquina.nombre.toLowerCase()}`;
+    
+                    // Buscar todos los contenedores usando esa imagen
+                    const contenedores = await docker.listContainers({ all: true });
+    
+                    const contenedoresUsandoImagen = contenedores.filter(c => c.Image === nombreImagen);
+
+                    // Detener y eliminar contenedores que usan la imagen
+                    for (const contenedorInfo of contenedoresUsandoImagen) {
+                        const contenedor = docker.getContainer(contenedorInfo.Id);
+
+                        // Detener el contenedor
+                        try {
+                            await contenedor.stop();
+                            console.log(`Contenedor ${contenedorInfo.Id} detenido correctamente.`);
+                        } catch (error) {
+                            console.error(`No se pudo detener contenedor ${contenedorInfo.Id}:`, error.message);
+                        }
+
+                        // Eliminar el contenedor
+                        try {
+                            await contenedor.remove();
+                            console.log(`Contenedor ${contenedorInfo.Id} eliminado correctamente.`);
+                        } catch (error) {
+                            console.error(`No se pudo eliminar contenedor ${contenedorInfo.Id}:`, error.message);
+                        }
+                    }
+
+                    // Eliminar la imagen Docker
+                    try {
+                        const imagen = docker.getImage(nombreImagen);
+                        await imagen.remove();
+                        console.log(`Imagen Docker ${nombreImagen} eliminada correctamente.`);
+                    } catch (error) {
+                        console.error(`No se pudo eliminar la imagen Docker ${nombreImagen}:`, error.message);
+                    }
+    
+                } catch (error) {
+                    console.error('Error al procesar archivos/contenedores:', error.message);
+                }
+            })();
+    
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: 'Error al eliminar la máquina' });

@@ -41,8 +41,6 @@ export class GestionMaquinasComponent {
     this.maquinaService.obtenerSolicitudesMaquinas().subscribe({
       next: (response: any) => {
         this.solicitudesMaquinas = response.solicitudesMaquinas;
-        console.log(this.solicitudesMaquinas);
-        
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
@@ -115,7 +113,7 @@ export class GestionMaquinasComponent {
 
   // Método para eliminar una máquina, sus archivos y sus datos
   eliminarMaquina(idMaquina: string): void {
-    this.maquinaService.aceptarSolicitud(idMaquina).subscribe({
+    this.maquinaService.eliminarMaquina(idMaquina).subscribe({
       next: (response: any) => {
         // Se ha eliminado la maquina correctamente
         this.getMaquinasRegistradas();
