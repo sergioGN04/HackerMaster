@@ -42,6 +42,11 @@ router.get('/api/maquina-detalle', verifyToken, maquinaController.obtenerDetalle
 router.post('/api/desplegar-maquina', verifyToken, maquinaController.desplegarMaquina);
 router.post('/api/detener-maquina', verifyToken, maquinaController.detenerMaquina);
 router.post('/api/verificar-flags', verifyToken, maquinaController.verificarMaquina);
+router.get('/api/solicitudes-maquinas', verifyToken, maquinaController.obtenerSolicitudesMaquinas);
+router.get('/api/maquinas-registradas', verifyToken, maquinaController.obtenerMaquinasRegistradas);
+router.put('/api/aceptar-solicitud', verifyToken, maquinaController.aceptarSolicitud);
+router.put('/api/denegar-solicitud', verifyToken, maquinaController.denegarSolicitud);
+router.delete('/api/eliminar-maquina', verifyToken, maquinaController.eliminarMaquina);
 
 // Notificaciones
 router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNotificaciones);

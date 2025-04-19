@@ -89,6 +89,53 @@ const detenerAutomaticamente = (nombre) => {
     }, 10800000); // 3 horas
 };
 
+// Crear imagen Docker a partir del archivo .tar
+const crearImagenDocker = async (nombreMaquina) => {
+    const tarPath = path.resolve(__dirname, `../uploads/maquinas/contenedores/${nombreMaquina}.tar`);
+
+    try {
+        // Leemos el archivo .tar
+        const stream = await fs.readFile(tarPath);
+
+        // Cargar la imagen Docker desde el archivo .tar
+        await docker.loadImage(stream, { stdin: true });
+
+        console.log(`Imagen Docker cargada correctamente: ${nombreMaquina}`);
+
+        return { success: true, message: 'Imagen cargada correctamente' };
+
+    } catch (error) {
+        console.error('Error al cargar la imagen Docker:', error);
+        throw new Error('Error al cargar la imagen Docker');
+    }
+};
+
+// Función para eliminar los archivos de una máquina
+const eliminarArchivosMaquina = async (maquina) => {
+    const contenedorDir = path.resolve(__dirname, '../uploads/maquinas/contenedores');
+    const imagenesDir = path.resolve(__dirname, '../uploads/maquinas/imagenes');
+
+    try {
+        // Eliminar imagen .tar
+        if (maquina.nombre) {
+            // Obtener nombre de la imagen
+            const nombreImagen = `${maquina.nombre}.tar`;
+
+            const rutaTar = path.join(contenedorDir, nombreImagen);
+            await fs.unlink(rutaTar).catch(() => console.warn(`No se encontró ${rutaTar}`));
+        }
+
+        // Eliminar imagen de la máquina
+        if (maquina.fotoMaquina) {
+            const rutaFoto = path.join(imagenesDir, maquina.fotoMaquina);
+            await fs.unlink(rutaFoto).catch(() => console.warn(`No se encontró ${rutaFoto}`));
+        }
+
+    } catch (err) {
+        console.error('Error al eliminar archivos:', err.message);
+    }
+};
+
 module.exports = {
     obtenerMaquinasRecomendadas: async (req, res) => {
         const { rango } = req.query;
@@ -602,6 +649,158 @@ module.exports = {
         } catch (error) {
             console.error('Error en verificarMaquina:', error);
             res.status(500).json({ message: 'Error del servidor al verificar la máquina' });
+        }
+    },
+    obtenerSolicitudesMaquinas: async (req, res) => {
+        const rol = req.user.rol;
+
+        // Verificamos que sea un administrador
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
+        }
+
+        try {
+            // Obtenemos las máquinas con estado En Espera
+            const maquinasInformacion = await Maquina.findAll({
+                attributes: ['idMaquina', 'nombre', 'dificultad', 'puntuacion', 'flagUsuario', 'flagRoot'],
+                include: [{
+                    model: Usuario,
+                    attributes: [
+                        'username',
+                        [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/usuarios/', Sequelize.col('Usuario.fotoPerfil')), 'fotoPerfil']
+                    ]
+                }],
+                where: { estado: 'En Espera' },
+                order: [['fechaCreacion', 'ASC']]
+            });
+
+            // Agregamos el número de solicitud a cada máquina
+            const solicitudesMaquinas = maquinasInformacion.map((solicitud, index) => ({
+                posicion: index + 1,
+                ...solicitud.toJSON()
+            }));
+
+            res.status(200).json({ solicitudesMaquinas });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener las solicitudes de máquinas' });
+        }
+    },
+    obtenerMaquinasRegistradas: async (req, res) => {
+        const rol = req.user.rol;
+
+        // Verificamos que sea un administrador
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
+        }
+
+        try {
+            // Obtenemos las máquinas registradas, es decir, todas las máquinas que están en estado Aceptada
+            const maquinasRegistradas = await Maquina.findAll({
+                attributes: [
+                    'idMaquina',
+                    'nombre',
+                    'dificultad',
+                    'fechaCreacion',
+                    'puntuacion'
+                ],
+                include: [{
+                    model: Usuario,
+                    attributes: [
+                        'username',
+                        [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/usuarios/', Sequelize.col('Usuario.fotoPerfil')), 'fotoPerfil']
+                    ]
+                }],
+                where: { estado: 'Aceptada' },
+                order: [['fechaCreacion', 'ASC']]
+            });
+
+            res.status(200).json({ maquinasRegistradas });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener las máquinas registradas' });
+        }
+    },
+    aceptarSolicitud: async (req, res) => {
+        const rol = req.user.rol;
+        const { idMaquina } = req.body;
+
+        // Verificamos que sea un administrador
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
+        }
+
+        try {
+            // Verificamos si la máquina existe
+            const maquina = await Maquina.findByPk(idMaquina);
+            if (!maquina) {
+                return res.status(404).json({ message: 'La máquina no existe' });
+            }
+
+            // Verificamos si la máquina ya está aceptada
+            if (maquina.estado === 'Aceptada') {
+                return res.status(400).json({ message: 'La máquina ya está aceptada' });
+            }
+
+            // Crear la imagen Docker
+            const dockerResponse = await crearImagenDocker(maquina.nombre);
+            if (!dockerResponse.success) {
+                return res.status(500).json({ message: 'No se pudo crear la imagen Docker' });
+            }
+
+            // Actualizamos el estado a "Aceptada"
+            await Maquina.update(
+                { estado: 'Aceptada' },
+                { where: { idMaquina } }
+            );
+
+            res.status(200).json({ message: 'Solicitud de máquina aceptada correctamente' });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error al aceptar la solicitud de la máquina' });
+        }
+    },
+    denegarSolicitud: async (req, res) => {
+        const rol = req.user.rol;
+        const { idMaquina } = req.body;
+
+        // Verificamos que el rol sea "Administrador"
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
+        }
+
+        try {
+            // Verificamos si la máquina existe
+            const maquina = await Maquina.findByPk(idMaquina);
+            if (!maquina) {
+                return res.status(404).json({ message: 'La máquina no existe' });
+            }
+
+            // Eliminamos los archivos de la máquina
+            await eliminarArchivosMaquina(maquina);
+
+            // Eliminamos la máquina
+            await Maquina.destroy({ where: { idMaquina } });
+
+            res.status(200).json({ message: 'La solicitud de la máquina ha sido denegada y los archivos eliminados correctamente' });
+
+        } catch (error) {
+            res.status(500).json({ message: 'Error al denegar la solicitud de la máquina' });
+        }
+    },
+    eliminarMaquina: async (req, res) => {
+        const rol = req.user.rol;
+
+        // Verificamos que sea un administrador
+        if (rol !== 'Administrador') {
+            return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
+        }
+
+        try {
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Error al eliminar la máquina' });
         }
     }
 

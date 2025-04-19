@@ -79,4 +79,45 @@ export class MaquinaService {
     return this.http.post(`${this.apiUrl}/verificar-flags`, body, { headers });
   }
 
+  // Método para obtener las solicitudes de máquinas
+  obtenerSolicitudesMaquinas(): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.get(`${this.apiUrl}/solicitudes-maquinas`, { headers });
+  }
+
+  // Método para obtener las máquinas registradas
+  obtenerMaquinasRegistradas(): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.get(`${this.apiUrl}/maquinas-registradas`, { headers });
+  }
+
+  // Método para aceptar una solicitud de máquina
+  aceptarSolicitud(idMaquina: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.put(`${this.apiUrl}/aceptar-solicitud`, { idMaquina }, { headers });
+  }
+
+  // Método para denegar una solicitud de máquina
+  denegarSolicitud(idMaquina: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.put(`${this.apiUrl}/denegar-solicitud`, { idMaquina }, { headers });
+  }
+
+  // Método para eliminar una máquina
+  eliminarMaquina(idMaquina: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const params = new HttpParams().set('idMaquina', idMaquina);
+
+    return this.http.delete(`${this.apiUrl}/eliminar-maquina`, { headers, params });
+  }
+
 }

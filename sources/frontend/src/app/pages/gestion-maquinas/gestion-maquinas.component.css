@@ -1,0 +1,156 @@
+/* Estilo General Contenedor */
+.containers {
+    color: white;
+    padding: 150px 30px 50px;
+    margin-left: 280px;
+    text-align: center;
+}
+
+.containers.colapsado {
+    margin-left: 80px;
+}
+
+.titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.separator {
+    border: 1px solid white;
+    margin: 0 5% 20px;
+}
+
+.descripcion {
+    max-width: 1200px;
+    margin: 0 auto 100px;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+/* Tabla de Solicitudes Máquinas y Gestion Máquinas */
+.tabla-container {
+    overflow-x: auto;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+.maquinas-tabla {
+    min-width: 600px;
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.maquinas-tabla thead {
+    background-color: #0A1A2A;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.maquinas-tabla th,
+.maquinas-tabla td {
+    padding: 15px;
+    text-align: center;
+    background-color: #0A1A2A;
+    white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+
+.maquinas-tabla td {
+    color: #6FFF00;
+}
+
+.colum-nombre {
+    text-align: center;
+}
+
+.nombre-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.nombre-usuario {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #6FFF00;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.posicion-circulo {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #6FFF00;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.mensaje-vacio {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #6FFF00;
+}
+
+/* Botones Operaciones */
+.btn-operacion {
+    margin: 4px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-operacion i {
+    font-size: 1rem;
+}
+
+/* Aceptar Solicitud */
+.aceptar-solicitud {
+    background-color: #1A324A;
+    color: #6FFF00;
+}
+
+.aceptar-solicitud:hover {
+    background-color: #6FFF00;
+    color: #0A1A2A;
+}
+
+/* Denegar Solicitud y Eliminar Máquina */
+.denegar-solicitud,
+.eliminar-maquina {
+    background-color: #460000;
+    color: white;
+}
+
+.denegar-solicitud:hover,
+.eliminar-maquina:hover {
+    background-color: #a50000;
+}
