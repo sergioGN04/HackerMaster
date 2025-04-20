@@ -714,7 +714,7 @@ module.exports = {
                     ]
                 }],
                 where: { estado: 'Aceptada' },
-                order: [['fechaCreacion', 'ASC']]
+                order: [['nombre', 'ASC']]
             });
 
             res.status(200).json({ maquinasRegistradas });

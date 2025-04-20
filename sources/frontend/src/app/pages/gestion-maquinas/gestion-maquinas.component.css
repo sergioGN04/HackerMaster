@@ -153,3 +153,46 @@
 .eliminar-maquina:hover {
     background-color: #a50000;
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .containers {
+        margin-left: 65px;
+        padding: 120px 20px 60px;
+    }
+
+    .containers.colapsado {
+        margin-left: 65px;
+    }
+
+    .descripcion {
+        font-size: 0.8rem;
+        margin-bottom: 70px;
+    }
+
+    .foto-perfil {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containers {
+        margin-left: 60px;
+        padding: 110px 15px 40px;
+    }
+
+    .descripcion {
+        font-size: 0.8rem;
+        margin-bottom: 50px;
+    }
+
+    .btn-operacion {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+
+    .btn-operacion i {
+        font-size: 0.85rem;
+    }
+}
