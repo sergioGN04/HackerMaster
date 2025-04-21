@@ -29,6 +29,12 @@
     color: #ccc;
 }
 
+.mensaje-vacio {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #6FFF00;
+}
+
 /* Tabla de Usuarios */
 .tabla-container {
     overflow-x: auto;

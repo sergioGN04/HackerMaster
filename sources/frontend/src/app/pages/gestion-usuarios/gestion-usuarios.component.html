@@ -13,40 +13,46 @@
     </p>
 
     <div class="tabla-container">
-        <table class="usuarios-tabla">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>País</th>
-                    <th>Fecha Registro</th>
-                    <th>Rol</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let usuario of usuariosRegistrados">
-                    <td class="colum-nombre">
-                        <div class="nombre-wrapper">
-                            <img [src]="usuario.fotoPerfil" alt="foto" class="foto-perfil" />
-                            <span class="nombre-usuario">{{ usuario.username }}</span>
-                        </div>
-                    </td>
-                    <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.pais }}</td>
-                    <td>{{ usuario.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ usuario.rol }}</td>
-                    <td>
-                        <button class="btn-operacion cambiar-rol" (click)="cambiarRol(usuario.idUsuario)">
-                            <i class="bi bi-arrow-left-right"></i> Cambiar Rol
-                        </button>
-                        <button class="btn-operacion eliminar-usuario" (click)="eliminarUsuario(usuario.idUsuario)">
-                            <i class="bi bi-trash"></i> Eliminar
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div *ngIf="usuariosRegistrados.length === 0; else tablaUsuarios" class="mensaje-vacio">
+            No hay usuarios registrados
+        </div>
+
+        <ng-template #tablaUsuarios>
+            <table class="usuarios-tabla">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>País</th>
+                        <th>Fecha Registro</th>
+                        <th>Rol</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuariosRegistrados">
+                        <td class="colum-nombre">
+                            <div class="nombre-wrapper">
+                                <img [src]="usuario.fotoPerfil" alt="foto" class="foto-perfil" />
+                                <span class="nombre-usuario">{{ usuario.username }}</span>
+                            </div>
+                        </td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.pais }}</td>
+                        <td>{{ usuario.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ usuario.rol }}</td>
+                        <td>
+                            <button class="btn-operacion cambiar-rol" (click)="cambiarRol(usuario.idUsuario)">
+                                <i class="bi bi-arrow-left-right"></i> Cambiar Rol
+                            </button>
+                            <button class="btn-operacion eliminar-usuario" (click)="eliminarUsuario(usuario.idUsuario)">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
     </div>
 
 </div>

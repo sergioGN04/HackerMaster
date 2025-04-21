@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class GestionUsuariosComponent {
   sidebarExpandido = true;
-  usuariosRegistrados: any;
+  usuariosRegistrados: any = [];
 
   constructor(private authService: AuthService, private usuarioService: UsuarioService, private router: Router) { }
 
