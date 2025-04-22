@@ -11,7 +11,16 @@
             <div class="info-maquina">
                 <h3>{{ maquinaDetalles.nombre }}</h3>
                 <p><strong>Autor: </strong>{{ maquinaDetalles.Usuario.username }}</p>
-                <p><strong>Dificultad:</strong> {{ maquinaDetalles.dificultad }}</p>
+                <p>
+                    <strong>Dificultad:</strong>
+                    <span [ngClass]="{
+                      'dificultad-facil': maquinaDetalles.dificultad === 'Facil',
+                      'dificultad-media': maquinaDetalles.dificultad === 'Media',
+                      'dificultad-dificil': maquinaDetalles.dificultad === 'Dificil'
+                    }">
+                        {{ maquinaDetalles.dificultad }}
+                    </span>
+                </p>
             </div>
         </div>
 
@@ -58,16 +67,18 @@
             <div class="preguntas-maquina lineal">
                 <div class="pregunta-con-icono">
                     <i class="bi bi-flag icono-bandera"></i>
-                    <input type="text" class="form-control" placeholder="Enviar Flag Usuario" [(ngModel)]="flagUsuario" name="flagUsuario">
+                    <input type="text" class="form-control" placeholder="Enviar Flag Usuario" [(ngModel)]="flagUsuario"
+                        name="flagUsuario">
                 </div>
 
                 <div class="separator-vertical"></div>
-            
+
                 <div class="pregunta-con-icono">
                     <i class="bi bi-flag icono-bandera"></i>
-                    <input type="text" class="form-control" placeholder="Enviar Flag Root" [(ngModel)]="flagRoot" name="flagRoot">
+                    <input type="text" class="form-control" placeholder="Enviar Flag Root" [(ngModel)]="flagRoot"
+                        name="flagRoot">
                 </div>
-            </div>            
+            </div>
             <button class="btn btn-submit" (click)="comprobarFlags()">Comprobar</button>
             <div *ngIf=" mensajeFlags !== '' ">
                 <p [ngClass]="{ 'mensaje-error': mensajeErrorFlags, 'mensaje-exito': !mensajeErrorFlags }">

@@ -28,6 +28,18 @@
     text-align: center;
 }
 
+.dificultad-facil {
+    color: #6FFF00;
+}
+
+.dificultad-media {
+    color: #FFD700;
+}
+
+.dificultad-dificil {
+    color: #FF4C4C;
+}
+
 .imagen-maquina {
     height: auto;
     width: 300px;

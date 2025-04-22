@@ -41,7 +41,15 @@
                             </div>
                         </td>
                         <td>{{ maquina.nombre }}</td>
-                        <td>{{ maquina.dificultad }}</td>
+                        <td>
+                            <span [ngClass]="{
+                              'dificultad-facil': maquina.dificultad === 'Facil',
+                              'dificultad-media': maquina.dificultad === 'Media',
+                              'dificultad-dificil': maquina.dificultad === 'Dificil'
+                            }">
+                                {{ maquina.dificultad }}
+                            </span>
+                        </td>
                         <td>{{ maquina.flagUsuario }}</td>
                         <td>{{ maquina.flagRoot }}</td>
                         <td>{{ maquina.puntuacion }}</td>
@@ -102,7 +110,15 @@
                                 <span class="nombre-usuario">{{ maquina.Usuario.username }}</span>
                             </div>
                         </td>
-                        <td>{{ maquina.dificultad }}</td>
+                        <td>
+                            <span [ngClass]="{
+                              'dificultad-facil': maquina.dificultad === 'Facil',
+                              'dificultad-media': maquina.dificultad === 'Media',
+                              'dificultad-dificil': maquina.dificultad === 'Dificil'
+                            }">
+                                {{ maquina.dificultad }}
+                            </span>
+                        </td>
                         <td>{{ maquina.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
                         <td>{{ maquina.puntuacion }}</td>
                         <td>

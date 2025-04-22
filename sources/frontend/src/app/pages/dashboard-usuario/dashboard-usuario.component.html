@@ -75,7 +75,13 @@
                 <a href="maquina/{{ maquina.idMaquina }}">
                     <img [src]="maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
                     <h3>{{ maquina.nombre }}</h3>
-                    <p>{{ maquina.dificultad }}</p>
+                    <p [ngClass]="{
+                        'facil': maquina.dificultad === 'Facil',
+                        'media': maquina.dificultad === 'Media',
+                        'dificil': maquina.dificultad === 'Dificil'
+                      }">
+                        {{ maquina.dificultad }}
+                    </p>
                 </a>
             </div>
         </div>

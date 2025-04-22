@@ -126,7 +126,15 @@
                         </div>
 
                         <!-- Botón de Enviar -->
-                        <button type="submit" class="btn btn-enviar">Crear máquina</button>
+                        <button type="submit" class="btn btn-enviar" [disabled]="creandoMaquina">
+                            <ng-container *ngIf="!creandoMaquina; else cargandoCrear">
+                                Crear máquina
+                            </ng-container>
+                            <ng-template #cargandoCrear>
+                                <i class="bi bi-arrow-repeat spinner-icon"></i>
+                            </ng-template>
+                        </button>
+
                         <div class="mensajeErrorFormNuevaMaquina" *ngIf="mensajeFormNuevaMaquina !== ''">
                             <p
                                 [ngClass]="{ 'mensaje-error': mensajeErrorFormNuevaMaquina, 'mensaje-exito': !mensajeErrorFormNuevaMaquina }">
@@ -164,7 +172,13 @@
                     <a href="maquina/{{ maquina.idMaquina }}">
                         <img [src]="maquina.fotoMaquina" alt="Foto de la máquina" class="foto-maquina">
                         <h3>{{ maquina.nombre }}</h3>
-                        <p>{{ maquina.dificultad }}</p>
+                        <p [ngClass]="{
+                            'facil': maquina.dificultad === 'Facil',
+                            'media': maquina.dificultad === 'Media',
+                            'dificil': maquina.dificultad === 'Dificil'
+                          }">
+                            {{ maquina.dificultad }}
+                        </p>
                     </a>
                 </div>
             </div>

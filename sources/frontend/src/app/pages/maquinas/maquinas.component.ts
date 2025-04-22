@@ -20,6 +20,7 @@ export class MaquinasComponent {
   sidebarExpandido = true;
 
   nuevaMaquina: any = { dificultad: "" };
+  creandoMaquina: boolean = false;
   mensajeFormNuevaMaquina: string = '';
   mensajeErrorFormNuevaMaquina: boolean = false;
 
@@ -86,6 +87,8 @@ export class MaquinasComponent {
   // Función que maneja el envío del formulario
   guardarMaquina(crearMaquinaForm: NgForm) {
 
+    this.creandoMaquina = true;
+
     // Comprobamos que todos los campos tienen datos
     if (!this.nuevaMaquina.nombre || !this.nuevaMaquina.fotoMaquina || !this.nuevaMaquina.dificultad || !this.nuevaMaquina.writeUp
       || !this.nuevaMaquina.imagenMaquina || !this.nuevaMaquina.descripcion || !this.nuevaMaquina.flagUsuario
@@ -93,6 +96,8 @@ export class MaquinasComponent {
 
       this.mensajeErrorFormNuevaMaquina = true;
       this.mensajeFormNuevaMaquina = "Todos los campos son obligatorios";
+
+      this.creandoMaquina = false;
 
       setTimeout(() => {
         this.mensajeFormNuevaMaquina = '';
@@ -131,6 +136,8 @@ export class MaquinasComponent {
           this.nuevaMaquina.fotoMaquina = null;
           this.nuevaMaquina.imagenMaquina = null;
 
+          this.creandoMaquina = false;
+
           setTimeout(() => {
             this.mensajeFormNuevaMaquina = '';
           }, 4000);
@@ -139,6 +146,8 @@ export class MaquinasComponent {
         error: (error: any) => {
           this.mensajeFormNuevaMaquina = error.error.message;
           this.mensajeErrorFormNuevaMaquina = true;
+
+          this.creandoMaquina = false;
 
           setTimeout(() => {
             this.mensajeFormNuevaMaquina = '';
