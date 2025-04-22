@@ -69,7 +69,7 @@ module.exports = {
             }
 
             const nombreUsuario = usuario.username;
-            const fotoPerfil = `http://192.168.2.2:3000/uploads/usuarios/${usuario.fotoPerfil}`;
+            const fotoPerfil = `http://${process.env.IP_BACKEND}/uploads/usuarios/${usuario.fotoPerfil}`;
 
             // Obtener rango y puntuación
             const { puntuacion, rango } = await calcularRangoYPuntuacion(idUsuario);
@@ -110,7 +110,7 @@ module.exports = {
                 attributes: [
                     'idUsuario',
                     'username',
-                    [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/usuarios/', Sequelize.col('fotoPerfil')), 'fotoPerfil'],
+                    [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/usuarios/`, Sequelize.col('fotoPerfil')), 'fotoPerfil' ],
                     'email',
                     'pais',
                     'fechaNacimiento',
@@ -353,7 +353,7 @@ module.exports = {
                 ranking.push({
                     idUsuario,
                     username: usuario.username,
-                    fotoPerfil: `http://192.168.2.2:3000/uploads/usuarios/${usuario.fotoPerfil}`,
+                    fotoPerfil: `http://${process.env.IP_BACKEND}/uploads/usuarios/${usuario.fotoPerfil}`,
                     maquinasCompletadas,
                     logrosCompletados,
                     puntuacion
@@ -399,7 +399,7 @@ module.exports = {
                 attributes: [
                     'idUsuario',
                     'username',
-                    [Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/usuarios/', Sequelize.col('fotoPerfil')), 'fotoPerfil'],
+                    [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/usuarios/`, Sequelize.col('fotoPerfil')), 'fotoPerfil' ],
                     'email',
                     'pais',
                     'fechaRegistro',

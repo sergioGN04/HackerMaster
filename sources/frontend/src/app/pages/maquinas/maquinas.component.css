@@ -256,6 +256,22 @@ h3 {
     width: 250px;
 }
 
+.spinner-icon {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    font-size: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .mensaje-error {
     color: #ff4d4d;
     background-color: rgba(255, 0, 0, 0.1);
@@ -374,7 +390,19 @@ h3 {
 
 .item-maquina p {
     font-size: 16px;
+    font-weight: bold;
+}
+
+.facil {
     color: #6FFF00;
+}
+
+.media {
+    color: #FFD700;
+}
+
+.dificil {
+    color: #FF4C4C;
 }
 
 /* Responsive */

@@ -30,7 +30,7 @@ module.exports = {
                     'idLogro', 
                     'nombre', 
                     'descripcion', 
-                    [ Sequelize.fn('CONCAT', 'http://192.168.2.2:3000/uploads/logros/', Sequelize.col('fotoLogro')),'fotoLogro' ],
+                    [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/logros/`, Sequelize.col('fotoLogro')),'fotoLogro' ],
                     'puntuacion'
                 ],
                 where: {

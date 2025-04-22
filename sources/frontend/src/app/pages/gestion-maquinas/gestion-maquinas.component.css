@@ -106,6 +106,18 @@
     font-size: 1.3rem;
 }
 
+.dificultad-facil {
+    color: #6FFF00;
+}
+
+.dificultad-media {
+    color: #FFD700;
+}
+
+.dificultad-dificil {
+    color: #FF4C4C;
+}
+
 .mensaje-vacio {
     text-align: center;
     font-size: 1.1rem;

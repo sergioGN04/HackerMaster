@@ -200,7 +200,19 @@ button.active {
 
 .maquina-card p {
     font-size: 16px;
+    font-weight: bold;
+}
+
+.facil {
     color: #6FFF00;
+}
+
+.media {
+    color: #FFD700;
+}
+
+.dificil {
+    color: #FF4C4C;
 }
 
 /* Responsive */
