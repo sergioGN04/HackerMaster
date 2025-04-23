@@ -10,6 +10,7 @@ const logroController = require('../controllers/logroController');
 const verifyToken = require('../middlewares/verifyToken');
 const uploadUsuario = require('../config/multerUsuarioConfig');
 const uploadMaquina = require('../config/multerMaquinaConfig');
+const uploadNotificacion = require('../config/multerNotificacionConfig');
 
 // ------ Rutas HackerMaster ------
 // Informacion del sitio
@@ -50,7 +51,10 @@ router.delete('/api/eliminar-maquina', verifyToken, maquinaController.eliminarMa
 
 // Notificaciones
 router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNotificaciones);
+router.get('/api/notificaciones-usuario', verifyToken, notificacionController.obtenerNotificacionesUsuario);
 router.get('/api/marcar-notificaciones', verifyToken, notificacionController.marcarNotificacionesComoVistas);
+router.post('/api/crear-notificacion', verifyToken, uploadNotificacion, notificacionController.crearNotificacion);
+router.delete('/api/eliminar-notificacion', verifyToken, notificacionController.eliminarNotificacion);
 
 // Logros
 router.get('/api/logros-usuario', verifyToken, logroController.obtenerLogrosUsuario);

@@ -84,7 +84,7 @@ export class MaquinasComponent {
     }
   }
 
-  // Función que maneja el envío del formulario
+  // Función que maneja el guardado de la nueva máquina
   guardarMaquina(crearMaquinaForm: NgForm) {
 
     this.creandoMaquina = true;
@@ -144,7 +144,7 @@ export class MaquinasComponent {
 
         },
         error: (error: any) => {
-          this.mensajeFormNuevaMaquina = error.error.message;
+          this.mensajeFormNuevaMaquina = error.error.message || 'Error al subir la máquina';
           this.mensajeErrorFormNuevaMaquina = true;
 
           this.creandoMaquina = false;

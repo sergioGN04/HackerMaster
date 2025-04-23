@@ -17,7 +17,7 @@ export class NotificacionService {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.get(`${this.apiUrl}/notificaciones`, { headers });
+    return this.http.get(`${this.apiUrl}/notificaciones-usuario`, { headers });
   }
 
   // Método para obtener las notificaciones del usuario que no han sido leídas
@@ -26,9 +26,34 @@ export class NotificacionService {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     const idsNotificaciones = notificaciones.join(",");
-    const params = new HttpParams().set('idsNotificaciones',idsNotificaciones);
+    const params = new HttpParams().set('idsNotificaciones', idsNotificaciones);
 
     return this.http.get(`${this.apiUrl}/marcar-notificaciones`, { headers, params });
+  }
+
+  // Método para obtener las notificaciones
+  obtenerNotificaciones(): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.get(`${this.apiUrl}/notificaciones`, { headers });
+  }
+
+  // Método para crear la notificación
+  crearNotificacion(data: FormData): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.post(`${this.apiUrl}/crear-notificacion`, data, { headers });
+  }
+
+  // Método para eliminar las notificaciones
+  eliminarNotificacion(idNotificacion: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const params = new HttpParams().set('idNotificacion', idNotificacion);
+
+    return this.http.delete(`${this.apiUrl}/eliminar-notificacion`, { headers, params });
   }
 
 }

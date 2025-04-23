@@ -1,0 +1,158 @@
+<app-header-autorizado></app-header-autorizado>
+<app-sidebar-admin (sidebarExpandido)="sidebarExpandido = $event"></app-sidebar-admin>
+
+<!-- Contenedor Crear Notificaciones -->
+<div class="containers crear-notificacion-section primarySections" [class.colapsado]="!sidebarExpandido">
+    <div class="accordion" id="accordionCrearNotificacion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" style="border-radius: 0;" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+                    aria-controls="collapseOne">
+                    <div class="accordion-content">
+                        <i class="bi bi-plus-circle"></i> Crear Notificación
+                    </div>
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                data-bs-parent="#accordionCrearNotificacion">
+                <div class="accordion-body formulario-notificacion">
+                    <!-- Título de la sección -->
+                    <h3>Crear Notificación</h3>
+                    <hr class="linea-separadora" />
+
+                    <!-- Descripción -->
+                    <p class="descripcion-formulario">
+                        En este apartado, los administradores pueden crear y enviar notificaciones personalizadas para
+                        mantener informados a los usuarios. Es una forma sencilla de comunicar avisos importantes de manera clara
+                        y en el momento oportuno.
+                    </p>
+
+                    <!-- Formulario Crear Notificación -->
+                    <form class="formCrearNotificacion" #crearNotificacionForm="ngForm" id="crearNotificacionForm"
+                        (ngSubmit)="guardarNotificacion(crearNotificacionForm)">
+
+                        <div class="formulario-contenedor">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tituloNotificacion">Título</label>
+                                    <input type="text" id="tituloNotificacion" [(ngModel)]="nuevaNotificacion.titulo"
+                                        name="titulo" placeholder="Nueva Notificación" required class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fotoNotificacion">Foto Notificación</label>
+                                    <div class="custom-file-input">
+                                        <span *ngIf="!nuevaNotificacion.fotoNotificacion">Ningún Archivo
+                                            Seleccionado</span>
+                                        <span *ngIf="nuevaNotificacion.fotoNotificacion">{{
+                                            nuevaNotificacion.fotoNotificacion.name }}</span>
+                                        <button type="button" class="btn btn-seleccionar"
+                                            (click)="selectFile('fotoNotificacion')">Seleccionar</button>
+                                        <input type="file" id="fotoNotificacion"
+                                            (change)="onFileSelected('fotoNotificacion', $event)" hidden
+                                            accept="image/png, image/jpeg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fechaLimite">Fecha Límite</label>
+                                    <input type="date" [(ngModel)]="nuevaNotificacion.fechaLimite" name="fechaLimite"
+                                        id="fechaLimite" class="form-control" required />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="descripcionNotificacion">Descripción</label>
+                                    <textarea id="descripcionNotificacion" [(ngModel)]="nuevaNotificacion.descripcion"
+                                        name="descripcion" rows="4" placeholder="Descripción notificación..." required
+                                        class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Botón de Enviar -->
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-enviar" [disabled]="creandoNotificacion">
+                                <ng-container *ngIf="!creandoNotificacion; else cargandoCrear">
+                                    Crear Notificación
+                                </ng-container>
+                                <ng-template #cargandoCrear>
+                                    <i class="bi bi-arrow-repeat spinner-icon"></i>
+                                </ng-template>
+                            </button>
+                        </div>
+
+                        <div class="mensajeErrorFormNuevaNotificacion" *ngIf="mensajeFormNuevaNotificacion !== ''">
+                            <p
+                                [ngClass]="{ 'mensaje-error': mensajeErrorFormNuevaNotificacion, 'mensaje-exito': !mensajeErrorFormNuevaNotificacion }">
+                                {{ mensajeFormNuevaNotificacion }}
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contenedor Gestión Notificaciones -->
+<div class="containers primarySections" [class.colapsado]="!sidebarExpandido">
+    <!-- Lista de Notificaciones -->
+    <div class="notificaciones-section">
+        <h2 class="titulo-seccion">Gestión Notificaciones</h2>
+        <hr class="linea-separadora" />
+
+        <p class="descripcion-formulario">
+            En este apartado, los administradores pueden ver y gestionar todas las notificaciones enviadas a los usuarios. Desde aquí
+            es posible revisar el historial y eliminar aquellas que ya no sean necesarias.
+        </p>
+
+        <div class="tabla-container">
+            <div *ngIf="notificaciones.length === 0; else tablaNotificaciones" class="mensaje-vacio">
+                No hay notificaciones creadas
+            </div>
+
+            <ng-template #tablaNotificaciones>
+                <table class="notificaciones-tabla">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>Descripción</th>
+                            <th>Foto</th>
+                            <th>Fecha Limite</th>
+                            <th>Operaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let notificacion of notificaciones">
+                            <td>
+                                <span class="posicion-circulo">{{ notificacion.idNotificacion }}</span>
+                            </td>
+                            <td>{{ notificacion.titulo }}</td>
+                            <td class="descripcion">{{ notificacion.descripcion }}</td>
+                            <td>
+                                <img [src]="notificacion.fotoNotificacion" alt="foto" class="foto-perfil" />
+                            </td>
+                            <td>{{ notificacion.fechaLimite | date: 'dd/MM/yyyy' }}</td>
+                            <td>
+                                <button class="btn-operacion eliminar-notificacion"
+                                    (click)="eliminarNotificacion(notificacion.idNotificacion)">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </div>
+    </div>
+</div>

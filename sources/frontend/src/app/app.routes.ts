@@ -11,6 +11,7 @@ import { MaquinaDetallesComponent } from './pages/maquina-detalles/maquina-detal
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { GestionUsuariosComponent } from './pages/gestion-usuarios/gestion-usuarios.component';
 import { GestionMaquinasComponent } from './pages/gestion-maquinas/gestion-maquinas.component';
+import { GestionNotificacionesComponent } from './pages/gestion-notificaciones/gestion-notificaciones.component';
 import { Error404Component } from './pages/error-404/error-404.component';
 
 export const routes: Routes = [
@@ -27,5 +28,6 @@ export const routes: Routes = [
   { path: 'ranking', component: RankingComponent },
   { path: 'admin/gestion-usuarios', component: GestionUsuariosComponent },
   { path: 'admin/gestion-maquinas', component: GestionMaquinasComponent },
+  { path: 'admin/gestion-notificaciones', component: GestionNotificacionesComponent },
   { path: '**', component: Error404Component }
 ];
