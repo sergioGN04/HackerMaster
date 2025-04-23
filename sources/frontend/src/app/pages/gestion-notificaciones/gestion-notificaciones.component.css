@@ -1,0 +1,396 @@
+/* Estilo General Contenedor */
+.containers {
+    color: white;
+    padding: 130px 30px 80px;
+    margin-left: 280px;
+}
+
+.containers.colapsado {
+    margin-left: 80px;
+}
+
+/* Sección Crear Notificación */
+.crear-notificacion-section {
+    color: white;
+    padding: 80px 0 0 0;
+    margin-left: 275px;
+}
+
+.crear-notificacion-section.colapsado {
+    margin-left: 75px;
+}
+
+/* Estilos del Acordeón */
+.accordion-item {
+    border: none;
+}
+
+.accordion-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A324A;
+    color: #6FFF00;
+    font-weight: bold;
+    border: none;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 0;
+}
+
+.accordion-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.accordion-button i {
+    margin-right: 10px;
+    font-size: 1.4rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.accordion-button::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    font-weight: 900;
+    font-size: 20px;
+    color: #6FFF00;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 20px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg);
+}
+
+.accordion-body {
+    background-color: #0A1A2A;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 15px 20px;
+    border-radius: 0;
+    border: none;
+    text-align: center;
+}
+
+/* Sección del formulario de la notificación */
+.formulario-notificacion {
+    padding: 80px 7% 40px 7%;
+    background-color: #0A1A2A;
+}
+
+.formCrearNotificacion {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #1A324A;
+    border-radius: 20px;
+    padding: 50px 70px;
+}
+
+.form-row {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.formCrearNotificacion label {
+    font-size: 1.2rem;
+    margin: 50px 0 10px 0;
+}
+
+.formulario-notificacion .form-label {
+    color: #6FFF00;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.linea-separadora {
+    border: 1px solid white;
+    margin: 0 5% 20px 5%;
+}
+
+.descripcion-formulario {
+    font-size: 1rem;
+    margin-bottom: 80px;
+    color: #CCCCCC;
+}
+
+.formulario-contenedor {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.formulario-notificacion input,
+.formulario-notificacion select,
+.formulario-notificacion textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #B0B0B0;
+    border-radius: 5px;
+    background-color: #0A1A2A;
+    color: white;
+    font-size: 1rem;
+    max-width: 700px;
+    min-width: 300px;
+}
+
+.formulario-notificacion input:focus,
+.formulario-notificacion select:focus,
+.formulario-notificacion textarea:focus {
+    outline: none;
+    border: 1px solid #6FFF00;
+}
+
+.formulario-notificacion input::placeholder,
+.formulario-notificacion select::placeholder,
+.formulario-notificacion textarea::placeholder {
+    color: white;
+    opacity: 90%;
+}
+
+.formulario-notificacion .form-group {
+    width: 100%;
+}
+
+.custom-file-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    background-color: #0A1A2A;
+    padding: 7px;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-seleccionar {
+    background-color: #6FFF00;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-seleccionar:hover,
+.btn-enviar:hover {
+    background-color: #57cc00;
+    color: #FFFFFF;
+}
+
+.btn-seleccionar:active,
+.btn-enviar:active {
+    background-color: #4DB300;
+    color: #FFFFFF;
+}
+
+.btn-seleccionar:focus,
+.btn-enviar:focus {
+    background-color: #368000;
+    color: #FFFFFF;
+}
+
+/* Botón de Enviar */
+.btn-enviar {
+    background-color: #6FFF00;
+    color: black;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 80px auto 20px auto;
+    width: 250px;
+}
+
+/* Estilo para el mensaje de error o éxito */
+.mensaje-error {
+    color: #ff4d4d;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff4d4d;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.mensaje-exito {
+    color: #4dff4d;
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #4dff4d;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+/* Spinner de carga */
+.spinner-icon {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    font-size: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Seccion de Notificaciones */
+.notificaciones-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.titulo-seccion {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+/* Tabla de Gestión Notificaciones */
+.tabla-container {
+    overflow-x: auto;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+.notificaciones-tabla {
+    min-width: 600px;
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.notificaciones-tabla thead {
+    background-color: #0A1A2A;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.notificaciones-tabla th,
+.notificaciones-tabla td {
+    padding: 15px;
+    text-align: center;
+    background-color: #0A1A2A;
+    white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notificaciones-tabla td {
+    color: #6FFF00;
+}
+
+.posicion-circulo {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #6FFF00;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.descripcion {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.mensaje-vacio {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #6FFF00;
+}
+
+/* Botones Operaciones */
+.btn-operacion {
+    margin: 4px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-operacion i {
+    font-size: 1rem;
+}
+
+/* Eliminar Notificación */
+.eliminar-notificacion {
+    background-color: #460000;
+    color: white;
+}
+
+.eliminar-notificacion:hover {
+    background-color: #a50000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
+
+}
