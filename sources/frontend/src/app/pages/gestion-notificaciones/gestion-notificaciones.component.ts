@@ -52,7 +52,7 @@ export class GestionNotificacionesComponent {
           this.authService.eliminarToken();
           this.router.navigate(['/login']);
         } else {
-          console.error('Error - No se ha podido obtener las solicitudes de máquinas');
+          console.error('Error - No se ha podido obtener las notificaciones');
         }
       }
     });
@@ -72,8 +72,7 @@ export class GestionNotificacionesComponent {
     }
   }
 
-
-  // Método para guardar la nueva notificación
+  // Método para crear la nueva notificación
   guardarNotificacion(crearNotificacionForm: NgForm): void {
 
     this.creandoNotificacion = true;

@@ -52,7 +52,7 @@ router.delete('/api/eliminar-maquina', verifyToken, maquinaController.eliminarMa
 // Notificaciones
 router.get('/api/notificaciones', verifyToken, notificacionController.obtenerNotificaciones);
 router.get('/api/notificaciones-usuario', verifyToken, notificacionController.obtenerNotificacionesUsuario);
-router.get('/api/marcar-notificaciones', verifyToken, notificacionController.marcarNotificacionesComoVistas);
+router.put('/api/marcar-notificaciones', verifyToken, notificacionController.marcarNotificacionesComoVistas);
 router.post('/api/crear-notificacion', verifyToken, uploadNotificacion, notificacionController.crearNotificacion);
 router.delete('/api/eliminar-notificacion', verifyToken, notificacionController.eliminarNotificacion);
 

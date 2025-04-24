@@ -20,15 +20,12 @@ export class NotificacionService {
     return this.http.get(`${this.apiUrl}/notificaciones-usuario`, { headers });
   }
 
-  // Método para obtener las notificaciones del usuario que no han sido leídas
+  // Método para marcar notificaciones como vistas
   marcarNotificaciones(notificaciones: any[]): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    const idsNotificaciones = notificaciones.join(",");
-    const params = new HttpParams().set('idsNotificaciones', idsNotificaciones);
-
-    return this.http.get(`${this.apiUrl}/marcar-notificaciones`, { headers, params });
+    return this.http.put(`${this.apiUrl}/marcar-notificaciones`, { notificaciones }, { headers });
   }
 
   // Método para obtener las notificaciones
@@ -47,7 +44,7 @@ export class NotificacionService {
     return this.http.post(`${this.apiUrl}/crear-notificacion`, data, { headers });
   }
 
-  // Método para eliminar las notificaciones
+  // Método para eliminar una notificación
   eliminarNotificacion(idNotificacion: string): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });

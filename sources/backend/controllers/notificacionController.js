@@ -8,6 +8,7 @@ module.exports = {
     obtenerNotificaciones: async (req, res) => {
         try {
 
+            // Obtenemos las notificaciones de los usuarios
             const notificaciones = await Notificacion.findAll({
                 attributes: [
                     'idNotificacion',
@@ -76,29 +77,33 @@ module.exports = {
         }
     },
     marcarNotificacionesComoVistas: async (req, res) => {
-        const { idsNotificaciones } = req.query;
+        const { notificaciones } = req.body;
         const idUsuario = req.user.idUsuario;
-
+    
         try {
-            // Convertir en un array de enteros
-            const idsArray = idsNotificaciones.split(',').map(id => parseInt(id)).filter(Boolean);
 
-            const registros = idsArray.map(idNotificacion => ({
+            // Verificamos que la lista de IDs no esté vacía
+            if (!Array.isArray(notificaciones) || notificaciones.length === 0) {
+                return res.status(400).json({ message: 'Lista de notificaciones inválida' });
+            }
+
+            // Creamos una lista de objetos con idNotificacion e idUsuario, para registrar que el usuario ha visto las notificaciones
+            const registros = notificaciones.map(idNotificacion => ({
                 idUsuario,
                 idNotificacion
             }));
-
-            // Marcar las notificaciones como vistas para el usuario
+    
+            // Marcar como vistas las notificaciones, ignorando duplicados
             await NotificacionUsuario.bulkCreate(registros, {
                 ignoreDuplicates: true
             });
-
+    
             res.status(200).json({ message: 'Notificaciones marcadas como vistas' });
-
+    
         } catch (error) {
             res.status(500).json({ message: 'Error al marcar notificaciones como vistas' });
         }
-    },
+    },    
     crearNotificacion: async (req, res) => {
         try {
             const { titulo, descripcion, fechaLimite } = req.body;
@@ -140,7 +145,7 @@ module.exports = {
             // Obtenemos la ruta del archivo a eliminar
             const rutaImagen = path.join(__dirname, '../uploads/notificaciones', notificacion.fotoNotificacion);
 
-            // Eliminar archivo si existe
+            // Eliminar archivo si existe y si no es la foto predeterminada (fotoNotificacion.png)
             if (notificacion.fotoNotificacion != 'fotoNotificacion.png' && fs.existsSync(rutaImagen)) {
                 fs.unlinkSync(rutaImagen);
             } else {
