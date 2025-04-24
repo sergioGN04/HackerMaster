@@ -177,6 +177,11 @@
         margin-left: 65px;
     }
 
+    .titulo {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
     .descripcion {
         font-size: 0.8rem;
         margin-bottom: 70px;
@@ -186,6 +191,18 @@
         width: 32px;
         height: 32px;
     }
+
+
+    .nombre-usuario {
+        font-size: 0.9rem;
+        max-width: 150px;
+    }
+
+    .btn-operacion {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        gap: 4px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -194,17 +211,57 @@
         padding: 110px 15px 40px;
     }
 
+    .containers.colapsado {
+        margin-left: 60px;
+    }
+
+    .titulo {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+
     .descripcion {
         font-size: 0.8rem;
         margin-bottom: 50px;
     }
 
+    .foto-perfil {
+        width: 35px;
+        height: 35px;
+    }
+
+    .nombre-usuario {
+        font-size: 0.85rem;
+        max-width: 120px;
+    }
+
     .btn-operacion {
-        padding: 6px 10px;
         font-size: 0.75rem;
+        padding: 6px 10px;
     }
 
     .btn-operacion i {
         font-size: 0.85rem;
+    }
+
+    .posicion-circulo {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1rem;
+    }
+
+    .maquinas-tabla {
+        font-size: 0.9rem;
+        min-width: 100%;
+    }
+
+    .maquinas-tabla th,
+    .maquinas-tabla td {
+        padding: 8px 6px;
+    }
+
+    .nombre-wrapper {
+        gap: 8px;
     }
 }
