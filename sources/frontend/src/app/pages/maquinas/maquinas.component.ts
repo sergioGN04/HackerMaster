@@ -84,7 +84,7 @@ export class MaquinasComponent {
     }
   }
 
-  // Función que maneja el guardado de la nueva máquina
+  // Función para manejar el crear una nueva máquina
   guardarMaquina(crearMaquinaForm: NgForm) {
 
     this.creandoMaquina = true;
