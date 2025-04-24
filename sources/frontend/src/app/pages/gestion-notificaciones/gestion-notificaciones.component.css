@@ -336,7 +336,7 @@ h3 {
     font-size: 1.3rem;
 }
 
-.foto-perfil {
+.foto-notificacion {
     width: 40px;
     height: 40px;
     object-fit: cover;
@@ -388,9 +388,136 @@ h3 {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .crear-notificacion-section {
+        padding: 60px 0 0 0 !important;
+        margin-left: 65px !important;
+    }
 
+    .crear-notificacion-section.colapsado {
+        margin-left: 65px !important;
+    }
+
+    .containers {
+        padding: 80px 40px 80px 40px;
+        margin-left: 65px;
+        text-align: center;
+    }
+
+    .containers.colapsado {
+        margin-left: 65px;
+    }
+
+    .formCrearNotificacion {
+        padding: 20px 20px;
+    }
+
+    .formulario-contenedor {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .descripcion-formulario {
+        margin-bottom: 40px;
+    }
+
+    .btn-enviar {
+        width: 100%;
+        margin: 40px auto 20px;
+    }
+
+    .foto-notificacion {
+        width: 35px;
+        height: 35px;
+    }
+
+    .descripcion {
+        max-width: 140px;
+    }
 }
 
 @media (max-width: 480px) {
+    .crear-notificacion-section {
+        padding: 60px 0 0 0;
+        margin-left: 60px;
+        text-align: center;
+    }
 
+    .crear-notificacion-section.colapsado {
+        margin-left: 60px !important;
+    }
+
+    .containers {
+        color: white;
+        padding: 40px 30px 80px 30px;
+        margin-left: 60px;
+        text-align: center;
+    }
+
+    .containers.colapsado {
+        margin-left: 60px;
+    }
+
+    h3,
+    .titulo-seccion {
+        font-size: 1.5rem;
+    }
+
+    .formCrearNotificacion label {
+        font-size: 1.1rem;
+    }
+
+    .formulario-notificacion input,
+    .formulario-notificacion select,
+    .formulario-notificacion textarea {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .formulario-notificacion input::placeholder,
+    .formulario-notificacion select::placeholder,
+    .formulario-notificacion textarea::placeholder {
+        font-size: 14px;
+    }
+
+    .custom-file-input span {
+        font-size: 14px;
+    }
+
+    .formCrearNotificacion {
+        padding: 20px 15px;
+    }
+
+    .descripcion-formulario {
+        font-size: 0.95rem;
+        margin-bottom: 40px;
+    }
+
+    .btn-enviar {
+        width: 100%;
+    }
+
+    .custom-file-input {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .notificaciones-tabla {
+        font-size: 0.9rem;
+    }
+
+    .descripcion {
+        max-width: 100px;
+    }
+
+    .posicion-circulo {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1rem;
+    }
+
+    .btn-operacion {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
 }
