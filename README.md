@@ -65,7 +65,7 @@ La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimi
   Las máquinas subidas a la plataforma se detendrán automáticamente después de 3 horas de haber sido desplegadas. Esto permite garantizar que los recursos del servidor se gestionen adecuadamente y evitar un uso excesivo.
 
 - **Sistema de Notificaciones**:  
-  Los usuarios reciben notificaciones sobre eventos importantes dentro de la plataforma, como la aprobación de máquinas o actualizaciones en su progreso.
+  Los usuarios reciben notificaciones sobre eventos importantes dentro de la plataforma, como la aprobación de nuevas máquinas.
 
 - **Autenticación y Seguridad**:  
   Los usuarios deben registrarse e iniciar sesión para acceder a sus paneles. La autenticación se realiza mediante un sistema basado en tokens JWT para garantizar la seguridad.
