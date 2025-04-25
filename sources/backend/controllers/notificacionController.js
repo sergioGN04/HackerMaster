@@ -18,7 +18,7 @@ module.exports = {
                     'fechaLimite'
                 ],
                 where: { destinatario: 'Usuario' },
-                order: [['fechaLimite', 'ASC']]
+                order: [['idNotificacion', 'ASC']]
             });
 
             res.status(200).json({ notificaciones });
