@@ -405,7 +405,7 @@ module.exports = {
                     'fechaRegistro',
                     'rol'
                 ],
-                order: [['username', 'ASC']]
+                order: [['rol', 'ASC'], ['username', 'ASC']]
             });
 
             res.status(200).json({ usuariosRegistrados });

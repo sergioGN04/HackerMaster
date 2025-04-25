@@ -274,7 +274,8 @@ module.exports = {
                         [Op.like]: `%${nombreMaquina}%`
                     },
                     estado: 'Aceptada'
-                }
+                },
+                order: [['dificultad', 'ASC']]
             });
 
             res.status(200).json({ maquinasFiltradas })
@@ -705,7 +706,7 @@ module.exports = {
                     ]
                 }],
                 where: { estado: 'Aceptada' },
-                order: [['nombre', 'ASC']]
+                order: [['idMaquina', 'ASC']]
             });
 
             res.status(200).json({ maquinasRegistradas });
