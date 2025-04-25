@@ -1,6 +1,6 @@
 # HackerMaster
 
-HackerMaster es una plataforma web pensada para quienes quieren aprender y practicar ciberseguridad. Permite a los usuarios subir sus propias máquinas de entrenamiento en formato Docker y compartirlas con la comunidad.
+HackerMaster es una plataforma web pensada para quienes quieren aprender y practicar pentesting. Permite a los usuarios subir sus propias máquinas de entrenamiento en formato Docker y compartirlas con la comunidad.
 
 La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimiento de su progreso y mejorar sus habilidades. Al mismo tiempo, los administradores pueden revisar, aprobar o rechazar las máquinas enviadas y gestionar todo el contenido fácilmente desde el panel.
 
