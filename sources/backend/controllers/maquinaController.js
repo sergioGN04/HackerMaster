@@ -8,6 +8,7 @@ const fs = require('fs');
 const fsp = require('fs').promises;
 const Docker = require('dockerode');
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
+const notificacionAdmin = require('../utils/notificacionAdmin');
 
 // Eliminar los archivos subidos en caso de error
 const eliminarArchivosSubidos = async (req) => {
@@ -351,6 +352,12 @@ module.exports = {
                 flagRoot,
                 estado: 'En Espera',
             });
+
+            // Crear notificación para el administrador
+            await notificacionAdmin.crearNotificacion(
+                'Nueva Máquina Subida',
+                `El usuario '${usuario.username}' ha subido una nueva máquina: ${nombre}`
+            );
 
             return res.status(201).json({ message: 'Máquina subida correctamente' });
 

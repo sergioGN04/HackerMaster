@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { Op } = require("sequelize");
 const Usuario = require('../models/usuarioModel');
 const jwt = require('jsonwebtoken');
+const notificacionAdmin = require('../utils/notificacionAdmin');
 
 // Validaciones Regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -91,9 +92,9 @@ module.exports = {
             });
 
             if (usuarioExistente) {
-                return res.status(400).json({ 
-                    message: usuarioExistente.username === nombreUsuario 
-                        ? "El nombre de usuario ya está en uso." 
+                return res.status(400).json({
+                    message: usuarioExistente.username === nombreUsuario
+                        ? "El nombre de usuario ya está en uso."
                         : "El correo ya está en uso."
                 });
             }
@@ -101,6 +102,12 @@ module.exports = {
             // Encriptar contraseña y almacenar usuario
             const hashedPassword = await bcrypt.hash(passwordUsuario, 10);
             await Usuario.create({ username: nombreUsuario, email: emailUsuario, password: hashedPassword });
+            
+            // Crear notificación para el administrador
+            await notificacionAdmin.crearNotificacion (
+                'Nuevo registro de usuario',
+                `${nombreUsuario} se ha registrado en la plataforma.`
+            );
 
             res.status(201).json({ message: "Usuario registrado correctamente." });
 
