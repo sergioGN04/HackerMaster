@@ -1,6 +1,7 @@
 const sequelize = require('../config/database');
 const nodemailer = require('nodemailer');
 const Usuario = require('../models/usuarioModel');
+const notificacionAdmin = require('../utils/notificacionAdmin');
 
 module.exports = {
     enviarCorreo: async (req, res) => {
@@ -44,6 +45,13 @@ module.exports = {
 
             // Enviar el correo
             await transporter.sendMail(mailOptions);
+
+            // Crear notificación para el administrador
+            await notificacionAdmin.crearNotificacion (
+                'Nuevo mensaje de contacto',
+                `Has recibido un nuevo mensaje de contacto de parte de ${nombreUsuario}.`
+            );
+            
             res.status(200).json({ message: "Se ha enviado el email correctamente" });
 
         } catch (error) {
