@@ -6,7 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { LogroService } from '../../core/services/logro.service';
- 
+
 @Component({
   selector: 'app-perfil',
   standalone: true,
@@ -18,8 +18,9 @@ export class PerfilComponent {
   sidebarExpandido = true;
   informacionUsuario: any;
   logrosObtenidos: any;
+  logrosNuevos: any = [];
 
-  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private logroService: LogroService) {}
+  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private logroService: LogroService) { }
 
   ngOnInit(): void {
     this.comprobarToken();
@@ -36,11 +37,12 @@ export class PerfilComponent {
     }
   }
 
+  // Método para obtener la información del usuario
   getInformacionPerfil(): void {
     this.usuarioService.obtenerInformacionUsuario().subscribe({
       next: (response: any) => {
         this.informacionUsuario = response;
-        
+
         // Obtener los logros del usuario
         this.getLogrosUsuario();
 
@@ -62,7 +64,10 @@ export class PerfilComponent {
     this.logroService.obtenerLogrosUsuario(this.informacionUsuario.usuario.idUsuario).subscribe({
       next: (response: any) => {
         this.logrosObtenidos = response.logros;
-        
+
+        // Obtener si hay logros nuevos
+        this.logrosNuevos = this.logrosObtenidos.filter((logro: any) => logro.UsuarioLogros[0].nuevoLogro === true);
+
       },
       error: (error: any) => {
         if (error.status === 401 || error.status === 403) {
@@ -74,6 +79,23 @@ export class PerfilComponent {
         }
       }
     });
+  }
+
+  // Método para cerrar el modal de logros, actualizando los logros nuevos para que no sean nuevos
+  cerrarModalLogros() {
+    if (this.logrosNuevos.length > 0) {
+      this.logroService.actualizarLogrosNuevos(this.informacionUsuario.usuario.idUsuario).subscribe({
+        next: () => {
+          // Se ha actualizado correctamente los logros
+
+          // Actualizamos la lista de logros obtenidos
+          this.logrosNuevos = [];
+        },
+        error: (error: any) => {
+          console.error('Error actualizando logros nuevos', error);
+        }
+      });
+    }
   }
 
 }

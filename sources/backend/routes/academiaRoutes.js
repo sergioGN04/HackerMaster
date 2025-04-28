@@ -58,5 +58,6 @@ router.delete('/api/eliminar-notificacion', verifyToken, notificacionController.
 
 // Logros
 router.get('/api/logros-usuario', verifyToken, logroController.obtenerLogrosUsuario);
+router.put('/api/actualizar-logros-usuario', verifyToken, logroController.actualizarLogrosUsuario);
 
 module.exports = router;

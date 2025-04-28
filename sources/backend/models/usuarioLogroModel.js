@@ -21,6 +21,11 @@ const UsuarioLogro = sequelize.define('UsuarioLogro', {
         type: DataTypes.DATE,
         allowNull: true,
         defaultValue: DataTypes.NOW
+    },
+    nuevoLogro: { 
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: true
     }
 }, {
     timestamps: false,

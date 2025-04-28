@@ -105,22 +105,45 @@
         <hr class="separator">
         <p class="descripcion-seccion">Aquí puedes ver los logros que has obtenido en HackerMaster. Completa desafíos,
             resuelve máquinas y alcanza nuevas metas para desbloquear más insignias. ¡Demuestra tu habilidad!</p>
-        
         <!-- Mostrar los logros solo si la lista tiene elementos -->
         <div class="logros-lista" *ngIf="logrosObtenidos?.length > 0">
             <div class="logro-card" *ngFor="let logro of logrosObtenidos">
                 <!-- Puntuación en la parte superior derecha -->
                 <div class="logro-puntuacion">
                     <i class="bi bi-star-fill"></i> {{ logro.puntuacion }}
-                </div>                
-            
+                </div>
+
                 <img [src]="logro.fotoLogro" alt="Imagen del logro" class="logro-imagen">
                 <h4>{{ logro.nombre }}</h4>
                 <p>{{ logro.descripcion }}</p>
-            </div>            
+            </div>
         </div>
 
         <!-- Mensaje si no se tienen logros -->
         <p *ngIf="logrosObtenidos?.length === 0" class="no-logros">No has obtenido logros aún</p>
+    </div>
+</div>
+
+<!-- Modal Nuevos Logros -->
+<div class="modal-logros" *ngIf="logrosNuevos?.length > 0">
+    <div class="modal-contenido">
+        <h2 class="titulo-modal">¡Nuevos Logros!</h2>
+
+        <hr class="separator">
+
+        <div class="logros-lista">
+            <div class="logro-card" *ngFor="let logro of logrosNuevos">
+                <!-- Puntuación en la parte superior derecha -->
+                <div class="logro-puntuacion">
+                    <i class="bi bi-star-fill"></i> {{ logro.puntuacion }}
+                </div>
+
+                <img [src]="logro.fotoLogro" alt="Imagen del logro" class="logro-imagen">
+                <h4>{{ logro.nombre }}</h4>
+                <p>{{ logro.descripcion }}</p>
+            </div>
+        </div>
+
+        <button class="btn btn-cerrar-modal" (click)="cerrarModalLogros()">Cerrar</button>
     </div>
 </div>

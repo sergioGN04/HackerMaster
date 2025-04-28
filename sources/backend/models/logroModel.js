@@ -24,6 +24,11 @@ const Logro = sequelize.define('Logro', {
     puntuacion: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    cantidadRequerida: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0
     }
 }, {
     timestamps: false,
