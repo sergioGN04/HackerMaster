@@ -20,4 +20,12 @@ export class LogroService {
     return this.http.get(`${this.apiUrl}/logros-usuario`, { headers, params });
   }
 
+  // Método para actualizar los logros del usuario, para que no sean nuevos logros
+  actualizarLogrosNuevos(idUsuario: string): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+    return this.http.put(`${this.apiUrl}/actualizar-logros-usuario`, { idUsuario }, { headers });
+  }
+
 }

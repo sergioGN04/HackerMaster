@@ -72,6 +72,7 @@
     color: #FFFFFF;
 }
 
+/* Estilos de los datos del usuario */
 .dato-box {
     background-color: #4DB300;
     color: black;
@@ -186,7 +187,6 @@
     margin-top: 20px;
 }
 
-/* Estilo para la puntuación */
 .logro-puntuacion {
     position: absolute;
     top: 10px;
@@ -210,6 +210,113 @@
 .logro-puntuacion i {
     font-size: 0.95rem;
     color: #FFD700;
+}
+
+/* Modal para los logros */
+.modal-logros {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.modal-contenido {
+    background-color: #1A324A;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 1200px;
+    width: 100%;
+    color: white;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.titulo-modal {
+    font-size: 2rem;
+    color: #6FFF00;
+    margin-bottom: 20px;
+}
+
+.nuevos-logros-lista {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.nuevo-logro-card {
+    display: flex;
+    background-color: #4DB300;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    align-items: center;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+}
+
+.nuevo-logro-imagen {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.nuevo-logro-info {
+    text-align: left;
+    flex: 1;
+}
+
+.nuevo-logro-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.nuevo-logro-info p {
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    margin-bottom: 5px;
+}
+
+.puntuacion-logro {
+    font-size: 0.9rem;
+    color: #FFD700;
+}
+
+.btn-cerrar-modal {
+    background-color: #6FFF00;
+    color: black;
+    border: none;
+    padding: 10px 25px;
+    margin-top: 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-cerrar-modal:hover {
+    background-color: #57cc00;
+    color: #FFFFFF;
+}
+
+.btn-cerrar-modal:active {
+    background-color: #4DB300;
+    color: #FFFFFF;
+}
+
+.btn-cerrar-modal:focus {
+    background-color: #368000;
+    color: #FFFFFF;
 }
 
 /* Responsive */
