@@ -9,6 +9,7 @@
             <!-- Icono Notificaciones -->
             <div class="notificaciones" (click)="toggleMenuNotificaciones($event)">
                 <i class="bi bi-bell"></i>
+                <span class="notificaciones-circulo" *ngIf="notificaciones.length > 0">{{ notificaciones.length }}</span>
             </div>
 
             <!-- Notificaciones -->
