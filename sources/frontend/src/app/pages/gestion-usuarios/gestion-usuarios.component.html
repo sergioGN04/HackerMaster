@@ -45,7 +45,7 @@
                             <button class="btn-operacion cambiar-rol" (click)="cambiarRol(usuario.idUsuario)">
                                 <i class="bi bi-arrow-left-right"></i> Cambiar Rol
                             </button>
-                            <button class="btn-operacion eliminar-usuario" (click)="eliminarUsuario(usuario.idUsuario)">
+                            <button class="btn-operacion eliminar-usuario" (click)="abrirModalEliminar(usuario)">
                                 <i class="bi bi-trash"></i> Eliminar
                             </button>
                         </td>
@@ -53,6 +53,20 @@
                 </tbody>
             </table>
         </ng-template>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal-confirmacion" *ngIf="usuarioAEliminar">
+        <div class="modal-contenido">
+            <h2 class="titulo-modal">¿Estás seguro?</h2>
+            <p class="descripcion-seccion">¿Deseas eliminar al usuario <strong>{{ usuarioAEliminar?.username}}</strong>?
+                Esta acción no se puede deshacer.
+            </p>
+            <div class="modal-buttons">
+                <button class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+                <button class="btn-confirmar" (click)="confirmarEliminacion()">Eliminar</button>
+            </div>
+        </div>
     </div>
 
 </div>

@@ -17,6 +17,8 @@ export class GestionUsuariosComponent {
   sidebarExpandido = true;
   usuariosRegistrados: any = [];
 
+  usuarioAEliminar: any = null;
+
   constructor(private authService: AuthService, private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class GestionUsuariosComponent {
     }
   }
 
+  // Método para obtener los usuarios registrados
   getUsuariosRegistrados(): void {
     this.usuarioService.obtenerUsuariosRegistrados().subscribe({
       next: (response: any) => {
@@ -85,6 +88,24 @@ export class GestionUsuariosComponent {
         }
       }
     });
+  }
+
+  // Método para abrir el modal de confirmación
+  abrirModalEliminar(usuario: any): void {
+    this.usuarioAEliminar = usuario;
+  }
+
+  // Método para cerrar el modal y confirmar la eliminación del usuario
+  confirmarEliminacion(): void {
+    if (this.usuarioAEliminar) {
+      this.eliminarUsuario(this.usuarioAEliminar.idUsuario);
+      this.cerrarModal();
+    }
+  }
+
+  // Método para cerrar el modal de confirmación
+  cerrarModal(): void {
+    this.usuarioAEliminar = null;
   }
 
 }
