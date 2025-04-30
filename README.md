@@ -75,6 +75,20 @@ La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimi
 
 ---
 
+## Usuarios por Defecto
+
+Para facilitar las pruebas de la plataforma, se han creado los siguientes usuarios ya registrados:
+
+- `test@test.com` / `12345678QA`  
+- `test1@test.com` / `12345678QA`  
+- `admin@test.com` / `12345678QA`  
+
+> **Nota**: El usuario `admin@test.com` tiene permisos de administrador y puede acceder al panel de gestión de usuarios, máquinas y notificaciones.
+
+Además, las máquinas actualmente visibles en la plataforma son **simulaciones** subidas con fines de demostración visual. Estas **no son máquinas reales desplegables**, sino ejemplos para ilustrar la estructura y funcionamiento de la interfaz.
+
+---
+
 ## Instalación y Despliegue
 
 ### 1. Clonar el repositorio
