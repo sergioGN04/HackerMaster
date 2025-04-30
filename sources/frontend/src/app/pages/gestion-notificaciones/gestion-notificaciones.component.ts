@@ -23,6 +23,8 @@ export class GestionNotificacionesComponent {
 
   notificaciones: any = [];
 
+  notificacionAEliminar: any = null;
+  
   constructor(private router: Router, private authService: AuthService, private notificacionService: NotificacionService) { }
 
   ngOnInit(): void {
@@ -155,6 +157,24 @@ export class GestionNotificacionesComponent {
         }
       }
     });
+  }
+
+  // Método para abrir el modal de confirmación
+  abrirModalEliminar(maquina: any): void {
+    this.notificacionAEliminar = maquina;
+  }
+
+  // Método para cerrar el modal y confirmar la eliminación de la notificación
+  confirmarEliminacion(): void {
+    if (this.notificacionAEliminar) {
+      this.eliminarNotificacion(this.notificacionAEliminar.idNotificacion);
+      this.cerrarModal();
+    }
+  }
+
+  // Método para cerrar el modal de confirmación
+  cerrarModal(): void {
+    this.notificacionAEliminar = null;
   }
 
 }

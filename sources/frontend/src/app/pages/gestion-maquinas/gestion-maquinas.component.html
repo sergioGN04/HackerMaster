@@ -122,7 +122,7 @@
                         <td>{{ maquina.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
                         <td>{{ maquina.puntuacion }}</td>
                         <td>
-                            <button class="btn-operacion eliminar-maquina" (click)="eliminarMaquina(maquina.idMaquina)">
+                            <button class="btn-operacion eliminar-maquina" (click)="abrirModalEliminar(maquina)">
                                 <i class="bi bi-trash"></i> Eliminar
                             </button>
                         </td>
@@ -130,6 +130,21 @@
                 </tbody>
             </table>
         </ng-template>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal-confirmacion" *ngIf="maquinaAEliminar">
+        <div class="modal-contenido">
+            <h2 class="titulo-modal">¿Estás seguro?</h2>
+            <p class="descripcion-seccion">
+                ¿Deseas eliminar la máquina <strong>{{ maquinaAEliminar?.nombre }}</strong>?<br>
+                Esta acción no se puede deshacer.
+            </p>
+            <div class="modal-buttons">
+                <button class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+                <button class="btn-confirmar" (click)="confirmarEliminacion()">Eliminar</button>
+            </div>
+        </div>
     </div>
 
 </div>
