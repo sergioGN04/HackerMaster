@@ -24,7 +24,8 @@
                     <!-- Descripción -->
                     <p class="descripcion-formulario">
                         En este apartado, los administradores pueden crear y enviar notificaciones personalizadas para
-                        mantener informados a los usuarios. Es una forma sencilla de comunicar avisos importantes de manera clara
+                        mantener informados a los usuarios. Es una forma sencilla de comunicar avisos importantes de
+                        manera clara
                         y en el momento oportuno.
                     </p>
 
@@ -112,7 +113,8 @@
         <hr class="linea-separadora" />
 
         <p class="descripcion-formulario">
-            En este apartado, los administradores pueden ver y gestionar todas las notificaciones enviadas a los usuarios. Desde aquí
+            En este apartado, los administradores pueden ver y gestionar todas las notificaciones enviadas a los
+            usuarios. Desde aquí
             es posible revisar el historial y eliminar aquellas que ya no sean necesarias.
         </p>
 
@@ -146,7 +148,7 @@
                             <td>{{ notificacion.fechaLimite | date: 'dd/MM/yyyy' }}</td>
                             <td>
                                 <button class="btn-operacion eliminar-notificacion"
-                                    (click)="eliminarNotificacion(notificacion.idNotificacion)">
+                                    (click)="abrirModalEliminar(notificacion)">
                                     <i class="bi bi-trash"></i> Eliminar
                                 </button>
                             </td>
@@ -156,4 +158,20 @@
             </ng-template>
         </div>
     </div>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal-confirmacion" *ngIf="notificacionAEliminar">
+        <div class="modal-contenido">
+            <h2 class="titulo-modal">¿Estás seguro?</h2>
+            <p class="descripcion-seccion">
+                ¿Deseas eliminar la notificación <strong>"{{ notificacionAEliminar?.titulo }}"</strong>?<br>
+                Esta acción no se puede deshacer.
+            </p>
+            <div class="modal-buttons">
+                <button class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+                <button class="btn-confirmar" (click)="confirmarEliminacion()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
 </div>

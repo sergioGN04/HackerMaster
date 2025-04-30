@@ -18,6 +18,8 @@ export class GestionMaquinasComponent {
   solicitudesMaquinas: any = [];
   maquinasRegistradas: any = [];
 
+  maquinaAEliminar: any = null;
+
   constructor(private authService: AuthService, private maquinaService: MaquinaService, private router: Router) { }
 
   ngOnInit(): void {
@@ -129,5 +131,23 @@ export class GestionMaquinasComponent {
       }
     });
   }
+
+    // Método para abrir el modal de confirmación
+    abrirModalEliminar(maquina: any): void {
+      this.maquinaAEliminar = maquina;
+    }
+  
+    // Método para cerrar el modal y confirmar la eliminación de la máquina
+    confirmarEliminacion(): void {
+      if (this.maquinaAEliminar) {
+        this.eliminarMaquina(this.maquinaAEliminar.idMaquina);
+        this.cerrarModal();
+      }
+    }
+  
+    // Método para cerrar el modal de confirmación
+    cerrarModal(): void {
+      this.maquinaAEliminar = null;
+    }
 
 }
