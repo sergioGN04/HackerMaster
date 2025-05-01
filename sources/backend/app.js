@@ -1,15 +1,13 @@
 const express = require('express');
 const body_parser = require('body-parser');
 const cors = require('cors');
-const dotenv = require('dotenv');
+require('dotenv').config(); // Permite el uso de variables de entorno
 const path = require('path');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const fs = require('fs');
-// Archivo para guardar los logs
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.log'), { flags: 'a' });
-
-dotenv.config();
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.log'), { flags: 'a' }); // Archivo para guardar los logs
+const rateLimit = require('express-rate-limit');
 
 const PORT = process.env.PORT || 3000;
 
@@ -51,8 +49,25 @@ app.use(
     })
 );
 
-const sequelize = require('./config/database');
+// Middleware para limitar el número de peticiones, evita DDoS y ataques de fuerza bruta
+// Envia un error 429 si se supera el límite para que el frontend lo gestione
+const globalLimiter = rateLimit({
+    windowMs: 5 * 60 * 1000, // 5 minutos
+    max: 300,
+    statusCode: 429,
+    message: JSON.stringify({
+        error: 'Too many requests',
+        code: 'RATE_LIMIT_EXCEEDED',
+        retryAfter: 300 // 5 minutos
+    }),
+    standardHeaders: true,
+    legacyHeaders: false
+});
 
+app.use(globalLimiter);
+
+// Conexión a la base de datos y creación de tablas
+const sequelize = require('./config/database');
 sequelize.authenticate()
     .then(() => { console.log("Se ha conectado a la base de datos correctamente"); })
     .catch((error) => { console.error("Error - No se ha podido conectar a la base de datos", error); });
@@ -61,6 +76,7 @@ sequelize.sync({ alter: true })
     .then(() => console.log('Se han creado las tablas correctamente'))
     .catch(() => console.error('Error - No se ha podido crear las tablas correctamente'));
 
+// Rutas de la API
 const academiaRoutes = require('./routes/academiaRoutes');
 app.use(academiaRoutes);
 
