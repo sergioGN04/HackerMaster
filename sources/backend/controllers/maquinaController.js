@@ -9,6 +9,7 @@ const fsp = require('fs').promises;
 const Docker = require('dockerode');
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 const notificacionAdmin = require('../utils/notificacionAdmin');
+const verificarLogros = require('../utils/verificarLogros');
 
 // Eliminar los archivos subidos en caso de error
 const eliminarArchivosSubidos = async (req) => {
@@ -542,6 +543,7 @@ module.exports = {
     verificarMaquina: async (req, res) => {
         const { idMaquina, flagUsuario, flagRoot } = req.body;
         const username = req.user.username;
+        const idUsuario = req.user.idUsuario;
 
         if (!idMaquina) {
             return res.status(400).json({ message: 'Falta el idMaquina' });
@@ -632,6 +634,9 @@ module.exports = {
                 if (yaCompletado) {
                     return res.status(200).json({ message: '¡Correcto! Ya habías completado esta máquina', puntosSumados: false });
                 }
+
+                // Verificar logros del usuario
+                await verificarLogros(idUsuario);
 
                 return res.status(200).json({ message: 'Ambas flags son correctas', puntosSumados: true });
             }
@@ -725,24 +730,24 @@ module.exports = {
     aceptarSolicitud: async (req, res) => {
         const rol = req.user.rol;
         const { idMaquina } = req.body;
-    
+
         // Verificamos que sea un administrador
         if (rol !== 'Administrador') {
             return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
         }
-    
+
         try {
             // Verificamos si la máquina existe
             const maquina = await Maquina.findByPk(idMaquina);
             if (!maquina) {
                 return res.status(404).json({ message: 'La máquina no existe' });
             }
-    
+
             // Verificamos si la máquina ya está aceptada
             if (maquina.estado === 'Aceptada') {
                 return res.status(400).json({ message: 'La máquina ya está aceptada' });
             }
-    
+
             // Actualizamos el estado a "Aceptada"
             await Maquina.update(
                 { estado: 'Aceptada' },
@@ -750,7 +755,7 @@ module.exports = {
             );
 
             res.status(200).json({ message: 'Solicitud de máquina aceptada correctamente' });
-    
+
             // Creamos la imagen Docker en segundo plano
             (async () => {
                 try {
@@ -764,11 +769,11 @@ module.exports = {
                     console.error(`Error en creación de imagen Docker para ${maquina.nombre}:`, err.message);
                 }
             })();
-    
+
         } catch (error) {
             res.status(500).json({ message: 'Error al aceptar la solicitud de la máquina' });
         }
-    },    
+    },
     denegarSolicitud: async (req, res) => {
         const rol = req.user.rol;
         const { idMaquina } = req.body;
@@ -800,24 +805,24 @@ module.exports = {
     eliminarMaquina: async (req, res) => {
         const rol = req.user.rol;
         const { idMaquina } = req.query;
-    
+
         // Verificamos que el rol sea "Administrador"
         if (rol !== 'Administrador') {
             return res.status(403).json({ message: 'No tienes permiso para realizar esta acción' });
         }
-    
+
         try {
             // Verificamos si la máquina existe
             const maquina = await Maquina.findByPk(idMaquina);
             if (!maquina) {
                 return res.status(404).json({ message: 'Máquina no encontrada' });
             }
-    
+
             // Eliminamos la máquina
             await maquina.destroy();
 
             res.status(200).json({ message: 'Máquina eliminada correctamente' });
-    
+
             // Eliminamos los archivos y contenedores asociados a la máquina, se hace en segundo plano
             (async () => {
                 try {
@@ -826,10 +831,10 @@ module.exports = {
 
                     // Obtener el nombre de la imagen
                     const nombreImagen = `${maquina.nombre.toLowerCase()}`;
-    
+
                     // Buscar todos los contenedores usando esa imagen
                     const contenedores = await docker.listContainers({ all: true });
-    
+
                     const contenedoresUsandoImagen = contenedores.filter(c => c.Image === nombreImagen);
 
                     // Detener y eliminar contenedores que usan la imagen
@@ -861,12 +866,12 @@ module.exports = {
                     } catch (error) {
                         console.error(`No se pudo eliminar la imagen Docker ${nombreImagen}:`, error.message);
                     }
-    
+
                 } catch (error) {
                     console.error('Error al procesar archivos/contenedores:', error.message);
                 }
             })();
-    
+
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: 'Error al eliminar la máquina' });
