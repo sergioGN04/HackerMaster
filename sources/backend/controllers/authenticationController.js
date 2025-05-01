@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 const Usuario = require('../models/usuarioModel');
 const jwt = require('jsonwebtoken');
 const notificacionAdmin = require('../utils/notificacionAdmin');
+const verificarLogros = require('../utils/verificarLogros');
 
 // Validaciones Regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,6 +57,9 @@ module.exports = {
                 return res.status(401).json({ message: "Contraseña incorrecta" });
             }
 
+            // Verificar logros del usuario
+            await verificarLogros(usuario.idUsuario);
+
             // Crear token JWT
             const token = jwt.sign(
                 { idUsuario: usuario.idUsuario, username: usuario.username, rol: usuario.rol },
@@ -70,7 +74,6 @@ module.exports = {
             res.status(500).json({ message: "No se ha podido iniciar sesión con esta cuenta" });
         }
     },
-
     registrarUsuario: async (req, res) => {
         try {
             const { nombreUsuario, emailUsuario, passwordUsuario, confirmarPassword } = req.body;
