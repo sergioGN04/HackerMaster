@@ -92,7 +92,7 @@ module.exports = {
             const totalPosibles = totalMaquinas + totalLogros;
             const totalCompletado = maquinasCompletadas + logrosCompletados;
 
-            const progreso = totalPosibles > 0 ? Math.round((totalCompletado * 100) / totalPosibles) : 0;
+            const progreso = totalPosibles > 0 ? Math.trunc((totalCompletado * 100) / totalPosibles) : 0;
 
             return res.status(200).json({ nombreUsuario, fotoPerfil, rango, progreso, puntuacion, maquinasCompletadas, logrosCompletados });
 
