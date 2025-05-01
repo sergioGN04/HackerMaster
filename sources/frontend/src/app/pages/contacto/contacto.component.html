@@ -26,7 +26,14 @@
                     <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="4" required
                         placeholder="Escribe aqui tu mensaje..."></textarea>
                 </div>
-                <button type="submit" class="btn-enviar">Enviar</button>
+                <button type="submit" class="btn btn-enviar" [disabled]="enviandoEmail">
+                    <ng-container *ngIf="!enviandoEmail; else cargandoEnviar">
+                        Enviar
+                    </ng-container>
+                    <ng-template #cargandoEnviar>
+                        <i class="bi bi-arrow-repeat spinner-icon"></i>
+                    </ng-template>
+                </button>
             </form>
             <p *ngIf="mensajeRespuesta"
                 [ngClass]="mensajeEsError ? 'mensaje-respuesta mensaje-error' : 'mensaje-respuesta mensaje-exito'">

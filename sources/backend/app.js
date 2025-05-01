@@ -42,7 +42,7 @@ app.use(
     })
 );
 
-// Para proteger contra ataques XSS en HTTPS
+// Middleware para forzar el uso de HTTPS
 app.use(
     helmet.hsts({
         maxAge: 63072000, // 2 años
