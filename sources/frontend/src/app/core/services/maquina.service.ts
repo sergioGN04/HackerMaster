@@ -7,7 +7,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class MaquinaService {
-  private apiUrl = 'http://192.168.2.2:3000/api';
+  private apiUrl = 'https://192.168.2.2:3000/api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InformacionSitioService {
 
-  private url = 'http://192.168.2.2:3000/api';
+  private url = 'https://192.168.2.2:3000/api';
 
   constructor(private http: HttpClient) { }
 

@@ -20,7 +20,7 @@
                         <img [src]="notificacion.fotoNotificacion" alt="Notificación" class="notificacion-imagen">
                         <span class="notificacion-titulo">{{ notificacion.titulo }}</span>
                         <p class="notificacion-descripcion">{{ notificacion.descripcion }}</p>
-                        <p class="notificacion-fecha">{{ notificacion.fechaLimite | date:'dd/MM/yyyy' }}</p>
+                        <p class="notificacion-fecha">{{ notificacion.fechaLimite | date: rol === 'Administrador' ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy' }}</p>
                     </div>
                 </div>
                 <!-- Mensaje cuando no haya notificaciones -->

@@ -18,8 +18,10 @@ const app = express();
 app.use(express.json())
 app.use(body_parser.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Configuración de CORS para permitir el acceso al frontend
 app.use(cors({
-    origin: '*',
+    origin: `https://${process.env.IP_FRONTEND}`,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -41,13 +43,13 @@ app.use(
 );
 
 // Para proteger contra ataques XSS en HTTPS
-//app.use(
-//    helmet.hsts({
-//        maxAge: 63072000, // 2 años en segundos
-//        includeSubDomains: true,
-//        preload: true,
-//    })
-//);
+app.use(
+    helmet.hsts({
+        maxAge: 63072000, // 2 años
+        includeSubDomains: true,
+        preload: true,
+    })
+);
 
 const sequelize = require('./config/database');
 
@@ -62,6 +64,12 @@ sequelize.sync({ alter: true })
 const academiaRoutes = require('./routes/academiaRoutes');
 app.use(academiaRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Se ha iniciado correctamente. Ejemplo: http://192.168.1.2:${PORT}/api/estadisticas-actuales`);
+// Configuración de HTTPS en el servidor
+const https = require('https');
+
+const sslKey = fs.readFileSync(path.join(__dirname, 'ssl', 'server.key'));
+const sslCert = fs.readFileSync(path.join(__dirname, 'ssl', 'server.cert'));
+
+https.createServer({ key: sslKey, cert: sslCert }, app).listen(PORT, () => {
+    console.log(`Se ha iniciado correctamente. Ejemplo: https://${process.env.IP_BACKEND}/api/estadisticas-actuales`);
 });

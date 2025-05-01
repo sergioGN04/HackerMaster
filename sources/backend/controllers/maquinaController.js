@@ -171,7 +171,7 @@ module.exports = {
                 attributes: [
                     'idMaquina',
                     'nombre',
-                    [Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')), 'fotoMaquina'],
+                    [Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')), 'fotoMaquina'],
                     'dificultad'
                 ],
                 where: {
@@ -242,7 +242,7 @@ module.exports = {
                 attributes: [
                     'idMaquina',
                     'nombre',
-                    [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')),'fotoMaquina' ],
+                    [ Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')),'fotoMaquina' ],
                     'dificultad'
                 ],
                 where: {
@@ -268,7 +268,7 @@ module.exports = {
                 attributes: [
                     'idMaquina',
                     'nombre',
-                    [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')),'fotoMaquina' ],
+                    [ Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')),'fotoMaquina' ],
                     'dificultad'
                 ],
                 where: {
@@ -382,7 +382,7 @@ module.exports = {
             const maquina = await Maquina.findOne({
                 attributes: [
                     'idMaquina',
-                    [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')),'fotoMaquina' ],
+                    [ Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/maquinas/imagenes/`, Sequelize.col('fotoMaquina')),'fotoMaquina' ],
                     'nombre',
                     'dificultad',
                     'descripcion',
@@ -673,7 +673,7 @@ module.exports = {
                     model: Usuario,
                     attributes: [
                         'username',
-                        [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/usuarios/`, Sequelize.col('Usuario.fotoPerfil')), 'fotoPerfil' ]
+                        [ Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/usuarios/`, Sequelize.col('Usuario.fotoPerfil')), 'fotoPerfil' ]
                     ]
                 }],
                 where: { estado: 'En Espera' },
@@ -714,7 +714,7 @@ module.exports = {
                     model: Usuario,
                     attributes: [
                         'username',
-                        [ Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/usuarios/`, Sequelize.col('Usuario.fotoPerfil')), 'fotoPerfil' ]
+                        [ Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/usuarios/`, Sequelize.col('Usuario.fotoPerfil')), 'fotoPerfil' ]
                     ]
                 }],
                 where: { estado: 'Aceptada' },
