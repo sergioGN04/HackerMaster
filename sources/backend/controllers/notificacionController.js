@@ -12,7 +12,7 @@ module.exports = {
             const notificaciones = await Notificacion.findAll({
                 attributes: [
                     'idNotificacion',
-                    [Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/notificaciones/`, Sequelize.col('fotoNotificacion')), 'fotoNotificacion'],
+                    [Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/notificaciones/`, Sequelize.col('fotoNotificacion')), 'fotoNotificacion'],
                     'titulo',
                     'descripcion',
                     'fechaLimite'
@@ -55,7 +55,7 @@ module.exports = {
             const nuevasNotificaciones = await Notificacion.findAll({
                 attributes: [
                     'idNotificacion',
-                    [Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/notificaciones/`, Sequelize.col('fotoNotificacion')), 'fotoNotificacion'],
+                    [Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/notificaciones/`, Sequelize.col('fotoNotificacion')), 'fotoNotificacion'],
                     'titulo',
                     'descripcion',
                     'fechaLimite'

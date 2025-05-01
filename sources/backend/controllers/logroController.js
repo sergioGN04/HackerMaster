@@ -30,7 +30,7 @@ module.exports = {
                     'idLogro',
                     'nombre',
                     'descripcion',
-                    [Sequelize.fn('CONCAT', `http://${process.env.IP_BACKEND}/uploads/logros/`, Sequelize.col('fotoLogro')), 'fotoLogro'],
+                    [Sequelize.fn('CONCAT', `https://${process.env.IP_BACKEND}/uploads/logros/`, Sequelize.col('fotoLogro')), 'fotoLogro'],
                     'puntuacion'
                 ],
                 include: [{
