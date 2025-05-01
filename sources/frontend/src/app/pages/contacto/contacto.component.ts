@@ -16,6 +16,8 @@ export class ContactoComponent {
   nombreUsuario: string = '';
   asunto: string = '';
   descripcion: string = '';
+  enviandoEmail: boolean = false;
+  
   mensajeRespuesta: string = '';
   mensajeEsError: boolean = false;
 
@@ -36,11 +38,14 @@ export class ContactoComponent {
   enviar(event: Event, contactoForm: NgForm) {
     event.preventDefault();
 
+    this.enviandoEmail = true;
+
     const { nombreUsuario, asunto, descripcion } = contactoForm.form.value;
 
     if (!nombreUsuario || !asunto || !descripcion) {
       this.mensajeRespuesta = 'Todos los campos son obligatorios';
       this.mensajeEsError = true;
+      this.enviandoEmail = false;
     } else {
 
       this.contactoService.enviarFormulario(nombreUsuario, asunto, descripcion).subscribe({
@@ -49,6 +54,7 @@ export class ContactoComponent {
           this.mensajeEsError = false;
           contactoForm.reset();
           this.asunto = '';
+          this.enviandoEmail = false;
         },
         error: (error: any) => {
           if (error.error && error.error.message) {
@@ -57,6 +63,7 @@ export class ContactoComponent {
             this.mensajeRespuesta = 'Ocurrió un error inesperado. Intenta nuevamente.';
           }
           this.mensajeEsError = true;
+          this.enviandoEmail = false;
         }
       });
 

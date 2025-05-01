@@ -75,7 +75,9 @@ form div {
     outline: none;
 }
 
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     border: 1px solid #6FFF00;
 }
 
@@ -111,6 +113,22 @@ textarea::-webkit-resizer {
 
 .btn-enviar:hover {
     background: #57cc00;
+}
+
+.spinner-icon {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    font-size: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Mensaje de respuesta del formulario */
