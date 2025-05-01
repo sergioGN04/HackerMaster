@@ -13,6 +13,7 @@ import { GestionUsuariosComponent } from './pages/gestion-usuarios/gestion-usuar
 import { GestionMaquinasComponent } from './pages/gestion-maquinas/gestion-maquinas.component';
 import { GestionNotificacionesComponent } from './pages/gestion-notificaciones/gestion-notificaciones.component';
 import { Error404Component } from './pages/error-404/error-404.component';
+import { LimiteExcedidoComponent } from './pages/limite-excedido/limite-excedido.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -29,5 +30,6 @@ export const routes: Routes = [
   { path: 'admin/gestion-usuarios', component: GestionUsuariosComponent },
   { path: 'admin/gestion-maquinas', component: GestionMaquinasComponent },
   { path: 'admin/gestion-notificaciones', component: GestionNotificacionesComponent },
+  { path: 'limite-excedido', component: LimiteExcedidoComponent },
   { path: '**', component: Error404Component }
 ];
