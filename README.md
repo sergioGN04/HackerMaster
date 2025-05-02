@@ -22,11 +22,14 @@ La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimi
     - **/backend**: Lógica del servidor (Node.js + Express)
       - **/config**: Configuración de las subidas de archivos y la base de datos
       - **/controllers**: Controladores para gestionar la lógica
+      - **/logs**: Archivos de logs de la aplicación (peticiones)
       - **/middlewares**: Middlewares para la autenticación y validaciones
       - **/models**: Modelos de la base de datos (Sequelize)
       - **/routes**: Definición de las rutas de la API
+      - **/ssl**: Certificados SSL para habilitar HTTPS
       - **/uploads**: Archivos subidos por los usuarios (logros, máquinas, notificaciones, usuarios)
-      - **.env**: Variables de entorno (base de datos, puerto, etc.)
+      - **/utils**: Funciones como el envío de notificaciones al admin y la verificación de logros
+      - **.env**: Variables de entorno (base de datos, puertos, etc.)
       - **app.js**: Configuración principal de la aplicación
     - **/datos_mysql**: Archivos de la base de datos MySQL
     - **/frontend**: Implementación de las interfaces (Angular + Bootstrap)
@@ -37,9 +40,12 @@ La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimi
           - **/core**: Funcionalidades y servicios principales
             - **/auth**: Servicio de autenticación (maneja el login, registro, y tokens)
             - **/services**: Servicios para hacer diferentes solicitudes a la API
+          - **/interceptors**: Interceptores HTTP, como el de gestión del código 429
           - **/pages**: Páginas de la plataforma (inicio, perfil, etc.)
+          - **app.config.ts**: Configuración global de la app (rutas, HTTP, interceptores)
           - **app.routes.ts**: Configuración de las rutas del frontend
           - **style.css**: Estilo general de la plataforma
+      - **/ssl**: Certificados SSL para habilitar HTTPS
   - **/despliegueAplicacion.yml**: Archivo de configuración de Docker Compose para la ejecución de contenedores
   - **/README.md**: Documentación principal del proyecto
 
@@ -125,7 +131,7 @@ docker-compose -f despliegueAplicacion.yml up
 Una vez que los contenedores estén en funcionamiento, puedes acceder a la plataforma desde tu navegador web en la siguiente URL:
 
 ```bash
-http://192.168.2.3:4200
+https://192.168.2.3:4200
 ```
 
 En esa dirección podrás acceder a la página de inicio de la plataforma, donde podrás registrarte, iniciar sesión y comenzar a usar la aplicación.
