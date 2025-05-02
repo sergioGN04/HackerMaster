@@ -1,4 +1,3 @@
-// src/app/interceptors/http-error.interceptor.ts
 import { HttpInterceptorFn } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
