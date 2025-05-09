@@ -1,8 +1,22 @@
 # HackerMaster
 
-HackerMaster es una plataforma web pensada para quienes quieren aprender y practicar pentesting. Permite a los usuarios subir sus propias máquinas de entrenamiento en formato Docker y compartirlas con la comunidad.
+**HackerMaster** es una plataforma web orientada a quienes quieren aprender y practicar pentesting. Permite a los usuarios subir sus propias máquinas de entrenamiento en formato Docker y compartirlas con la comunidad.
 
-La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimiento de su progreso y mejorar sus habilidades. Al mismo tiempo, los administradores pueden revisar, aprobar o rechazar las máquinas enviadas y gestionar todo el contenido fácilmente desde el panel.
+Su objetivo es ofrecer un entorno accesible donde cualquier usuario pueda resolver retos, hacer seguimiento de su progreso y mejorar sus habilidades. Al mismo tiempo, los administradores disponen de un panel desde el que pueden revisar, aprobar o rechazar las máquinas enviadas, y gestionar el contenido general de la plataforma.
+
+---
+
+## Índice
+
+- [Tecnologías utilizadas](#tecnologías-utilizadas)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Cómo usar la plataforma](#cómo-usar-la-plataforma)
+  - [Funcionalidades destacadas](#funcionalidades-destacadas)
+- [Usuarios por Defecto](#usuarios-por-defecto)
+- [Pruebas del Proyecto](#pruebas-del-proyecto)
+  - [Pruebas de Módulo (Unitarias) e Integración](#pruebas-de-módulo-unitarias-e-integración)
+  - [Pruebas de Sistema (Carga)](#pruebas-de-sistema-carga)
+- [Instalación y Despliegue](#instalación-y-despliegue)
 
 ---
 
@@ -51,7 +65,7 @@ La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimi
 
 ---
 
-## Uso de la Plataforma
+## Cómo usar la plataforma
 
 1. **Registro e inicio de sesión**:  
    Los usuarios pueden registrarse mediante el formulario de registro en la página principal. Una vez registrados, pueden iniciar sesión y acceder a su panel de usuario.
@@ -65,7 +79,7 @@ La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimi
 4. **Ver progreso y competir en el ranking global**:  
    Los usuarios pueden seguir su progreso general y competir en un **ranking global**, donde se muestran las posiciones de los participantes según su puntuación.
 
-### Características
+### Funcionalidades destacadas
 
 - **Máquinas de Entrenamiento Limitadas a 3 Horas**:  
   Las máquinas subidas a la plataforma se detendrán automáticamente después de 3 horas de haber sido desplegadas. Esto permite garantizar que los recursos del servidor se gestionen adecuadamente y evitar un uso excesivo.
@@ -74,7 +88,25 @@ La idea es tener un espacio donde cualquiera pueda resolver retos, hacer seguimi
   Los usuarios reciben notificaciones sobre eventos importantes dentro de la plataforma, como la aprobación de nuevas máquinas.
 
 - **Autenticación y Seguridad**:  
-  Los usuarios deben registrarse e iniciar sesión para acceder a sus paneles. La autenticación se realiza mediante un sistema basado en tokens JWT para garantizar la seguridad.
+  La plataforma implementa varias medidas de seguridad para proteger la información y garantizar un entorno seguro para los usuarios. Entre ellas, se incluyen:
+
+  - **Dotenv**: Utilizamos **dotenv** para gestionar de manera segura las variables de entorno (como credenciales de la base de datos y claves secretas) y evitar que se expongan en el código.
+  
+  - **CORS**: Se configura **CORS** (Cross-Origin Resource Sharing) para limitar qué dominios pueden hacer solicitudes a la API, previniendo ataques de origen cruzado.
+
+  - **HTTPS**: La plataforma está configurada para utilizar **HTTPS**, garantizando que todas las comunicaciones entre el servidor y los usuarios estén cifradas y sean seguras.
+
+  - **Helmet**: Se utiliza **Helmet** para proteger la plataforma contra vulnerabilidades comunes de seguridad en aplicaciones web, como **XSS (Cross-Site Scripting)**, mediante la configuración de encabezados HTTP seguros.
+
+  - **Rate-Limit**: Se implementa un sistema de **rate-limiting** para prevenir ataques de **DDoS** (Distributed Denial of Service) y **fuerza bruta**, limitando la cantidad de solicitudes que un usuario puede hacer a la API en un período determinado.
+
+  - **JWT (JSON Web Tokens)**: Se usa para la autenticación de usuarios, permitiendo validar credenciales y acceder a rutas protegidas sin necesidad de sesiones en el servidor.
+
+  - **Sequelize**: Se utiliza **Sequelize**, un ORM que ayuda a prevenir ataques de **inyección SQL (SQLI)** al usar consultas preparadas y validación de las entradas de los usuarios.
+
+  - **Bcrypt**: Las contraseñas de los usuarios se encriptan con **bcrypt** antes de almacenarse en la base de datos, asegurando que, incluso en caso de acceso no autorizado a la base de datos, las contraseñas no puedan ser obtenidas fácilmente.
+
+  - **Morgan**: Se utiliza para generar logs detallados de todas las solicitudes realizadas a la plataforma, lo que ayuda en la auditoría y monitoreo de la actividad de la aplicación.
 
 - **Panel de Administración**:  
   Los administradores tienen acceso a un panel donde pueden gestionar el contenido de la plataforma: administrar usuarios, gestionar máquinas (solicitadas o registradas) y administrar notificaciones de los usuarios.
@@ -92,6 +124,56 @@ Para facilitar las pruebas de la plataforma, se han creado los siguientes usuari
 > **Nota**: El usuario `admin@test.com` tiene permisos de administrador y puede acceder al panel de gestión de usuarios, máquinas y notificaciones.
 
 Además, las máquinas actualmente visibles en la plataforma son **simulaciones** subidas con fines de demostración visual. Estas **no son máquinas reales desplegables**, sino ejemplos para ilustrar la estructura y funcionamiento de la interfaz.
+
+---
+
+## Pruebas del Proyecto
+
+La plataforma permite realizar diferentes tipos de pruebas para asegurar su correcto funcionamiento. A continuación, se detallan los pasos para realizarlas.
+
+### Pruebas de Módulo (Unitarias) e Integración
+
+La plataforma cuenta con una serie de pruebas automáticas que permiten verificar tanto funcionalidades individuales (pruebas de módulo) como el correcto funcionamiento entre componentes (pruebas de integración). Se encuentran en **sources/backend/tests/**.
+
+#### 1. Accede al directorio del backend:
+
+```bash
+cd sources/backend
+```
+
+#### 2. Ejecuta las pruebas:
+
+```bash
+npm test
+```
+
+> **Nota**: Los resultados de las pruebas se mostrarán directamente en la terminal, indicando si han pasado correctamente o si ha ocurrido algún fallo.
+
+### Pruebas de Sistema (Carga)
+
+Para comprobar el comportamiento de la plataforma bajo carga, se han definido pruebas con la herramienta **Artillery**, que simulan múltiples usuarios accediendo a la API de forma simultánea.
+
+#### 1. Asegurarse de que la plataforma esté desplegada:
+
+```bash
+docker-compose -f despliegueAplicacion.yml up
+```
+
+> **Nota**: Este comando debe ejecutarse desde la raíz del proyecto, donde se encuentra el archivo despliegueAplicacion.yml.
+
+#### 2. Accede al directorio del backend:
+
+```bash
+cd sources/backend
+```
+
+#### 3. Ejecuta la prueba de carga (permitiendo certificados autofirmados):
+
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED='0' npx artillery run tests-artillery/sistema.test.yml
+```
+
+> **Nota**: Esta prueba simulará múltiples usuarios que acceden a distintas rutas de la API y proporcionará un informe detallado sobre el rendimiento del sistema (como tiempos de respuesta, número de errores, etc.).
 
 ---
 
@@ -135,3 +217,5 @@ https://192.168.2.3:4200
 ```
 
 En esa dirección podrás acceder a la página de inicio de la plataforma, donde podrás registrarte, iniciar sesión y comenzar a usar la aplicación.
+
+> ⚠️ **Nota**: La plataforma utiliza HTTPS con un certificado autofirmado. Es posible que tu navegador te advierta sobre la conexión. Puedes continuar aceptando el riesgo temporalmente.
