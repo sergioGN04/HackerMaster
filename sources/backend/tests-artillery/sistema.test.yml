@@ -1,0 +1,33 @@
+# Comando para ejecutar la prueba de carga (confiando en el certificado autofirmado): NODE_TLS_REJECT_UNAUTHORIZED='0' npx artillery run tests-artillery/sistema.test.yml
+
+# Configuración de Artillery para las pruebas de carga
+config:
+  target: 'https://192.168.2.2:3000'
+  phases:
+    - duration: 10  # Duración de la prueba
+      arrivalRate: 210  # Número de usuarios por segundo (Maximo de solicitudes posibles: 210)
+  http:
+    rejectUnauthorized: false  # Permitir certificados SSL auto-firmados
+
+# Escenarios de prueba con peticiones a diferentes rutas
+scenarios:
+  - flow:
+      # Solicitud GET a /api/estadisticas-actuales
+      - get:
+          url: "/api/estadisticas-actuales"
+      
+      # Solicitud POST a /api/login
+      - post:
+          url: "/api/login"
+          json:
+            emailUsuario: "test@test.com"
+            password: "12345678QA"
+          capture:
+            - json: "$.token"  # Captura el token
+              as: "authToken"  # Almacena el token en la variable authToken
+
+      # Solicitud GET a /api/dashboard-usuario
+      - get:
+          url: "/api/dashboard-usuario"
+          headers:
+            Authorization: "Bearer {{ authToken }}"  # Enviar el token en la cabecera de autorización

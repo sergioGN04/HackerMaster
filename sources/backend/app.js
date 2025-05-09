@@ -80,12 +80,4 @@ sequelize.sync({ alter: true })
 const academiaRoutes = require('./routes/academiaRoutes');
 app.use(academiaRoutes);
 
-// Configuración de HTTPS en el servidor
-const https = require('https');
-
-const sslKey = fs.readFileSync(path.join(__dirname, 'ssl', 'server.key'));
-const sslCert = fs.readFileSync(path.join(__dirname, 'ssl', 'server.cert'));
-
-https.createServer({ key: sslKey, cert: sslCert }, app).listen(PORT, () => {
-    console.log(`Se ha iniciado correctamente. Ejemplo: https://${process.env.IP_BACKEND}/api/estadisticas-actuales`);
-});
+module.exports = app;
