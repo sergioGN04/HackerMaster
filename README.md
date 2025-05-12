@@ -188,34 +188,23 @@ git clone https://github.com/sergioGN04/HackerMaster
 cd HackerMaster
 ```
 
-### 2. Instalar dependencias del backend
+### 2. Ejecutar el Script de instalación y despliegue
 
-Para que el backend funcione correctamente, accedemos a dicha carpeta e instalamos las dependencias necesarias:
+Para simplificar el proceso, el proyecto incluye un script (**setup.sh**) que instala las dependencias necesarias del backend y despliega la aplicación.
 
-```bash
-cd sources/backend
-npm install
-```
-
-### 3. Iniciar/Desplegar la plataforma
-
-El proyecto está configurado para ser desplegado utilizando Docker Compose, lo que simplifica el manejo de los contenedores para el frontend, el backend y la base de datos.
-
-Asegúrate de tener Docker y Docker Compose instalados en tu máquina. Una vez que los tengas, navega al directorio raíz del proyecto y ejecuta el siguiente comando para levantar los contenedores:
+Asegúrate de tener Docker y Docker Compose instalados en tu máquina. Luego, simplemente hay que dar permisos de ejecución y ejecutar dicho script:
 
 ```bash
-cd ../..
-docker-compose -f despliegueAplicacion.yml up
+chmod +x setup.sh
+./setup.sh
 ```
 
 ### 4. Acceder a la plataforma
 
-Una vez que los contenedores estén en funcionamiento, puedes acceder a la plataforma desde tu navegador web en la siguiente URL:
+Una vez completado el despliegue, puedes acceder a la plataforma desde tu navegador web en la siguiente URL:
 
 ```bash
 https://192.168.2.3:4200
 ```
-
-En esa dirección podrás acceder a la página de inicio de la plataforma, donde podrás registrarte, iniciar sesión y comenzar a usar la aplicación.
 
 > ⚠️ **Nota**: La plataforma utiliza HTTPS con un certificado autofirmado. Es posible que tu navegador te advierta sobre la conexión. Puedes continuar aceptando el riesgo temporalmente.
