@@ -199,7 +199,7 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-### 4. Acceder a la plataforma
+### 3. Acceder a la plataforma
 
 Una vez completado el despliegue, puedes acceder a la plataforma desde tu navegador web en la siguiente URL:
 
