@@ -19,7 +19,7 @@ export class SidebarAutorizadoComponent {
   // Obtiene el tamaño de la pantalla al cargar el componente y ajusta el estado del sidebar
   constructor() {
     this.esPantallaPequena = window.innerWidth <= 768;
-    
+
     if (this.esPantallaPequena) {
       this.expandido = false;
       this.logoUrl = '/assets/images/logo.png';
@@ -29,7 +29,7 @@ export class SidebarAutorizadoComponent {
       this.logoUrl = '/assets/images/hackermasterlogo.png';
       this.sidebarExpandido.emit(this.expandido);
     }
-    
+
   }
 
   // Detecta el cambio de tamaño de la pantalla y ajusta el estado del sidebar
@@ -41,8 +41,12 @@ export class SidebarAutorizadoComponent {
       this.expandido = false;
       this.logoUrl = '/assets/images/logo.png';
       this.sidebarExpandido.emit(this.expandido);
+    } else {
+      this.expandido = true;
+      this.logoUrl = '/assets/images/hackermasterlogo.png';
+      this.sidebarExpandido.emit(this.expandido);
     }
-    
+
   }
 
   // Cambia el estado del sidebar al hacer clic en el logo
