@@ -353,12 +353,12 @@
     }
 
     .titulo-configuracion {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
 
     .descripcion-configuracion,
     .descripcion-formulario {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .seccion-perfil {
@@ -388,7 +388,7 @@
     }
 
     .seccion-formulario h3 {
-        font-size: 1.7rem;
+        font-size: 1.4rem;
     }
 
     .form-dos-columnas {
@@ -413,7 +413,7 @@
     .btn-guardar {
         width: 100%;
         padding: 12px;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .form-password {
@@ -432,6 +432,6 @@
     .btn-guardar-password {
         width: 100%;
         padding: 12px;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
