@@ -479,7 +479,7 @@ h3 {
 
     h3,
     .titulo-seccion {
-        font-size: 1.4rem;
+        font-size: 1.8rem;
     }
 
     .formCrearMaquina label {
@@ -508,7 +508,7 @@ h3 {
     }
 
     .descripcion-formulario {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         margin-bottom: 40px;
     }
 
