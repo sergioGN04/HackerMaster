@@ -516,6 +516,14 @@ h3 {
     .descripcion {
         max-width: 140px;
     }
+
+    .titulo-modal {
+        font-size: 1.8rem;
+    }
+
+    .descripcion-seccion {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -542,11 +550,11 @@ h3 {
 
     h3,
     .titulo-seccion {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .accordion-button {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .formCrearNotificacion label {
@@ -575,12 +583,13 @@ h3 {
     }
 
     .descripcion-formulario {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         margin-bottom: 40px;
     }
 
     .btn-enviar {
         width: 100%;
+        font-size: 16px;
     }
 
     .custom-file-input {
@@ -606,5 +615,13 @@ h3 {
     .btn-operacion {
         font-size: 0.75rem;
         padding: 6px 10px;
+    }
+
+    .titulo-modal {
+        font-size: 1.8rem;
+    }
+
+    .descripcion-seccion {
+        font-size: 0.85rem;
     }
 }
