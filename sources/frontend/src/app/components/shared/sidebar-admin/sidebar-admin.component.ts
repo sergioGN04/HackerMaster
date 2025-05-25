@@ -41,6 +41,10 @@ export class SidebarAdminComponent {
       this.expandido = false;
       this.logoUrl = '/assets/images/logo.png';
       this.sidebarExpandido.emit(this.expandido);
+    } else {
+      this.expandido = true;
+      this.logoUrl = '/assets/images/hackermasterlogo.png';
+      this.sidebarExpandido.emit(this.expandido);
     }
     
   }

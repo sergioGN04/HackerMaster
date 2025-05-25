@@ -528,8 +528,8 @@ h3 {
 
 @media (max-width: 480px) {
     .crear-notificacion-section {
-        padding: 60px 0 0 0;
-        margin-left: 60px;
+        padding: 60px 0 0 0 !important;
+        margin-left: 60px !important;
         text-align: center;
     }
 
