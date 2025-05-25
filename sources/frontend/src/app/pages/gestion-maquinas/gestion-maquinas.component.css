@@ -261,12 +261,12 @@
     }
 
     .titulo {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         margin-bottom: 15px;
     }
 
     .descripcion {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         margin-bottom: 70px;
     }
 
@@ -286,6 +286,14 @@
         padding: 6px 10px;
         gap: 4px;
     }
+
+    .titulo-modal {
+        font-size: 1.8rem;
+    }
+
+    .descripcion-seccion {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -299,13 +307,17 @@
     }
 
     .titulo {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         margin-bottom: 12px;
     }
 
     .descripcion {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         margin-bottom: 50px;
+    }
+
+    .mensaje-vacio {
+        font-size: 1rem;
     }
 
     .foto-perfil {
@@ -346,5 +358,13 @@
 
     .nombre-wrapper {
         gap: 8px;
+    }
+
+    .titulo-modal {
+        font-size: 1.8rem;
+    }
+
+    .descripcion-seccion {
+        font-size: 0.85rem;
     }
 }
