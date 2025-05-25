@@ -234,7 +234,7 @@
     }
 
     .descripcion {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         margin-bottom: 70px;
     }
 
@@ -250,8 +250,12 @@
         padding: 110px 15px 40px;
     }
 
+    .titulo {
+        font-size: 1.8rem;
+    }
+
     .descripcion {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         margin-bottom: 50px;
     }
 
@@ -261,6 +265,14 @@
     }
 
     .btn-operacion i {
+        font-size: 0.85rem;
+    }
+
+    .titulo-modal {
+        font-size: 1.8rem;
+    }
+
+    .descripcion-seccion {
         font-size: 0.85rem;
     }
 }
