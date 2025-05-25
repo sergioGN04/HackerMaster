@@ -514,6 +514,7 @@ h3 {
 
     .btn-enviar {
         width: 100%;
+        font-size: 16px;
     }
 
     .custom-file-input {
