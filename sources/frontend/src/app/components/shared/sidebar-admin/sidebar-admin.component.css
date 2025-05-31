@@ -79,11 +79,28 @@
     font-size: 24px;
     min-width: 24px;
     text-align: center;
-    margin-right: 20px;
+}
+
+.espaciado {
+    margin-right: 27px;
+}
+
+.espaciado-notificaciones {
+    margin-right: 15px;
 }
 
 /* Texto de los enlaces */
 .texto-link {
+    display: block;
+    white-space: normal;
+    line-height: 1.2;
+    text-align: left;
+    word-break: break-word;
+    max-width: 50%;
+    text-align: center;
+}
+
+.texto-link-notificaciones {
     display: block;
     white-space: normal;
     line-height: 1.2;
@@ -99,7 +116,7 @@
     padding-left: 0;
 }
 
-.sidebar.colapsado .texto-link {
+.sidebar.colapsado .texto-link, .sidebar.colapsado .texto-link-notificaciones {
     display: none;
 }
 
