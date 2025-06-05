@@ -149,7 +149,7 @@ module.exports = {
         // Obtenemos la dificultad según el rango
         let dificultad = 'Facil';
         if (rango === 'Intermedio' || rango === 'Avanzado') {
-            dificultad = 'Medio';
+            dificultad = 'Media';
         } else if (rango === 'Experto') {
             dificultad = 'Dificil';
         }
