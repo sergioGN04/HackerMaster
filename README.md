@@ -17,6 +17,7 @@ Su objetivo es ofrecer un entorno accesible donde cualquier usuario pueda resolv
   - [Pruebas de Módulo (Unitarias) e Integración](#pruebas-de-módulo-unitarias-e-integración)
   - [Pruebas de Sistema (Carga)](#pruebas-de-sistema-carga)
 - [Instalación y Despliegue](#instalación-y-despliegue)
+- [Aceptar el certificado autofirmado (API)](#aceptar-el-certificado-autofirmado-api)
 
 ---
 
@@ -117,11 +118,11 @@ Su objetivo es ofrecer un entorno accesible donde cualquier usuario pueda resolv
 
 Para facilitar las pruebas de la plataforma, se han creado los siguientes usuarios ya registrados:
 
-- `test@test.com` / `12345678QA`  
-- `test1@test.com` / `12345678QA`  
-- `admin@test.com` / `12345678QA`  
+- `sgonzalez@hackermaster.com` / `12345678QA`  
+- `sergiogn@gmail.com` / `12345678QA`  
+- `laura.m@gmail.com` / `12345678QA`  
 
-> **Nota**: El usuario `admin@test.com` tiene permisos de administrador y puede acceder al panel de gestión de usuarios, máquinas y notificaciones.
+> **Nota**: El usuario `sgonzalez@hackermaster.com` tiene permisos de administrador y puede acceder al panel de gestión de usuarios, máquinas y notificaciones.
 
 Además, las máquinas actualmente visibles en la plataforma son **simulaciones** subidas con fines de demostración visual. Estas **no son máquinas reales desplegables**, sino ejemplos para ilustrar la estructura y funcionamiento de la interfaz.
 
@@ -207,4 +208,26 @@ Una vez completado el despliegue, puedes acceder a la plataforma desde tu navega
 https://192.168.2.3:4200
 ```
 
-> ⚠️ **Nota**: La plataforma utiliza HTTPS con un certificado autofirmado. Es posible que tu navegador te advierta sobre la conexión. Puedes continuar aceptando el riesgo temporalmente.
+> ⚠️ **Nota**: La plataforma utiliza HTTPS con un certificado autofirmado, lo que puede generar advertencias de seguridad en tu navegador. Para que el frontend funcione correctamente, primero debes aceptar el certificado de la API.
+
+---
+
+## Aceptar el certificado autofirmado (API)
+
+Antes de poder utilizar la plataforma, sigue estos pasos para evitar errores de seguridad o fallos de conexión entre el frontend y la API:
+
+### 1. Abre el navegador y accede directamente a la API:
+
+```bash
+https://192.168.2.2:3000/api/estadisticas-actuales
+```
+
+### 2. Aceptar el certificado
+
+Haz clic en “Avanzado” y luego selecciona “Continuar” o “Acceder de todos modos”, según tu navegador.
+
+Una vez aceptado el certificado, podrás acceder sin problemas a la plataforma desde:
+
+```bash
+https://192.168.2.3:4200
+```
