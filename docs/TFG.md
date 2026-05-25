@@ -1,7 +1,7 @@
 <h1 align="center">HackerMaster</h1>
 
 <p align="center">
-  <img src="imgs/banner.png" alt="HackerMaster Banner">
+  <img src="../imgs/banner.png" alt="HackerMaster Banner">
 </p>
 
 ***Fecha:*** 25 de mayo de 2026
