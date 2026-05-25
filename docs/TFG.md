@@ -192,27 +192,27 @@ A continuación se muestran algunas capturas de la plataforma en funcionamiento,
 ---
 
 #### Página principal
-![Página principal](imgs/inicio.png)
+![Página principal](../imgs/inicio.png)
 
 ---
 
 #### Catálogo de máquinas
-![Máquinas](imgs/maquinas.png)
+![Máquinas](../imgs/maquinas.png)
 
 ---
 
 #### Perfil de usuario
-![Perfil](imgs/perfil.png)
+![Perfil](../imgs/perfil.png)
 
 ---
 
 #### Ranking global
-![Ranking](imgs/ranking.png)
+![Ranking](../imgs/ranking.png)
 
 ---
 
 #### Panel de administración
-![Administración](imgs/admin.png)
+![Administración](../imgs/admin.png)
 
 ---
 ## 8. ***Funcionalidades principales***
