@@ -77,7 +77,7 @@ chmod +x setup.sh
 
 ### Backend
 ```
-https://192.168.2.3:3000
+https://192.168.2.2:3000/api/estadisticas-actuales
 ```
 
 ### Frontend
